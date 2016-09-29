@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width; initial-scale=1.0; maximum-scale=1.0; minimum-scale=1.0; user-scalable=0;"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Language" content="en-us"/>
+    <meta name="author" th:content="#{head.meta.author}"/>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <title th:text="#{head.title}"></title>
+
+    <link rel="stylesheet" th:href="@{resources/styles/dashboard.css}"/>
+    <link rel="stylesheet" th:href="@{resources/styles/pushMenu.css}"/>
+    <link rel="stylesheet" type="text/css" media="screen"
+          th:href="@{resources/bower_components/bootstrap/dist/css/bootstrap.min.css}"/>
+    <link th:href='@{https://fonts.googleapis.com/css?family=Source+Sans+Pro}' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" type="text/css"
+          th:href="@{resources/bower_components/bootstrap-daterangepicker/daterangepicker.css}"/>
+    <link rel="stylesheet" type="text/css"
+          th:href="@{resources/bower_components/bootstrap-vertical-tabs/bootstrap.vertical-tabs.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{resources/bower_components/Hover/css/hover-min.css}"/>
+</head>
+<body id="top">
+<div id="wrapper">
+    <div th:include="master/loggedin :: head"></div>
+
+
+    <section id="hookForEmber">
+
+        <script type="text/x-handlebars" th:inline="text">
+		
+
+    <div id ="dashboardAnchor"></div>
+      <div class="dashboard navbar navbar-fixed-top" style="margin-top:80px !important;z-index:1" id="dashboard">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-2 col-sm-2" style="text-align: center;color:#fff;">
+              <h4 style="margin-bottom:0 !important;">Organization:</h4>
+              {{view 'select' content=organization
+                              optionValuePath='content.id'
+                              optionLabelPath='content.organizationName'
+                              value=organizationSelected.id
+                              prompt='Select Organization'
+                              class='dashboardSelect form-control'
+                              id='organizationList'}}
+              <!--<select class="form-control dashboardSelect">
+               <option>ABC</option>
+               <option>DEF</option>
+               <option>GHI</option>
+               <option>JKL</option>
+               <option>MNO</option>
+             </select>-->
+      <img class="arrow1" src='/resources/images/arrow.png'>
+
+            </div>
+            <div class=" col-md-2 col-sm-2" style="text-align: center;color:#fff;">
+              <h4 style="margin-bottom:0 !important;">Practice/Group:</h4>
+              {{view 'select' content=groupedPractice
+                              optionValuePath='content.id'
+                              optionLabelPath='content.groupName'
+                              value=practiceSelected.id
+                                disabled=controlPracDisable
+                              prompt='Select a Practice'
+                              class='dashboardSelect form-control'
+                              id='practiceList'
+                              }}
+              <!--<select class="form-control dashboardSelect">
+               <option>ABC</option>
+               <option>DEF</option>
+               <option>GHI</option>
+               <option>JKL</option>
+               <option>MNO</option>
+              </select>-->
+        <img class="arrow2" src='/resources/images/arrow.png'>
+                <span id="practiceStore" style="display:none;"></span>
+            </div>
+            <div class="col-sm-2 col-md-2" style="text-align: center;color:#fff;">
+              <h4 style="margin-bottom:0 !important;">Provider:</h4>
+
+               {{view 'select' content=groupedProvider
+                               optionValuePath='content.id'
+                               optionLabelPath='content.fullName'
+                               value=providerSelected.id
+                                disabled=controlProvDisable
+                               prompt='Select a Provider'
+                               class='dashboardSelect form-control'
+                               id='providerList'
+                               }}
+                  <!-- <select class="form-control dashboardSelect" id="providerList" {{action 'watchDropDown' on='change'}}>
+                        <option>Select a provider</option>
+                     {{#each item in provider}}
+                        <option {{bind-attr value=item.id}}>{{item.fullName}}</option>
+                     {{/each}}
+                    </select>-->
+        <img class="arrow3" src='/resources/images/arrow.png'>
+
+            </div>
+            <div class="col-sm-2 col-md-2" style="text-align: left;color:#fff;">
+              <h4 style="margin-bottom:0 !important;text-align:center;">Period:</h4>
+              <div class=" dashboardSelect1">
+                 {{daterange-picker tagName='input' id='daterange'  }}
+              </div>
+        <img class="arrow4" src='/resources/images/arrow.png'>
+
+           </div>
+            <div class="col-sm-3  col-md-3 calculateButton" style="display:inline-block;height:50px;">
+                {{#if showCalculationButton}}
+                    <button  id='calculationButton' class="btn btn-warning btn-lg" type="button" data-toggle="modal" data-target="#calculationTriggerModal" {{action 'calculate'}}>Calculate</button>
+                {{/if}}
+                {{#if showRefreshButton}}
+                   <a class="test" href="javascript:;" data-toggle="tooltip" data-placement="right" title="Refresh">
+                        <button style="margin-top:12px;" id="refreshCqm" type="button" class="btn btn-default btn-xs " aria-label="Refresh" {{action 'refreshCqm'}}>
+                            <p style="margin:0;" class="glyphicon glyphicon-refresh" aria-hidden="true"></p>
+                        </button>
+                   </a>
+                {{/if}}
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+       <div class="modal fade" id="calculationTriggerModal" tabindex="-1" role="dialog" aria-labelledby="calculationTriggerModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content" style="top:200px !important;">
+                        <div class="modal-header" style="background-color:#062c49 !important;color:#fff !important;">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:#fff !important;"><span aria-hidden="true">&times;</span></button>
+                            <h3 class="modal-title" id="myModalLabel" style="text-align:left;">
+                                <img style="padding-top:8px;" src="[[#{'header.companyLogoImage'}]]">
+                            </h3>
+                        </div>
+                        <div class="modal-body">
+                            <p><b>Thank you</b> for using CAliPHR. We have received your request for calculation.
+                             You will be notified via email upon completion of calculation.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        {{outlet}}
+
+
+		
+        </script>
+
+
+
+        <script type="text/x-handlebars" data-template-name="index">
+            <div class="panel panel-default" style="width:40% !important;margin-left:auto !important;margin-right:auto!important;margin-top:250px !important;" >
+                <div class="panel-body">
+                    <h4>To view previous Calculation</h4>
+                    <ul>
+                        <li> Select a provider</li>
+                    </ul>
+                    <h4>For new Calculations</h4>
+                    <ul>
+                        <li>Select the provider with period and hit Calculate</li>
+                    </ul>
+                    <h4>To upload clinical documents (C-CDA or QRDA 1)</h4>
+                    <ul>
+                        <li><a href="/util/cda-import">Click here</a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="cqm">
+     <div class="summaryInformation navbar navbar-fixed-top" style="margin-top:190px !important;z-index:1;">
+      <div class='container'>
+        <div class="row">
+          <div class=" col-sm-3 col-md-3">
+            <div class="lastCalculated">
+              <div class="row">
+                <div class="col-md-12">
+                  <p style="padding-top:14px;">
+                    <b> Last Calculated : {{lastCalculated}}</b>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4 col-md-4">
+            <div class="dates_patients">
+              <div class="row">
+                <div class="col-md-12">
+                  <p style="padding-top:14px;"><b>Reporting Period:  {{startDate}} to {{endDate}}</b></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3 col-md-3">
+            <div class="counter">
+              <div class='row'>
+
+                  <p style="margin-top:14px;display:inline-block;"><b>CQMs Selected: </b>
+                  <!--<input type="text" id="count" style="width:60px;height:30px;margin-top:5px;padding-left:0 !important;border-radius:5px; font-size:18px;text-align: center;color:#005596;font-weight:bold;" {{bind-attr value=selectedCount}} readonly /></p>-->
+                  <p style="margin-left:5px;display:inline-block; position:relative;width:25px !important;height:20px !important;border-radius:10px; background-color:white;text-align:center"><b>{{selectedCount}}</b></p></p>
+              </div>
+            </div>
+          </div>
+
+            <div class="col-sm-2 col-md-2">
+              <div class="export" style="padding-top:10px;">
+                <div class="row">
+                  <div class="col-md-12" style="width:160px;">
+                    {{#if showExportAndCheck}}
+                        {{#if anyMeasures}}
+                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal" style="text-align:left; float: left; font-size:10px;">
+                              Export
+                            </button>
+                            <button {{action 'checkAllClick'}} type="button" class="btn btn-success btn-sm" style="text-align:left; float: right; font-size:10px;">
+                              {{#if toggleCheckAll}}
+                              Check All
+                              {{else}}
+                              Uncheck All
+                              {{/if}}
+                            </button>
+                        {{/if}}
+                    {{/if}}
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close " data-dismiss="modal" aria-label="Close"  {{action 'clearOptions'}}><span aria-hidden="true">&times;</span></button>
+                    <h1 class="modal-title" id="myModalLabel">CQMs Selected.</h1>
+                </div>
+                <div class="modal-body" style="height:auto;max-height:600px;overflow-y:auto !important;">
+                    <ul class="nav nav-tabs">
+                        <li id="xmlAndZipExportTab" {{bind-attr class="isActive:active"}} {{action 'clickOnXmlTab'}}><a data-toggle="tab" href="#zipAndXml" style="font-style:normal;">QRDA Export</a></li>
+                        <li id="excelExportTab" {{bind-attr class="isActiveOne:active"}} {{action 'clickOnExcelTab'}}><a data-toggle="tab" href="#excelExport" style="font-style:normal;">Measure Reporting</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="zipAndXml" {{bind-attr class=" :tab-pane :fade isActive:active isActive:in"}}>
+                            <div {{bind-attr class="isActive:active"}}>
+                                <h3>Zip and Xml Export</h3>
+                                {{#if numberOfSelectedCqm}}
+                                    <div>
+                                        <p><h4>You have selected the following CQMs</h4></p><br><hr><br>
+                                        <ul>
+                                            {{#each checkedItems}}
+                                                <li>{{cmsId}} : {{title}}</li>
+                                            {{/each}}
+                                        </ul>
+                                    </div><br/><br/><br/>
+                                    <div >
+                                        <button type="button" class="btn btn-primary" {{action 'exportZipCQM' id="zipButton"}}>Save as zip</button>
+                                        <button type="button" class="btn btn-primary" {{action 'exportXmlCQM' id="xmlButton"}}>Save as xml</button>
+                                      <!--  <button type="button" class="btn btn-primary" {{action 'exportCsvCQM'}}>Save as .xlsx</button>-->
+                                        <button type="button" class="btn btn-default closeButton" data-dismiss="modal" >Close</button>
+                                    </div>
+                                {{else}}
+                                    <div>
+                                        <p><h4>Please select a CQM.</h4></p><br><br>
+                                    </div><br/><br/><br/>
+                                    <div >
+                                        <button type="button" class="btn btn-default closeButton" data-dismiss="modal" >Close</button>
+                                    </div>
+                                {{/if}}
+                            </div>
+                        </div>
+                        <div id="excelExport" {{bind-attr class=" :tab-pane :fade isActiveOne:active isActiveOne:in"}}>
+                            <h3>Excel Export</h3>
+                            <p>{{input type='checkbox' id="singleProvider" checked=selectSingleProvider}} Export selected Measure for selected Provider.</p>
+                            {{#if multipleProviders}}
+                                <p>{{input type="checkbox" id="multipleProviders" checked=selectMultipleProviders}} Export all Measures for all the providers in selected practice.</p>
+                            {{else}}
+                                <p style="color:#606060;"><input type="checkbox" disabled="disabled"> Export all Measures for all the providers in selected practice.</p>
+                            {{/if}}
+                            {{#if selectSingleProvider}}
+                                 {{#if numberOfSelectedCqm}}
+                                    <div>
+                                        <p><h4>You have selected the following CQMs</h4></p><br><hr><br>
+                                        <ul>
+                                            {{#each checkedItems}}
+                                                <li>{{cmsId}} : {{title}}</li>
+                                            {{/each}}
+                                        </ul>
+                                    </div> <br/><br/><br/>
+                                    <div >
+                                        <button type="button" class="btn btn-primary"  {{action 'exportProviderLevel'}} id="excelButton">Save as .xslx</button>
+                                        <button type="button" class="btn btn-default closeButton"  data-dismiss="modal" {{action 'clearOptions'}} >Close</button>
+                                    </div>
+                                 {{else}}
+                                    <div>
+                                        <p><h4>Please select a CQM.</h4></p><br><br>
+                                    </div><br/><br/><br/>
+                                    <div>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal" {{action 'clearOptions'}}>Close</button>
+                                    </div>
+                                 {{/if}}
+                            {{/if}}
+                            {{#if selectMultipleProviders}}
+                                <div>
+                                    <p><h4>The Excel export will have the following providers:</h4></p><br><hr><br>
+                                    <ul>
+                                        {{#each providerModel}}
+                                            <li>{{fullName}}</li>
+                                        {{/each}}
+                                    </ul>
+                                </div><br/><br/><br/>
+                                <div >
+                                    <button type="button" class="btn btn-primary"  {{action 'exportPracticeLevel'}}>Save as .xslx</button>
+                                    <button type="button" class="btn btn-default closeButton"  data-dismiss="modal" {{action 'clearOptions'}}>Close</button>
+                                </div>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </div>
+      </div>
+    <!-- <a class='btn hvr-icon-spin' style="color:#000 !important;margin-top:20px;margin-left:90%;background-color:#c0c0c0 !important;" role='button' {{action 'doRefresh'}}>Refresh</a>-->
+
+
+             <div class="cqmBody" style="margin-top:250px !important;">
+            <div class="page-container">
+                <div class="sidebar-menu">
+                    <header class="logo">
+                        <a class="test" href="javascript:;" data-toggle="tooltip" data-placement="right" title="Push Menu">
+                            <a href="javascript:;" class="sidebar-icon" data-toggle="tooltip" data-placement="right">
+                                <div class="fa fa-bars" {{action 'toggleMenu'}}></div>
+                            </a>
+                        </a>
+                        <a href="javascript:;">
+                            <span id="logo" class="fa fa-user-plus fa-5x"></span>
+                        </a>
+                    </header>
+
+                    <div style="border-top:1px solid rgba(69, 74, 84, 0.7)"></div>
+                    <div class="menu">
+                        <ul id="menu" >
+                            {{#each groupedResults}}
+                             <li id="menu-home" ><a href="javascript:;"{{action 'removeHide' id on='mouseEnter'}}><i class="fa fa-plus "></i><span style="font-size:13px;">{{domainName}}</span></a>
+
+                                <ul id="{{id}}" style="height: auto !important;max-height: 150px !important;overflow-y: scroll !important;" >
+                                    {{#each item in contents}}
+                                    <li  style="width: 400px;" ><a role="button"  href='#/' target='#{{item.cmsId}}' {{action 'goToLink'  'cqm' id item.cmsId on='click'}} >{{item.cmsId}} : {{item.title}}</a></li>
+                                    {{/each}}
+                                </ul>
+
+                            </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    <div class="cqmContainer">
+      {{#each groupedResults}}
+        <div class=" accordionNew">
+          <div class="panel-group" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab">
+                <h4 class="panel-title">
+                  <a  role="button" data-toggle="collapse"  href='#{{id}}' aria-expanded="true" >
+                   {{domainName}}
+                  </a>
+                </h4>
+              </div>
+              <div  id='{{id}}' class="panel-collapse collapse in" role="tabpanel" >
+                {{#each item in contents}}
+                  <div class="panel-body">
+                    <div class="row link" id='{{item.cmsId}}'>
+                      <div class="container-fluid">
+                        <div class="panel panel-default">
+                          <div class="panel-body">
+                            <div style="font-size:20px; padding-left:22px;color:#3c763d;font-weight:bold;">
+                                <div class="row">
+                                    <div class='col-md-11'>
+                                        {{#link-to 'dummyTemplate'  item item.populationSetResults.[0] }}
+                                             <p {{action 'scrollToOffset' item.cmsId}}>{{item.cmsId}}: {{item.title}}.</p>
+                                        {{/link-to}}
+                                    </div>
+                                    <div class='col-md-1 check '>
+                                        <!--  <h1>{{input type="checkbox" class="glyphicon glyphicon-ok-circle image" checked=item.isSelected }}</h1> -->
+                                        {{input id=item.hqmfDocumentId type='checkbox' class='icon-checkbox' checked=item.isSelected}}
+                                             <label {{bind-attr for=item.hqmfDocumentId}} style="color:green">
+                                                <h3 style="margin-top:0 !important;"><span class='glyphicon glyphicon-unchecked unchecked'></span>
+                                                <span class='glyphicon glyphicon-check checked'></span></h3>
+                                             </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            {{#each child in item.populationSetResults}}
+                              <div class="row">
+                                <div class="col-md-3 col-lg-3 envelope">
+                                  <blockquote>
+                                    <p>
+                                        <span {{action 'lockDashboard'}}>
+                                        {{#link-to 'dummyTemplate' item child}} <!--just item  child-->
+                                           <p class='centerLayout'{{action 'scrollToOffset' item.cmsId}}>{{child.submeasureTitle}}</p>
+                                        {{/link-to}}</span>
+                                    </p>
+                                  </blockquote>
+                                </div>
+                                <div class="col-md-2 percentageLoader">
+                                    {{percentage-loader num=child.numeratorCount den=child.denominatorCount excl=child.denexCount excep=child.denexcepCount tagName='canvas'}}
+                                </div>
+                                <div class="col-md-2 col-lg-2 envelope">
+                                  <div class="panel panel-success">
+                                    <div class="panel-heading">Numerator</div>
+                                    <table class="table">
+                                      <thead>
+                                        <tr>
+                                          <th><b>Count</b></th>
+                                          <th>{{child.numeratorCount}}</th>
+                                        </tr>
+                                      </thead>
+                                    </table>
+                                  </div>
+                                </div>
+                                <div class="col-md-2 col-lg-2 envelope">
+                                  <div class="panel panel-success">
+                                    <div class="panel-heading">Denominator</div>
+                                    <table class="table">
+                                      <thead>
+                                        <tr>
+                                          <th><b>Count</b></th>
+                                          <th>{{child.denominatorCount}}</th>
+                                        </tr>
+                                        {{#if child.denexCount}}
+                                            <tr>
+                                                <th><b>Exclusions</b></th>
+                                                <th>{{child.denexCount}}</th>
+                                            </tr>
+                                        {{/if}}
+                    {{#if child.denexcepCount}}
+                                            <tr>
+                                                <th><b>Exceptions</b></th>
+                                                <th>{{child.denexcepCount }}</th>
+                                            </tr>
+                                        {{/if}}
+                                      </thead>
+                                    </table>
+                                  </div>
+                                </div>
+                                <div class="col-md-2 col-lg-2 envelope">
+                                  <div class="panel panel-success">
+                                    <div class="panel-heading">Initial Patient Population</div>
+                                    <table class="table">
+                                      <thead>
+                                        <tr>
+                                          <th><b>IPP</b></th>
+                                          <th>{{child.ippCount}}</th>
+                                        </tr>
+                                      </thead>
+                                    </table>
+                                  </div>
+                                </div>
+
+                              </div>
+                            {{/each}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {{/each}}
+              </div>
+            </div>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+      <div>
+        <p id='back-top'>
+            <a href='#top' {{action 'scrollTop'}} >
+                <i class="fa fa-arrow-circle-up fa-4x"></i>
+                <p style="text-align:center;">Back To Top</p>
+            </a>
+        </p>
+      </div>
+
+
+
+        </script>
+        <!--<script type="text/x-handlebars" data-template-name="cqm/index">
+
+        <div class="cqmBody">
+            <div class="page-container">
+                <div class="sidebar-menu">
+                    <header class="logo"> <a href="javascript:;" class="sidebar-icon tooltips" > <div class="fa fa-bars" {{action 'toggleMenu'}}></div><span>Push Menu</span> </a> <a href="javascript:;"> <span id="logo" class="fa fa-user-plus fa-5x"></span>
+                    </a>
+                    </header>
+
+                    <div style="border-top:1px solid rgba(69, 74, 84, 0.7)"></div>
+                    <div class="menu">
+                        <ul id="menu" >
+                            {{#each groupedResults}}
+                             <li id="menu-home" ><a href="javascript:;"{{action 'removeHide' id on='mouseEnter'}}><i class="fa fa-plus "></i><span style="font-size:15px;">{{domainName}}</span></a>
+
+                                <ul id="{{id}}" style="height: auto !important;max-height: 150px !important;overflow-y: scroll !important;" >
+                                    {{#each item in contents}}
+                                    <li  style="width: 400px;" ><a role="button"  href='#/' target='#{{item.cmsId}}' {{action 'goToLink'  'cqm' id item.cmsId on='click'}} >{{item.cmsId}} : {{item.title}}</a></li>
+                                    {{/each}}
+                                </ul>
+
+                            </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        </script>-->
+        <script type="text/x-handlebars" data-template-name="loading">
+
+            <div class="sk-double-bounce" style="margin-top:150px;">
+                <div class="sk-child sk-double-bounce1"></div>
+                <div class="sk-child sk-double-bounce2"></div>
+            </div>
+            <div style="position:relative;top:240px;margin-left:48%;margin-right:47%;width:200px;"><h3>Fetching Data</h3></div>
+
+
+
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="cqm/loading">
+
+            <div class="sk-double-bounce">
+                <div class="sk-child sk-double-bounce1"></div>
+                <div class="sk-child sk-double-bounce2"></div>
+            </div>
+            <div style="position:relative;top:240px;margin-left:48%;margin-right:47%;width:200px;"><h3>Fetching Data</h3></div>
+
+
+
+        </script>
+
+
+        <script type="text/x-handlebars" data-template-name="measureInformation">
+         <section>
+            <div style="margin-top:20px;margin-left:20px;">
+                <a {{bind-attr href=href}} class=' btn hvr-sweep-to-left' role='button' style="margin-top:210px;background-color:#b0b0b0 !important;"{{action 'scrollToCqm' 'cqm' on='click'}}> Back </a>
+            </div>
+            <div class="container">
+                <div class="row panel panel-default" {{bind-attr style=measureInfo}}>
+                    <h1 id="rib_effect">
+                      <span id="rib_text">{{domainName}}</span>
+                  </h1>
+                    <div class="col-sm-12 col-md-12 col-lg-12" {{bind-attr style=column}}>
+                        <div class="row">
+                            <div class="col-sm-2 col-md-2 col-lg-2" {{bind-attr style=eachMeasureTitle}}>
+                                <p><b>Measure Id:</b></p>
+                            </div>
+                            <div class="col-sm-10 col-md-10 col-lg-10" {{bind-attr style=measureInfoBackground}} >
+                                <div>
+                                    <p>{{cmsId}}  </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12" {{bind-attr style=column}}>
+                        <div class="row">
+                            <div class="col-sm-2 col-md-2 col-lg-2" {{bind-attr style=eachMeasureTitle}}>
+                                <p><b>Measure Title:</b></p>
+                            </div>
+                            <div class="col-sm-10 col-md-10 col-lg-10" {{bind-attr style=measureInfoBackground}} >
+                                <div>
+                                    <p>{{title}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-sm-12 col-md-12 col-lg-12" {{bind-attr style=column}}>
+                        <div class="row">
+                            <div class="col-sm-2 col-md-2 col-lg-2" {{bind-attr style=eachMeasureTitle}}>
+                                <p><b>Sub-measure Title:</b></p>
+                            </div>
+                            <div class="col-sm-10 col-md-10 col-lg-10" {{bind-attr style=measureInfoBackground}} >
+                                <div>
+                                    <p>{{submeasuretitle}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12 " {{bind-attr style=column}} >
+                        <div class="row">
+                            <div class="col-sm-2 col-md-2 col-lg-2 " {{bind-attr style=eachMeasureTitle}}>
+                                <p><b> Measure Description:</b></p>
+                            </div>
+                            <div class="col-sm-10 col-md-10 col-lg-10 " {{bind-attr style=measureInfoBackground}} >
+                                <div>
+                                    <p> {{{show-newlines description}}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12" {{bind-attr style=column}}>
+                        <div class="row">
+                            <div class="col-sm-2 col-md-2 col-lg-2" {{bind-attr style=eachMeasureTitle}}>
+                                <p><b>Guidance:</b></p>
+                            </div>
+                            <div class="col-sm-10 col-md-10 col-lg-10" {{bind-attr style=measureInfoBackground}} >
+                                <div>
+                                    <p>{{{show-newlines measureGuidance}}}  </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12" {{bind-attr style=column}}>
+                        <div class="row">
+                            <div class="col-sm-2 col-md-2 col-lg-2" {{bind-attr style=eachMeasureTitle}}>
+                                <p><b>Stratification:</b></p>
+                            </div>
+                            <div class="col-sm-10 col-md-10 col-lg-10" {{bind-attr style=measureInfoBackground}} >
+                                <div>
+                                    <p>{{{show-newlines measureStratifications}}}  </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="informationTab">
+            <div class="container">
+                <div class="row panel panel-default" style="padding:10px;">
+                     <h1 id="rib_effect">
+                      <span id="rib_text">Measure Criteria and Patients</span>
+                  </h1>
+                    <div class="panel-body">
+                        <div class ="row">
+                        <div class="col-sm-2 col-md-2" style="padding-right:0px !important;padding-left:0px !important;">
+                        <ul class="nav nav-tabs tabs-left "><!-- 'tabs-right' for right tabs -->
+                                   {{#link-to 'initialPopulation' data-toggle="tab" tagName='li'}}
+                                        <a class='measureInfoTab' style="padding-right:0px !important;padding-left:0px !important"><b>Initial Population</b><span style="position:absolute;display:inline-block;width:25px;height:18px;border-radius:16px; background-color:#B0B0B0;font-size:12px;right:0;text-align:center;">{{ippCount}}</span></a>
+                                    {{/link-to}}
+
+
+
+                                    {{#link-to 'numeratorInfo' data-toggle="tab" tagName='li'}}
+                                        <a class='measureInfoTab' style="padding-right:0px !important;padding-left:0px !important"><b>Numerator</b><span style="position:absolute;display:inline-block;width:25px;height:18px;border-radius:16px; background-color:#B0B0B0;font-size:12px;right:0;text-align:center;">{{numeratorCount}}</span></a>
+                                    {{/link-to}}
+
+
+
+                                    {{#link-to 'denominatorInfo' data-toggle="tab" tagName='li'}}
+                                        <a class='measureInfoTab' style="padding-right:0px !important;padding-left:0px !important"><b>Denominator</b><span style="position:absolute;display:inline-block;width:25px;height:18px;border-radius:16px; background-color:#B0B0B0;font-size:12px;right:0;text-align:center;">{{denominatorCount}}</span></a>
+                                    {{/link-to}}
+
+
+                                    {{#if showExclusionTab}}
+                                        {{#link-to 'exclusionsInfo' data-toggle="tab" tagName='li'}}
+                                           <a class='measureInfoTab' style="padding-right:0px !important;padding-left:0px !important"><b>Exclusions</b><span style="position:absolute !important;display:inline-block !important;width:25px !important;height:18px !important;border-radius:16px !important; background-color:#B0B0B0 !important;font-size:12px !important;right:0 !important;text-align:center !important;">{{denexCount}}</span></a>
+                                        {{/link-to}}
+                                    {{/if}}
+
+                                    {{#if showExceptionTab}}
+                                        {{#link-to 'exceptionInfo' data-toggle="tab" tagName='li'}}
+                                           <a class='measureInfoTab' style="padding-right:0px !important;padding-left:0px !important"><b>Exceptions</b><span style="position:absolute !important;display:inline-block !important;width:25px !important;height:18px !important;border-radius:16px !important; background-color:#B0B0B0 !important;font-size:12px !important;right:0 !important;text-align:center !important;">{{exceptionCount}}</span></a>
+                                        {{/link-to}}
+                                    {{/if}}
+
+                        </ul>
+
+                            </div>
+                            <div class=" col-sm-10 col-md-10 tabRight">
+                                {{outlet}}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        </script>
+
+
+
+        <script type='text/x-handlebars' data-template-name='dummyTemplate'>
+            <h3 style="margin:10%;"> To view Criteria and Patients select from the tab on left.</h3>
+        </script>
+        <script type="text/x-handlebars" data-template-name="numeratorInfo">
+        <div class="col-sm-12 col-md-12" style="height:auto;max-height:650px;overflow-y:auto !important;">
+          <div class="tab-pane" >
+            <ul class="nav nav-tabs">
+              {{#link-to 'numeratorInfoCriteria' data-toggle="tab" tagName='li'}}<a style="cursor:pointer;">Criteria</a>{{/link-to}}
+                  {{#link-to 'numeratorInfoPatients' data-toggle="tab" tagName='li'}}<a style="cursor:pointer;">Patients</a>{{/link-to}}
+          </ul>
+        </div>
+        {{outlet}}
+      </div>
+
+
+
+        </script>
+        <script type='text/x-handlebars' data-template-name="numeratorInfo/index">
+            <p>Select from Criteria and Patients above. </p>
+
+
+
+        </script>
+        <script type="text/x-handlebars" data-template-name="numeratorInfoCriteria">
+          <div class="tab-content">
+          <div id="first" class="tab-pane active">
+
+
+                   <p><h4>Numerator Criteria: </h4> {{{show-newlines numeratorValue}}}</p>
+
+
+        </div>
+      </div>
+
+
+
+        </script>
+        <script type="text/x-handlebars" data-template-name="numeratorInfoPatients">
+                {{#if model}}
+          <table class="table">
+              <thead>
+                <tr>
+                      <th>Firstname</th>
+                  <th>Lastname</th>
+              <th>SEX</th>
+                            <th>D.O.B</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each model}}
+                    <tr>
+                      <td>{{firstName}}</td>
+                    <td>{{lastName}}</td>
+                    <td>{{gender}}</td>
+                                <td>{{format-date birthTime}}</td>
+                  </tr>
+                        {{/each}}
+            </tbody>
+        </table>
+        {{else}}
+            <p style="padding-top:20px;"><h4> There are no patients in Numerator for this selected measure</h4></p>
+        {{/if}}
+
+
+
+
+        </script>
+
+
+        <script type="text/x-handlebars" data-template-name="initialPopulation">
+        <div class="col-sm-12 col-md-12" style="height:auto;max-height:650px;overflow-y:auto !important;">
+          <div class="tab-pane" >
+            <ul class="nav nav-tabs">
+              {{#link-to 'initialPopulationCriteria' data-toggle="tab" tagName='li'}}<a style="cursor:pointer;">Criteria</a>{{/link-to}}
+                  {{#link-to 'initialPopulationPatients' data-toggle="tab" tagName='li'}}<a style="cursor:pointer;">Patients</a>{{/link-to}}
+          </ul>
+        </div>
+        {{outlet}}
+      </div>
+
+
+
+        </script>
+        <script type='text/x-handlebars' data-template-name="initialPopulation/index">
+            <p>Select from Criteria and Patients above. </p>
+
+
+
+        </script>
+        <script type="text/x-handlebars" data-template-name="initialPopulationCriteria">
+          <div class="tab-content">
+          <div id="first" class="tab-pane active">
+
+                <p><h4>Initial Population Criteria: </h4> {{{show-newlines initialPopulationValue}}}</p>
+
+
+        </div>
+      </div>
+
+
+
+        </script>
+        <script type="text/x-handlebars" data-template-name="initialPopulationPatients">
+                {{#if model}}
+          <table class="table">
+              <thead>
+                <tr>
+                      <th>Firstname</th>
+                  <th>Lastname</th>
+              <th>SEX</th>
+              <th>D.O.B</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each model}}
+                    <tr>
+                      <td>{{firstName}}</td>
+                    <td>{{lastName}}</td>
+                    <td>{{gender}}</td>
+                    <td>{{format-date birthTime}}</td>
+                  </tr>
+                        {{/each}}
+            </tbody>
+        </table>
+        {{else}}
+            <p style="padding-top:20px;"><h4> There are no patients in initial population for this selected measure</h4></p>
+        {{/if}}
+
+
+
+
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="denominatorInfo">
+        <div class="col-sm-12 col-md-12" style="height:auto;max-height:650px;overflow-y:auto !important;">
+          <div class="tab-pane" >
+            <ul class="nav nav-tabs">
+              {{#link-to 'denominatorInfoCriteria' data-toggle="tab" tagName='li'}}<a style="cursor:pointer;">Criteria</a>{{/link-to}}
+                  {{#link-to 'denominatorInfoPatients' data-toggle="tab" tagName='li'}}<a style="cursor:pointer;">Patients</a>{{/link-to}}
+          </ul>
+        </div>
+        {{outlet}}
+      </div>
+
+
+
+        </script>
+        <script type='text/x-handlebars' data-template-name="denominatorInfo/index">
+            <p>Select from Criteria and Patients above. </p>
+
+
+
+        </script>
+        <script type="text/x-handlebars" data-template-name="denominatorInfoCriteria">
+          <div class="tab-content">
+          <div id="first" class="tab-pane active">
+
+                <p><h4> Denominator Criteria : </h4> {{{show-newlines denominatorValue}}}</p>
+
+        </div>
+      </div>
+
+
+
+        </script>
+        <script type="text/x-handlebars" data-template-name="denominatorInfoPatients">
+                {{#if model}}
+          <table class="table">
+              <thead>
+                <tr>
+                      <th>Firstname</th>
+                  <th>Lastname</th>
+              <th>SEX</th>
+              <th>D.O.B</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each model}}
+                    <tr>
+                      <td>{{firstName}}</td>
+                    <td>{{lastName}}</td>
+                    <td>{{gender}}</td>
+                    <td>{{format-date birthTime}}</td>
+                  </tr>
+                        {{/each}}
+            </tbody>
+        </table>
+        {{else}}
+            <p style="padding-top:20px;"><h4> There are no patients in denominator for this selected measure</h4></p>
+                {{/if}}
+
+
+
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="exclusionsInfo">
+        <div class="col-sm-12 col-md-12" style="height:auto;max-height:650px;overflow-y:auto !important;">
+          <div class="tab-pane" >
+            <ul class="nav nav-tabs">
+              {{#link-to 'exclusionsInfoCriteria' data-toggle="tab" tagName='li'}}<a style="cursor:pointer;">Criteria</a>{{/link-to}}
+                  {{#link-to 'exclusionsInfoPatients' data-toggle="tab" tagName='li'}}<a style="cursor:pointer;">Patients</a>{{/link-to}}
+
+          </ul>
+        </div>
+        {{outlet}}
+      </div>
+
+
+
+        </script>
+        <script type='text/x-handlebars' data-template-name="exclusionsInfo/index">
+            <p>Select from Criteria and Patients above. </p>
+
+
+
+        </script>
+        <script type="text/x-handlebars" data-template-name="exclusionsInfoCriteria">
+          <div class="tab-content">
+          <div id="first" class="tab-pane active">
+
+                <!--<p><h4>Numerator Exclusions : </h4> {{numeratorExclusionsValue}}</p>-->
+                <p><h4>Denominator Exclusions: </h4> {{{show-newlines denominatorExclusionsValue}}}</p>
+
+        </div>
+      </div>
+
+
+
+        </script>
+        <script type="text/x-handlebars" data-template-name="exclusionsInfoPatients">
+                {{#if model}}
+          <table class="table">
+              <thead>
+                <tr>
+                      <th>Firstname</th>
+                  <th>Lastname</th>
+              <th>SEX</th>
+              <th>D.O.B</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each model}}
+                    <tr>
+                      <td>{{firstName}}</td>
+                    <td>{{lastName}}</td>
+                    <td>{{gender}}</td>
+                    <td>{{format-date birthTime}}</td>
+                  </tr>
+                        {{/each}}
+            </tbody>
+        </table>
+        {{else}}
+            <p style="padding-top:20px;"><h4> There are no excluded patients for this selected measure</h4></p>
+        {{/if}}
+        </script>
+
+
+
+        <script type="text/x-handlebars" data-template-name="exceptionInfo">
+        <div class="col-sm-12 col-md-12" style="height:auto;max-height:650px;overflow-y:auto !important;">
+          <div class="tab-pane" >
+            <ul class="nav nav-tabs">
+              {{#link-to 'exceptionInfoCriteria' data-toggle="tab" tagName='li'}}<a style="cursor:pointer;">Criteria</a>{{/link-to}}
+                  {{#link-to 'exceptionInfoPatients' data-toggle="tab" tagName='li'}}<a style="cursor:pointer;">Patients</a>{{/link-to}}
+          </ul>
+        </div>
+        {{outlet}}
+      </div>
+
+
+
+        </script>
+
+        <script type='text/x-handlebars' data-template-name="exceptionInfo/index">
+            <p>Select from Criteria and Patients above. </p>
+
+
+
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="exceptionInfoCriteria">
+          <div class="tab-content">
+          <div id="first" class="tab-pane active">
+
+                <p><h4> Denominator Exceptions : </h4> {{{show-newlines exceptionValue}}}</p>
+
+
+        </div>
+      </div>
+
+
+
+        </script>
+        <script type="text/x-handlebars" data-template-name="exceptionInfoPatients">
+                {{#if model}}
+          <table class="table">
+              <thead>
+                <tr>
+                      <th>Firstname</th>
+                  <th>Lastname</th>
+              <th>SEX</th>
+              <th>D.O.B</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each model}}
+                    <tr>
+                      <td>{{firstName}}</td>
+                    <td>{{lastName}}</td>
+                    <td>{{gender}}</td>
+                    <td>{{format-date birthTime}}</td>
+                  </tr>
+                        {{/each}}
+            </tbody>
+        </table>
+        {{else}}
+            <p style="padding-top:20px;"><h4> There are no patients with Exceptions for this selected measure</h4></p>
+        {{/if}}
+        </script>
+
+
+
+
+
+
+    </section>
+</div>
+<footer class="footer">
+    <div class="container">
+        <div class="contactInfo">
+            <ul class="pipedFooter">
+                <li class="companyName" th:text="#{footer.companyName}"> />
+                <li class="companyName" th:text="#{footer.companyAddress}" />
+                <li class="companyName" th:text="#{footer.companyCityStateZip}" />
+                <li class="companyName" th:text="#{footer.companyTel}" />
+                <li class="companyName" th:text="#{footer.companyFax}" />
+                <li class="companyName" th:text="#{footer.companyEmail}" />
+            </ul>
+        </div>
+    </div>
+    <div class="copyright container" style="color:white; margin-top:10px !important;margin-bottom:0px !important;">
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <p style="text-align:left; font-size:12px;color:#808080; font-family: 'Josefin Slab', serif;" th:utext="#{footer.copyright}"></p>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <p style="text-align:right;font-size:12px; font-family: 'Josefin Slab', serif;"><a style="color:#808080 !important; text-decoration:none !important;font-weight:normal !important;font-style:normal !important;" th:href="#{footer.website.href}" th:text="#{footer.website.text}"></a><span style="font-size:10px;color:#808080;"> Application Version:</span> <span  style="font-size:10px;color:#808080;" th:text="#{application.version}"></span></p>
+            </div>
+        </div>
+
+    </div>
+</footer>
+
+
+<!--SCRIPTS-->
+<script type="text/javascript"
+        th:src="@{/resources/bower_components/jquery/dist/jquery.js}"></script>
+<script type="text/javascript"
+        th:src="@{/resources/bower_components/jqueryui/jquery-ui.min.js}"></script>
+
+<script type="text/javascript"
+        th:src="@{/resources/bower_components/handlebars/handlebars.min.js}"></script>
+<script type="text/javascript"
+        th:src="@{/resources/bower_components/ember/ember-template-compiler.js}"></script>
+<script type="text/javascript"
+        th:src="@{/resources/bower_components/ember/ember.min.js}"></script>
+<script type="text/javascript"
+        th:src="@{/resources/bower_components/ember-data/ember-data.min.js}"></script>
+
+<script type="text/javascript"
+        th:src="@{resources/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+
+
+<script type="text/javascript"
+        th:src="@{/resources/bower_components/classy-loader/jquery.classyLoader/1.2.0/js/jquery.classyloader-1.2.0.js}"></script>
+
+<script type="text/javascript" th:src="@{resources/bower_components/scrollTo.js}"></script>
+<script type="text/javascript" th:src="@{/resources/bower_components/bootstrap-daterangepicker/moment.js}"></script>
+<script type="text/javascript"
+        th:src="@{/resources/bower_components/bootstrap-daterangepicker/daterangepicker.js}"></script>
+<script type="text/javascript"
+        th:src="@{/resources/js/site/dashboard.js}"></script>
+<script type="text/javascript"
+        th:src="@{/resources/js/security/auto-logout.js}"></script>
+
+
+<!-- Auto Logout Modal -->
+<div class="modal fade" id="logout-modal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Auto-Logout</h4>
+            </div>
+            <div class="modal-body">
+                <p>For security purposes you will be logged out of the application in one minute.</p>
+            </div>
+            <div class="modal-footer">
+                <button onclick="ResetTimeOutTimer();" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+
+        $('#practiceList').attr('disabled',true);
+        $('#providerList').attr('disabled',true);
+        console.log('script activated');
+        // var provId = localStorage.getItem('providerId');
+        // parsed
+        var screen = $(window);
+        if(screen.width <768){
+            $('.sidebar-menu').hide();
+            $('.cqmContainer').css('margin','o auto !important');
+        }
+        if(screen.width > 768){
+            $('.siderbar-menu').show();
+            $('.cqmContainer').css('margin','');
+        }
+
+       /* setTimeout(function(){
+            var orgId = $('#organizationList option:selected').val();
+            var pracId = $('#practiceList option:selected').val();
+            var provId = $('#providerList option:selected').val();
+
+            localStorage.setItem("orgId", orgId);
+            localStorage.setItem("pracId", pracId);
+            localStorage.setItem("provId", provId);
+        }, 120000);*/
+
+
+    });
+
+</script>
+</body>
+</html>

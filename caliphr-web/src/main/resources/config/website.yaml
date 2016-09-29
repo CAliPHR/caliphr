@@ -1,0 +1,12 @@
+# URL for API Tier
+API.ROOT: http://localhost:8081
+
+# Session Timeout (15 minutes)
+SESSION.TIMEOUT.SECONDS: 900
+
+# Password requirements
+PASSWORD:
+  EXPIRATION.MONTHS: 3
+  LENGTH:
+    MIN: 8
+    MAX: 30

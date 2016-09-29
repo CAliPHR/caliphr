@@ -1,0 +1,5 @@
+# XDS.b namespace
+TARGET.NAMESPACE.URL: http://caliphr.ainq.com/xdsb/document-repository-web-service
+
+# Session Timeout (15 minutes)
+SESSION.TIMEOUT.SECONDS: 900

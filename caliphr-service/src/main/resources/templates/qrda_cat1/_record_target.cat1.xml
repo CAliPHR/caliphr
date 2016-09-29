@@ -1,0 +1,29 @@
+<recordTarget>
+    <patientRole>
+        <id th:attr="extension=${patient.medicalRecordNumber}, root=${patient.sourceOid}" />
+        <addr use="HP">
+            <streetAddressLine th:text="${patient.address1}" th:if="${patient.address1 != null &amp;&amp;  #strings.length(patient.address1) > 0}" />
+            <streetAddressLine th:text="${patient.address2}" th:if="${patient.address2 != null &amp;&amp;  #strings.length(patient.address2) > 0}" />
+            <city th:text="${patient.city}" th:if="${patient.city != null &amp;&amp;  #strings.length(patient.city) > 0}" />
+            <state th:text="${patient.state}" th:if="${patient.state != null &amp;&amp;  #strings.length(patient.state) > 0}" />
+            <postalCode th:text="${patient.postalCode}" th:if="${patient.postalCode != null &amp;&amp;  #strings.length(patient.postalCode) > 0}" />
+            <country th:text="${patient.country}" th:if="${patient.country != null &amp;&amp;  #strings.length(patient.country) > 0}" />
+        </addr>
+        <telecom use="WP" value="tel:+1-781-271-3000"/>
+        <patient>
+            <name>
+                <given th:text="${patient.firstName}" />
+                <family th:text="${patient.lastName}" />
+            </name>
+            <administrativeGenderCode th:attr="code=${patient.gender}" codeSystem="2.16.840.1.113883.5.1" codeSystemName="HL7 AdministrativeGender"  th:if="${patient.gender != null &amp;&amp;  #strings.length(patient.gender) > 0}" />
+            <birthTime th:attr="value=${patient.birthTime}" />
+            <raceCode th:attr="code=${patient.race}" codeSystemName="CDC Race and Ethnicity" codeSystem="2.16.840.1.113883.6.238"  th:if="${patient.race != null &amp;&amp;  #strings.length(patient.race) > 0}" />
+            <ethnicGroupCode th:attr="code=${patient.ethnicity}" codeSystemName="CDC Race and Ethnicity" codeSystem="2.16.840.1.113883.6.238"  th:if="${patient.ethnicity != null &amp;&amp;  #strings.length(patient.ethnicity) > 0}" />
+            <languageCommunication th:if="${patient.language != null &amp;&amp;  #strings.length(patient.language) > 0}" >
+                <templateId root="2.16.840.1.113883.3.88.11.83.2" assigningAuthorityName="HITSP/C83"/>
+                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.2.1" assigningAuthorityName="IHE/PCC"/>
+                <languageCode th:attr="code=${patient.language}" />
+            </languageCommunication>
+        </patient>
+    </patientRole>
+</recordTarget>

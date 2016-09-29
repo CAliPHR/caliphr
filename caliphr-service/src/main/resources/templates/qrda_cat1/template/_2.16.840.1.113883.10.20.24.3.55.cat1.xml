@@ -1,0 +1,17 @@
+<entry>
+    <!-- Patient Characteristic Payer -->
+    <observation classCode="OBS" moodCode="EVN">
+        <templateId root="2.16.840.1.113883.10.20.24.3.55"/>
+        <id root="1.3.6.1.4.1.115" th:attr="extension=${entry.id}"/>
+        <code code="48768-6" codeSystemName="LOINC" codeSystem="2.16.840.1.113883.6.1" displayName="Payment source"/>
+        <statusCode code="completed"/>
+        <effectiveTime>
+            <low th:attr="value=${entry.low}" />
+            <high th:attr="value=${entry.high}" />
+        </effectiveTime>
+        <value xsi:type="CD" th:attr="code=${entry.codeCode}, codeSystem=${entry.codeSystem}, 'sdtc:valueSet'=${entry.codeValueSetOid}">
+            <originalText th:text="${entry.codeDescription}" />
+        </value>
+
+    </observation>
+</entry>

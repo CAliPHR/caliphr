@@ -1,0 +1,468 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:n1="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Cypress Certification Patient Test Record: SCIP_ADULT B</title>
+    <style type="text/css">
+      body {
+        color: #003366;
+        background-color: #FFFFFF;
+        font-family: Verdana, Tahoma, sans-serif;
+        font-size: 11px;
+      }
+      a {
+        color: #003366;
+        background-color: #FFFFFF;
+      }
+      h1 {
+        font-size: 12pt;
+        font-weight: bold;
+      }
+      h2 {
+        font-size: 11pt;
+        font-weight: bold;
+      }
+      h3 {
+        font-size: 10pt;
+        font-weight: bold;
+      }
+      h4 {
+        font-size: 8pt;
+        font-weight: bold;
+      }
+      div {
+        width: 95%;
+      }
+      table {
+        line-height: 10pt;
+        width: 90%;
+      }
+      tr {
+        background-color: #ccccff;
+      }
+      td {
+        padding: 0.1cm 0.2cm;
+        vertical-align: top;
+      }
+      .h1center {
+        font-size: 12pt;
+        font-weight: bold;
+        text-align: center;
+        width: 80%;
+      }
+      .header_table{
+        border: 1pt inset #00008b;
+      }
+      .narr_table {
+        width: 100%;
+      }
+      .narr_tr {
+        background-color: #ffffcc;
+      }
+      .narr_th {
+        background-color: #ffd700;
+      }
+      .td_label{
+        font-weight: bold;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="h1center">Cypress Certification Patient Test Record: SCIP_ADULT B</h1>
+    <table class="header_table">
+  <tbody>
+    <tr>
+      <td width="20%" bgcolor="#3399ff"><span class="td_label">Patient</span></td>
+      <td witdh="30%">SCIP_ADULT B</td>
+      <td width="15%" bgcolor="#3399ff"><span class="td_label">Sex</span></td>
+      <td>Male</td>
+    </tr>
+    <tr>
+      <td width="20%" bgcolor="#3399ff"><span class="td_label">Date of birth</span></td>
+      <td width="30%">June 6th, 1948 09:30</td>
+      <td width="15%" bgcolor="#3399ff"><span class="td_label">Date of expiration</span></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td width="20%" bgcolor="#3399ff"><span class="td_label">Race</span></td>
+      <td width="30%">American Indian or Alaska Native</td>
+      <td width="15%" bgcolor="#3399ff"><span class="td_label">Ethnicity</span></td>
+      <td>Not Hispanic or Latino</td>
+    </tr>    
+    <tr>
+      <td bgcolor="#3399ff"><span class="td_label">Insurance Providers</span></td>
+      <td>
+      	Other
+      </td>
+      <td bgcolor="#3399ff"><span class="td_label">Patient IDs</span></td>
+      <td>559fdfe0637970052a00008f Cypress</td>
+    </tr>
+    <tr>
+      <td bgcolor="#3399ff"><span class="td_label">Contact info</span></td>
+      <td colspan="3"> 
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="header_table">
+  <tbody>
+    <tr>
+      <td width="20%" bgcolor="#3399ff"><span class="td_label">Document Id</span></td>
+      <td width="80%">559fdfe0637970052a00008f 2.16.840.1.113883.3.72</td>
+    </tr>
+    <tr>
+      <td width="20%" bgcolor="#3399ff"><span class="td_label">Document Created:</span></td>
+      <td width="80%">July 10th, 2015 16:37</td>
+    </tr>
+  </tbody>
+</table>
+<table class="header_table">
+  <tbody>
+    <tr>
+      <td width="20%" bgcolor="#3399ff"><span class="td_label">Author</span></td>
+      <td width="80%">Auto Generated</td>
+    </tr>
+    <tr>
+      <td bgcolor="#3399ff"><span class="td_label">Contact info</span></td>
+      <td>
+        Tel:  +1-781-271-3000<br />
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="header_table">
+  <tbody>
+    <tr>
+      <td width="20%" bgcolor="#3399ff"><span class="td_label">Document maintained by</span></td>
+      <td width="80%">Cypress</td>
+    </tr>
+    <tr>
+      <td bgcolor="#3399ff"><span class="td_label">Contact info</span></td>
+      <td width="80%">202 Burlington Rd.<br />Bedford, MA 01730<br />Tel:  +1-781-271-3000<br /></td>
+    </tr>
+  </tbody>
+</table>
+
+    <!--h2><a name="toc">Table of Contents</a></h2>
+    <ul>
+      <li><a href="#idp190080">Allergies and Adverse Reactions</a></li>
+      <li><a href="#idp553808">Medications - Prescription and Non-Prescription</a></li>
+      <li><a href="#idp266352">Encounters</a></li>
+      <li><a href="#idp594640">Problems</a></li>
+    </ul-->
+    <script language="javascript">
+      var cur_view = "section";
+      function toggle(id) {
+        var e = document.getElementById(id);
+        if (cur_view=="section"){
+         document.getElementById("patient_information_by_section").style.display = 'none';
+         document.getElementById("table_by_encounter").style.display = 'block';
+         document.getElementById('toggle_button').innerHTML="View By Section";
+         cur_view = "encounter";
+        }else{
+         document.getElementById("patient_information_by_section").style.display = 'block';
+         document.getElementById("table_by_encounter").style.display = 'none';
+         document.getElementById('toggle_button').innerHTML="View By Encounter";
+         cur_view = "section";
+        }      
+      }
+      
+      function showConcepts(ev, id) {
+        var left = ev.clientX + document.documentElement.scrollLeft;
+        var top = ev.clientY + document.documentElement.scrollTop;
+
+        var concepts = document.getElementById(id);
+        concepts.style.display = 'block';
+        concepts.style.left = left + 'px';
+        concepts.style.top = top + 'px';
+      }
+      function hideConcepts(ev, id) {
+        var concepts = document.getElementById(id);
+        concepts.style.display = 'none';
+      }
+      function showCodes(event, id) {
+        //var left = ev.clientX + document.documentElement.scrollLeft;
+        //var top = ev.clientY + document.documentElement.scrollTop;
+
+        // Calculate pageX/Y if missing and clientX/Y available
+        if ( event.pageX == null && event.clientX != null ) {
+          var doc = document.documentElement, body = document.body;
+          event.pageX = event.clientX + (doc && doc.scrollLeft || body && body.scrollLeft || 0) - (doc && doc.clientLeft || body && body.clientLeft || 0);
+          event.pageY = event.clientY + (doc && doc.scrollTop  || body && body.scrollTop  || 0) - (doc   && doc.clientTop  || body && body.clientTop  || 0);
+        }
+        var left = event.pageX;
+        var top = event.pageY;
+        var codes = document.getElementById(id);
+        codes.style.display = 'block';
+        codes.style.left = left + 'px';
+        codes.style.top = top + 'px';
+      }
+      function hideCodes(ev, id) {
+        var codes = document.getElementById(id);
+        codes.style.display = 'none';
+      }
+    </script>
+    <div id="patient_information_by_section" style="display:block">
+    <h3><a name="_link" href="#toc">Encounters</a></h3>
+<div>
+  <table class="narr_table" border="1" width="100%">
+    <thead>
+      <tr class="narr_tr">
+        <th class="narr_th" width="30%">Description</th>
+        <th class="narr_th" width="15%">Codes</th>
+        <th class="narr_th" width="15%">Time</th>
+        <th class="narr_th" width="10%">Status</th>
+        <th class="narr_th" width="15%">Results</th>
+        <th class="narr_th" width="15%">Fields</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr class="narr_tr">
+  
+  <td>Encounter, Performed</td>
+  <td>
+      <b>
+          SNOMED-CT: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a000090_false_SNOMED-CT_183452005')" onmouseout="hideCodes(event,'559fdfe0637970052a000090_false_SNOMED-CT_183452005')" style="cursor:pointer;">183452005</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a000090_false_SNOMED-CT_183452005" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Emergency hospital admission (procedure) </span>
+      <br/>
+  </td>
+  <td>March 2nd, 2013 14:00 - March 4th, 2013 22:00</td>
+  <td>performed</td>   
+  <td>
+  </td>
+  <td>
+        <dl>
+            <dt><b>Admit Time</b>: March 2nd, 2013 14:00</dt>
+        <dl>
+        <dl>
+            <dt><b>Discharge Time</b>: March 4th, 2013 22:00</dt>
+        <dl>
+        <dl>
+            <dt><b>Facility:</b></dt>
+                    <dd>Start Time: <i>March 2nd, 2013 16:55</i></dd>
+                    <dd>Name: <i>Hospital Measures-PACU</i></dd>
+                    <dd>End Time: <i>March 2nd, 2013 18:00</i></dd>
+                    <dd>Code: <i>code_system: SNOMED-CT code: 398161000 title: Hospital Measures-PACU</i></dd>
+        <dl>
+	</td>
+
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+    <h3><a name="_link" href="#toc">Medications</a></h3>
+<div>
+  <table class="narr_table" border="1" width="100%">
+    <thead>
+      <tr class="narr_tr">
+        <th class="narr_th" width="30%">Description</th>
+        <th class="narr_th" width="15%">Codes</th>
+        <th class="narr_th" width="15%">Time</th>
+        <th class="narr_th" width="10%">Status</th>
+        <th class="narr_th" width="15%">Results</th>
+        <th class="narr_th" width="15%">Fields</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr class="narr_tr">
+  
+  <td>Medication, Administered</td>
+  <td>
+      <b>
+          RxNorm: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a000092_false_RxNorm_313920')" onmouseout="hideCodes(event,'559fdfe0637970052a000092_false_RxNorm_313920')" style="cursor:pointer;">313920</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a000092_false_RxNorm_313920" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Cefazolin 200 MG/ML Injectable Solution </span>
+      <br/>
+  </td>
+  <td>March 2nd, 2013 15:00 - March 2nd, 2013 15:30</td>
+  <td>administered</td>   
+  <td>
+  </td>
+  <td>
+        <dl>
+            <dt><b>Administration Timing</b>: period: value: 8 unit: h</dt>
+        <dl>
+        <dl>
+            <dt><b>Dose</b>: value: 500 unit: mg</dt>
+        <dl>
+        <dl>
+            <dt><b>Fulfillment History</b>: Dispense Date: March 2nd, 2012 14:55 Fill Number: none Fill Status: none Prescription Number: none Provider: none Quantity Dispensed: value: 500 unit: mg</dt>
+        <dl>
+        <dl>
+            <dt><b>Route</b>: code_system: SNOMED-CT code: 255560000 title: Hospital measures-Route IV</dt>
+        <dl>
+	</td>
+
+</tr>
+
+        <tr class="narr_tr">
+  
+  <td>Medication, Administered</td>
+  <td>
+      <b>
+          RxNorm: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a000094_false_RxNorm_204929')" onmouseout="hideCodes(event,'559fdfe0637970052a000094_false_RxNorm_204929')" style="cursor:pointer;">204929</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a000094_false_RxNorm_204929" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Cefuroxime 15 MG/ML Injectable Solution </span>
+      <br/>
+  </td>
+  <td>March 2nd, 2013 16:00 - March 2nd, 2013 16:30</td>
+  <td>administered</td>   
+  <td>
+  </td>
+  <td>
+        <dl>
+            <dt><b>Route</b>: code_system: SNOMED-CT code: 255560000 title: Hospital measures-Route IV</dt>
+        <dl>
+	</td>
+
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+    <h3><a name="_link" href="#toc">Procedures</a></h3>
+<div>
+  <table class="narr_table" border="1" width="100%">
+    <thead>
+      <tr class="narr_tr">
+        <th class="narr_th" width="30%">Description</th>
+        <th class="narr_th" width="15%">Codes</th>
+        <th class="narr_th" width="15%">Time</th>
+        <th class="narr_th" width="10%">Status</th>
+        <th class="narr_th" width="15%">Results</th>
+        <th class="narr_th" width="15%">Fields</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr class="narr_tr">
+  
+  <td>Procedure, Performed</td>
+  <td>
+      <b>
+          ICD-10-PCS: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a000095_false_ICD-10-PCS_0T9B70Z')" onmouseout="hideCodes(event,'559fdfe0637970052a000095_false_ICD-10-PCS_0T9B70Z')" style="cursor:pointer;">0T9B70Z</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a000095_false_ICD-10-PCS_0T9B70Z" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Drainage of Bladder with Drainage Device, Via Natural or Artificial Opening </span>
+      <br/>
+      <b>
+          ICD-9-PCS: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a000095_false_ICD-9-PCS_57.94')" onmouseout="hideCodes(event,'559fdfe0637970052a000095_false_ICD-9-PCS_57.94')" style="cursor:pointer;">57.94</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a000095_false_ICD-9-PCS_57.94" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Insertion of indwelling urinary catheter </span>
+      <br/>
+      <b>
+          SNOMED-CT: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a000095_false_SNOMED-CT_410024004')" onmouseout="hideCodes(event,'559fdfe0637970052a000095_false_SNOMED-CT_410024004')" style="cursor:pointer;">410024004</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a000095_false_SNOMED-CT_410024004" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Catheterization of urinary bladder (procedure) </span>
+      <br/>
+  </td>
+  <td>March 2nd, 2013 15:15 - March 2nd, 2013 18:30</td>
+  <td>performed</td>   
+  <td>
+  </td>
+  <td>
+	</td>
+
+</tr>
+
+        <tr class="narr_tr">
+  
+  <td>Procedure, Performed</td>
+  <td>
+      <b>
+          SNOMED-CT: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a000096_false_SNOMED-CT_112943005')" onmouseout="hideCodes(event,'559fdfe0637970052a000096_false_SNOMED-CT_112943005')" style="cursor:pointer;">112943005</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a000096_false_SNOMED-CT_112943005" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Epidural injection of anesthetic substance, diagnostic, caudal, continuous (procedure) </span>
+      <br/>
+      <b>
+          ICD-10-PCS: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a000096_false_ICD-10-PCS_3E030FZ')" onmouseout="hideCodes(event,'559fdfe0637970052a000096_false_ICD-10-PCS_3E030FZ')" style="cursor:pointer;">3E030FZ</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a000096_false_ICD-10-PCS_3E030FZ" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Introduction of Intracirculatory Anesthetic into Peripheral Vein, Open Approach </span>
+      <br/>
+  </td>
+  <td>March 2nd, 2013 15:40 - March 2nd, 2013 16:50</td>
+  <td>performed</td>   
+  <td>
+  </td>
+  <td>
+        <dl>
+            <dt><b>Incision Time</b>: March 2nd, 2013 15:45</dt>
+        <dl>
+	</td>
+
+</tr>
+
+        <tr class="narr_tr">
+  
+  <td>Procedure, Performed</td>
+  <td>
+      <b>
+          ICD-10-PCS: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a000097_false_ICD-10-PCS_0210093')" onmouseout="hideCodes(event,'559fdfe0637970052a000097_false_ICD-10-PCS_0210093')" style="cursor:pointer;">0210093</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a000097_false_ICD-10-PCS_0210093" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Bypass Coronary Artery, One Site from Coronary Artery with Autologous Venous Tissue, Open Approach </span>
+      <br/>
+      <b>
+          SNOMED-CT: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a000097_false_SNOMED-CT_10190003')" onmouseout="hideCodes(event,'559fdfe0637970052a000097_false_SNOMED-CT_10190003')" style="cursor:pointer;">10190003</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a000097_false_SNOMED-CT_10190003" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Aortocoronary bypass of four or more coronary arteries (procedure) </span>
+      <br/>
+      <b>
+          ICD-9-PCS: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a000097_false_ICD-9-PCS_36.10')" onmouseout="hideCodes(event,'559fdfe0637970052a000097_false_ICD-9-PCS_36.10')" style="cursor:pointer;">36.10</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a000097_false_ICD-9-PCS_36.10" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Aortocoronary bypass for heart revascularization, not otherwise specified </span>
+      <br/>
+  </td>
+  <td>March 2nd, 2013 15:45 - March 2nd, 2013 16:45</td>
+  <td>performed</td>   
+  <td>
+  </td>
+  <td>
+        <dl>
+            <dt><b>Incision Time</b>: March 2nd, 2013 15:45</dt>
+        <dl>
+        <dl>
+            <dt><b>Ordinality</b>: code_system: SNOMED-CT code: 63161005 title: Principal</dt>
+        <dl>
+	</td>
+
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+  
+</div>
+
+    
+    <br /><br />
+    <br /><br />
+    <br /><br />
+    <br /><br />
+  </body>
+</html>

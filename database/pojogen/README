@@ -1,0 +1,1 @@
+To run pojogen to generate the JPA Entity classes, execute the runHbnPojoGenerator gradle task in the caliphr-service project

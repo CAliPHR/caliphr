@@ -1,0 +1,15 @@
+<entry>
+    <!-- Clinical Trial Participant -->
+    <observation classCode="OBS" moodCode="EVN">
+        <templateId root="2.16.840.1.113883.10.20.24.3.51"/>
+        <id th:attr="root=${entry.uuid}"/>
+        <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
+        <statusCode code="active"/>
+        <effectiveTime>
+            <low th:attr="value=${entry.low}" />
+            <high th:attr="value=${entry.high}" />
+        </effectiveTime>
+        <value code="428024001" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"
+               displayName="clinical trial participant" xsi:type="CD"/>
+    </observation>
+</entry>

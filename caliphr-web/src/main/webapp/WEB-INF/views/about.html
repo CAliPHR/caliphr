@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width; initial-scale=1.0; maximum-scale=1.0; minimum-scale=1.0; user-scalable=0;" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta name="author" th:content="#{head.meta.author}"/>
+<title th:text="#{head.title}"></title>
+<link rel="stylesheet" type="text/css" media="screen"
+	th:href="@{'/resources/styles/master.css?version=' + #{application.version}}" />
+<link rel="stylesheet" type="text/css" media="print"
+	th:href="@{'/resources/styles/print.css?version=' + #{application.version}}" />
+<link rel="stylesheet" type="text/css" media="screen"
+	th:href="@{/resources/bower_components/bootstrap/dist/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" media="screen"
+	th:href="@{/resources/bower_components/bootstrap/dist/css/bootstrap-theme.min.css}" />
+<link rel="icon" type="image/x-icon"
+	th:href="@{/resources/images/favicon.ico}" />
+
+<script type="text/javascript"
+	th:src="@{/resources/bower_components/jquery/dist/jquery.js}"></script>
+<script type="text/javascript"
+	th:src="@{/resources/bower_components/jqueryui/jquery-ui.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/resources/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/resources/bower_components/handlebars/handlebars.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/resources/bower_components/ember/ember-template-compiler.js}"></script>
+<script type="text/javascript"
+	th:src="@{/resources/bower_components/ember/ember.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/resources/bower_components/ember-data/ember-data.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{'/resources/js/site/about.js?version=' + #{application.version}}"></script>
+
+<!--[if IE]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div id="header" th:include="layout :: head"></div>
+	<section id="content">
+
+		<p>Welcome to CAliPHR.  This is our about us page.  <a th:href="@{/}">Click here</a> to return home.</p>
+
+	</section>
+	<div th:include="layout :: foot"></div>
+
+</body>
+</html>

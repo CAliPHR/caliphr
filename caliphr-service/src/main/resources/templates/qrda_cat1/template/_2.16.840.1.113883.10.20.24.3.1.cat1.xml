@@ -1,0 +1,16 @@
+<entry>
+  <observation classCode="OBS" moodCode="GOL">
+    <!-- 2.16.840.1.113883.10.20.22.4.44 Plan of Care Activity Observation -->
+    <templateId root="2.16.840.1.113883.10.20.22.4.44"/>
+    <templateId root="2.16.840.1.113883.10.20.24.3.1"/>
+    <id root="1.3.6.1.4.1.115" th:attr="extension=${entry.id}"/>
+    <code th:attr="code=${entry.code}, codeSystem=${entry.codeSystem}, 'sdtc:valueSet'=${entry.codeValueSetOid}">
+      <originalText th:text="${entry.codeDescription}"></originalText>
+    </code>
+    <text th:text="${entry.description}"/>
+    <statusCode code="active"/>
+    <effectiveTime>
+      <low th:attr="value=${entry.low}" />
+    </effectiveTime>
+  </observation>
+</entry>

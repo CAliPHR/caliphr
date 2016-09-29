@@ -1,0 +1,8 @@
+<addr>
+    <streetAddressLine th:text="${address.address1}" th:if="${address.address1 != null &amp;&amp; #strings.length(address.address1) > 0}" />
+    <streetAddressLine th:text="${address.address2}" th:if="${address.address2 != null &amp;&amp; #strings.length(address.address2) > 0}" />
+    <city th:text="${address.city}" th:if="${address.city != null &amp;&amp; #strings.length(address.city) > 0}" />
+    <state th:text="${address.state}" th:if="${address.state != null &amp;&amp; #strings.length(address.state) > 0}" />
+    <postalCode th:text="${address.zipCode}" th:if="${address.zipCode != null &amp;&amp; #strings.length(address.zipCode) > 0}" />
+    <country th:text="${address.country}" th:if="${address.country != null &amp;&amp; #strings.length(address.country) > 0}" />
+</addr>

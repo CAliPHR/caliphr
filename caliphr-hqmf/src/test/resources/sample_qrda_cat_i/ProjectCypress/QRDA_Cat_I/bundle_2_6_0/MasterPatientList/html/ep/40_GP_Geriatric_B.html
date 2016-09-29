@@ -1,0 +1,793 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:n1="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Cypress Certification Patient Test Record: GP_Geriatric B</title>
+    <style type="text/css">
+      body {
+        color: #003366;
+        background-color: #FFFFFF;
+        font-family: Verdana, Tahoma, sans-serif;
+        font-size: 11px;
+      }
+      a {
+        color: #003366;
+        background-color: #FFFFFF;
+      }
+      h1 {
+        font-size: 12pt;
+        font-weight: bold;
+      }
+      h2 {
+        font-size: 11pt;
+        font-weight: bold;
+      }
+      h3 {
+        font-size: 10pt;
+        font-weight: bold;
+      }
+      h4 {
+        font-size: 8pt;
+        font-weight: bold;
+      }
+      div {
+        width: 95%;
+      }
+      table {
+        line-height: 10pt;
+        width: 90%;
+      }
+      tr {
+        background-color: #ccccff;
+      }
+      td {
+        padding: 0.1cm 0.2cm;
+        vertical-align: top;
+      }
+      .h1center {
+        font-size: 12pt;
+        font-weight: bold;
+        text-align: center;
+        width: 80%;
+      }
+      .header_table{
+        border: 1pt inset #00008b;
+      }
+      .narr_table {
+        width: 100%;
+      }
+      .narr_tr {
+        background-color: #ffffcc;
+      }
+      .narr_th {
+        background-color: #ffd700;
+      }
+      .td_label{
+        font-weight: bold;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="h1center">Cypress Certification Patient Test Record: GP_Geriatric B</h1>
+    <table class="header_table">
+  <tbody>
+    <tr>
+      <td width="20%" bgcolor="#3399ff"><span class="td_label">Patient</span></td>
+      <td witdh="30%">GP_Geriatric B</td>
+      <td width="15%" bgcolor="#3399ff"><span class="td_label">Sex</span></td>
+      <td>Male</td>
+    </tr>
+    <tr>
+      <td width="20%" bgcolor="#3399ff"><span class="td_label">Date of birth</span></td>
+      <td width="30%">January 3rd, 1946 14:00</td>
+      <td width="15%" bgcolor="#3399ff"><span class="td_label">Date of expiration</span></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td width="20%" bgcolor="#3399ff"><span class="td_label">Race</span></td>
+      <td width="30%">American Indian or Alaska Native</td>
+      <td width="15%" bgcolor="#3399ff"><span class="td_label">Ethnicity</span></td>
+      <td>Not Hispanic or Latino</td>
+    </tr>    
+    <tr>
+      <td bgcolor="#3399ff"><span class="td_label">Insurance Providers</span></td>
+      <td>
+      	Other
+      </td>
+      <td bgcolor="#3399ff"><span class="td_label">Patient IDs</span></td>
+      <td>559fdfe0637970052a0001ef Cypress</td>
+    </tr>
+    <tr>
+      <td bgcolor="#3399ff"><span class="td_label">Contact info</span></td>
+      <td colspan="3"> 
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="header_table">
+  <tbody>
+    <tr>
+      <td width="20%" bgcolor="#3399ff"><span class="td_label">Document Id</span></td>
+      <td width="80%">559fdfe0637970052a0001ef 2.16.840.1.113883.3.72</td>
+    </tr>
+    <tr>
+      <td width="20%" bgcolor="#3399ff"><span class="td_label">Document Created:</span></td>
+      <td width="80%">July 10th, 2015 16:37</td>
+    </tr>
+  </tbody>
+</table>
+<table class="header_table">
+  <tbody>
+    <tr>
+      <td width="20%" bgcolor="#3399ff"><span class="td_label">Author</span></td>
+      <td width="80%">Auto Generated</td>
+    </tr>
+    <tr>
+      <td bgcolor="#3399ff"><span class="td_label">Contact info</span></td>
+      <td>
+        Tel:  +1-781-271-3000<br />
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="header_table">
+  <tbody>
+    <tr>
+      <td width="20%" bgcolor="#3399ff"><span class="td_label">Document maintained by</span></td>
+      <td width="80%">Cypress</td>
+    </tr>
+    <tr>
+      <td bgcolor="#3399ff"><span class="td_label">Contact info</span></td>
+      <td width="80%">202 Burlington Rd.<br />Bedford, MA 01730<br />Tel:  +1-781-271-3000<br /></td>
+    </tr>
+  </tbody>
+</table>
+
+    <!--h2><a name="toc">Table of Contents</a></h2>
+    <ul>
+      <li><a href="#idp190080">Allergies and Adverse Reactions</a></li>
+      <li><a href="#idp553808">Medications - Prescription and Non-Prescription</a></li>
+      <li><a href="#idp266352">Encounters</a></li>
+      <li><a href="#idp594640">Problems</a></li>
+    </ul-->
+    <script language="javascript">
+      var cur_view = "section";
+      function toggle(id) {
+        var e = document.getElementById(id);
+        if (cur_view=="section"){
+         document.getElementById("patient_information_by_section").style.display = 'none';
+         document.getElementById("table_by_encounter").style.display = 'block';
+         document.getElementById('toggle_button').innerHTML="View By Section";
+         cur_view = "encounter";
+        }else{
+         document.getElementById("patient_information_by_section").style.display = 'block';
+         document.getElementById("table_by_encounter").style.display = 'none';
+         document.getElementById('toggle_button').innerHTML="View By Encounter";
+         cur_view = "section";
+        }      
+      }
+      
+      function showConcepts(ev, id) {
+        var left = ev.clientX + document.documentElement.scrollLeft;
+        var top = ev.clientY + document.documentElement.scrollTop;
+
+        var concepts = document.getElementById(id);
+        concepts.style.display = 'block';
+        concepts.style.left = left + 'px';
+        concepts.style.top = top + 'px';
+      }
+      function hideConcepts(ev, id) {
+        var concepts = document.getElementById(id);
+        concepts.style.display = 'none';
+      }
+      function showCodes(event, id) {
+        //var left = ev.clientX + document.documentElement.scrollLeft;
+        //var top = ev.clientY + document.documentElement.scrollTop;
+
+        // Calculate pageX/Y if missing and clientX/Y available
+        if ( event.pageX == null && event.clientX != null ) {
+          var doc = document.documentElement, body = document.body;
+          event.pageX = event.clientX + (doc && doc.scrollLeft || body && body.scrollLeft || 0) - (doc && doc.clientLeft || body && body.clientLeft || 0);
+          event.pageY = event.clientY + (doc && doc.scrollTop  || body && body.scrollTop  || 0) - (doc   && doc.clientTop  || body && body.clientTop  || 0);
+        }
+        var left = event.pageX;
+        var top = event.pageY;
+        var codes = document.getElementById(id);
+        codes.style.display = 'block';
+        codes.style.left = left + 'px';
+        codes.style.top = top + 'px';
+      }
+      function hideCodes(ev, id) {
+        var codes = document.getElementById(id);
+        codes.style.display = 'none';
+      }
+    </script>
+    <div id="patient_information_by_section" style="display:block">
+    <h3><a name="_link" href="#toc">Diagnoses</a></h3>
+<div>
+  <table class="narr_table" border="1" width="100%">
+    <thead>
+      <tr class="narr_tr">
+        <th class="narr_th" width="30%">Description</th>
+        <th class="narr_th" width="15%">Codes</th>
+        <th class="narr_th" width="15%">Time</th>
+        <th class="narr_th" width="10%">Status</th>
+        <th class="narr_th" width="15%">Results</th>
+        <th class="narr_th" width="15%">Fields</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr class="narr_tr">
+  
+  <td>Diagnosis, Active</td>
+  <td>
+      <b>
+          SNOMED-CT: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0001f0_false_SNOMED-CT_10091002')" onmouseout="hideCodes(event,'559fdfe0637970052a0001f0_false_SNOMED-CT_10091002')" style="cursor:pointer;">10091002</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0001f0_false_SNOMED-CT_10091002" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> High output heart failure (disorder) </span>
+      <br/>
+      <b>
+          ICD-9-CM: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0001f0_false_ICD-9-CM_428.0')" onmouseout="hideCodes(event,'559fdfe0637970052a0001f0_false_ICD-9-CM_428.0')" style="cursor:pointer;">428.0</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0001f0_false_ICD-9-CM_428.0" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Congestive heart failure, unspecified </span>
+      <br/>
+      <b>
+          ICD-10-CM: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0001f0_false_ICD-10-CM_I50.1')" onmouseout="hideCodes(event,'559fdfe0637970052a0001f0_false_ICD-10-CM_I50.1')" style="cursor:pointer;">I50.1</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0001f0_false_ICD-10-CM_I50.1" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Left ventricular failure </span>
+      <br/>
+  </td>
+  <td>February 1st, 2013 15:00 - present</td>
+  <td>active</td>   
+  <td>
+  </td>
+  <td>
+	</td>
+
+</tr>
+
+        <tr class="narr_tr">
+  
+  <td>Diagnosis, Active</td>
+  <td>
+      <b>
+          SNOMED-CT: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0001f1_false_SNOMED-CT_6475002')" onmouseout="hideCodes(event,'559fdfe0637970052a0001f1_false_SNOMED-CT_6475002')" style="cursor:pointer;">6475002</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0001f1_false_SNOMED-CT_6475002" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Primary degenerative dementia of the Alzheimer type, presenile onset, uncomplicated (disorder) </span>
+      <br/>
+      <b>
+          ICD-10-CM: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0001f1_false_ICD-10-CM_G30.9')" onmouseout="hideCodes(event,'559fdfe0637970052a0001f1_false_ICD-10-CM_G30.9')" style="cursor:pointer;">G30.9</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0001f1_false_ICD-10-CM_G30.9" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Alzheimer's disease, unspecified </span>
+      <br/>
+      <b>
+          ICD-9-CM: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0001f1_false_ICD-9-CM_331.0')" onmouseout="hideCodes(event,'559fdfe0637970052a0001f1_false_ICD-9-CM_331.0')" style="cursor:pointer;">331.0</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0001f1_false_ICD-9-CM_331.0" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Alzheimer's disease </span>
+      <br/>
+  </td>
+  <td>February 1st, 2013 16:00 - present</td>
+  <td>active</td>   
+  <td>
+  </td>
+  <td>
+	</td>
+
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+    <h3><a name="_link" href="#toc">Encounters</a></h3>
+<div>
+  <table class="narr_table" border="1" width="100%">
+    <thead>
+      <tr class="narr_tr">
+        <th class="narr_th" width="30%">Description</th>
+        <th class="narr_th" width="15%">Codes</th>
+        <th class="narr_th" width="15%">Time</th>
+        <th class="narr_th" width="10%">Status</th>
+        <th class="narr_th" width="15%">Results</th>
+        <th class="narr_th" width="15%">Fields</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr class="narr_tr">
+  
+  <td>Encounter, Performed</td>
+  <td>
+      <b>
+          CPT: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0001f2_false_CPT_99201')" onmouseout="hideCodes(event,'559fdfe0637970052a0001f2_false_CPT_99201')" style="cursor:pointer;">99201</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0001f2_false_CPT_99201" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Office or other outpatient visit for the evaluation and management of a new patient, which requires these 3 key components: A problem focused history; A problem focused examination; Straightforward medical decision making. Counseling and/or coordination of care with other physicians, other qualified health care professionals, or agencies are provided consistent with the nature of the problem(s) and the patient's and/or family's needs. Usually, the presenting problem(s) are self limited or minor. Typically, 10 minutes are spent face-to-face with the patient and/or family. </span>
+      <br/>
+  </td>
+  <td>August 1st, 2012 14:00 - August 1st, 2012 15:00</td>
+  <td>performed</td>   
+  <td>
+  </td>
+  <td>
+	</td>
+
+</tr>
+
+        <tr class="narr_tr">
+  
+  <td>Encounter, Performed</td>
+  <td>
+      <b>
+          CPT: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0001f3_false_CPT_99201')" onmouseout="hideCodes(event,'559fdfe0637970052a0001f3_false_CPT_99201')" style="cursor:pointer;">99201</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0001f3_false_CPT_99201" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Office or other outpatient visit for the evaluation and management of a new patient, which requires these 3 key components: A problem focused history; A problem focused examination; Straightforward medical decision making. Counseling and/or coordination of care with other physicians, other qualified health care professionals, or agencies are provided consistent with the nature of the problem(s) and the patient's and/or family's needs. Usually, the presenting problem(s) are self limited or minor. Typically, 10 minutes are spent face-to-face with the patient and/or family. </span>
+      <br/>
+  </td>
+  <td>October 1st, 2012 14:00 - October 1st, 2012 15:00</td>
+  <td>performed</td>   
+  <td>
+  </td>
+  <td>
+	</td>
+
+</tr>
+
+        <tr class="narr_tr">
+  
+  <td>Encounter, Performed</td>
+  <td>
+      <b>
+          CPT: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0001f4_false_CPT_99201')" onmouseout="hideCodes(event,'559fdfe0637970052a0001f4_false_CPT_99201')" style="cursor:pointer;">99201</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0001f4_false_CPT_99201" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Office or other outpatient visit for the evaluation and management of a new patient, which requires these 3 key components: A problem focused history; A problem focused examination; Straightforward medical decision making. Counseling and/or coordination of care with other physicians, other qualified health care professionals, or agencies are provided consistent with the nature of the problem(s) and the patient's and/or family's needs. Usually, the presenting problem(s) are self limited or minor. Typically, 10 minutes are spent face-to-face with the patient and/or family. </span>
+      <br/>
+  </td>
+  <td>February 1st, 2013 15:00 - February 1st, 2013 16:00</td>
+  <td>performed</td>   
+  <td>
+  </td>
+  <td>
+	</td>
+
+</tr>
+
+        <tr class="narr_tr">
+  
+  <td>Encounter, Performed</td>
+  <td>
+      <b>
+          CPT: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0001f5_false_CPT_99201')" onmouseout="hideCodes(event,'559fdfe0637970052a0001f5_false_CPT_99201')" style="cursor:pointer;">99201</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0001f5_false_CPT_99201" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Office or other outpatient visit for the evaluation and management of a new patient, which requires these 3 key components: A problem focused history; A problem focused examination; Straightforward medical decision making. Counseling and/or coordination of care with other physicians, other qualified health care professionals, or agencies are provided consistent with the nature of the problem(s) and the patient's and/or family's needs. Usually, the presenting problem(s) are self limited or minor. Typically, 10 minutes are spent face-to-face with the patient and/or family. </span>
+      <br/>
+  </td>
+  <td>June 1st, 2013 14:00 - June 1st, 2013 15:00</td>
+  <td>performed</td>   
+  <td>
+  </td>
+  <td>
+	</td>
+
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+    <h3><a name="_link" href="#toc">Medications</a></h3>
+<div>
+  <table class="narr_table" border="1" width="100%">
+    <thead>
+      <tr class="narr_tr">
+        <th class="narr_th" width="30%">Description</th>
+        <th class="narr_th" width="15%">Codes</th>
+        <th class="narr_th" width="15%">Time</th>
+        <th class="narr_th" width="10%">Status</th>
+        <th class="narr_th" width="15%">Results</th>
+        <th class="narr_th" width="15%">Fields</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr class="narr_tr">
+  
+  <td>Medication, Administered</td>
+  <td>
+      <b>
+          CVX: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0001f6_false_CVX_33')" onmouseout="hideCodes(event,'559fdfe0637970052a0001f6_false_CVX_33')" style="cursor:pointer;">33</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0001f6_false_CVX_33" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> pneumococcal polysaccharide vaccine, 23 valent </span>
+      <br/>
+  </td>
+  <td>February 1st, 2013 16:00 - February 1st, 2013 16:00</td>
+  <td>administered</td>   
+  <td>
+  </td>
+  <td>
+	</td>
+
+</tr>
+
+        <tr class="narr_tr">
+  
+  <td>Medication, Ordered</td>
+  <td>
+      <b>
+          RxNorm: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0001f7_false_RxNorm_1049630')" onmouseout="hideCodes(event,'559fdfe0637970052a0001f7_false_RxNorm_1049630')" style="cursor:pointer;">1049630</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0001f7_false_RxNorm_1049630" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Diphenhydramine Hydrochloride 25 MG Oral Tablet </span>
+      <br/>
+  </td>
+  <td>June 1st, 2013 15:00 - June 1st, 2013 15:00</td>
+  <td>ordered</td>   
+  <td>
+  </td>
+  <td>
+	</td>
+
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+    <h3><a name="_link" href="#toc">Functional Status Results</a></h3>
+<div>
+  <table class="narr_table" border="1" width="100%">
+    <thead>
+      <tr class="narr_tr">
+        <th class="narr_th" width="30%">Description</th>
+        <th class="narr_th" width="15%">Codes</th>
+        <th class="narr_th" width="15%">Time</th>
+        <th class="narr_th" width="10%">Status</th>
+        <th class="narr_th" width="15%">Results</th>
+        <th class="narr_th" width="15%">Fields</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr class="narr_tr">
+  
+  <td>Functional Status Result</td>
+  <td>
+      <b>
+          LOINC: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0001f8_false_LOINC_72102-7')" onmouseout="hideCodes(event,'559fdfe0637970052a0001f8_false_LOINC_72102-7')" style="cursor:pointer;">72102-7</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0001f8_false_LOINC_72102-7" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Pain score [KOOS] </span>
+      <br/>
+  </td>
+  <td>August 1st, 2012 14:00 - August 1st, 2012 15:00</td>
+  <td></td>   
+  <td>
+        40 <br/>
+  </td>
+  <td>
+	</td>
+
+</tr>
+
+        <tr class="narr_tr">
+  
+  <td>Functional Status Result</td>
+  <td>
+      <b>
+          LOINC: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0001fb_false_LOINC_72097-9')" onmouseout="hideCodes(event,'559fdfe0637970052a0001fb_false_LOINC_72097-9')" style="cursor:pointer;">72097-9</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0001fb_false_LOINC_72097-9" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Pain score [HOOS] </span>
+      <br/>
+  </td>
+  <td>August 1st, 2012 14:00 - August 1st, 2012 15:00</td>
+  <td></td>   
+  <td>
+        35 <br/>
+  </td>
+  <td>
+	</td>
+
+</tr>
+
+        <tr class="narr_tr">
+  
+  <td>Functional Status Result</td>
+  <td>
+      <b>
+          LOINC: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0001ff_false_LOINC_71940-1')" onmouseout="hideCodes(event,'559fdfe0637970052a0001ff_false_LOINC_71940-1')" style="cursor:pointer;">71940-1</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0001ff_false_LOINC_71940-1" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Overall summary score [KCCQ] </span>
+      <br/>
+  </td>
+  <td>February 1st, 2013 15:00 - February 1st, 2013 15:00</td>
+  <td></td>   
+  <td>
+        30 <br/>
+  </td>
+  <td>
+	</td>
+
+</tr>
+
+        <tr class="narr_tr">
+  
+  <td>Functional Status Result</td>
+  <td>
+      <b>
+          LOINC: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a000201_false_LOINC_72097-9')" onmouseout="hideCodes(event,'559fdfe0637970052a000201_false_LOINC_72097-9')" style="cursor:pointer;">72097-9</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a000201_false_LOINC_72097-9" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Pain score [HOOS] </span>
+      <br/>
+  </td>
+  <td>February 1st, 2013 15:00 - February 1st, 2013 15:15</td>
+  <td></td>   
+  <td>
+        80 <br/>
+  </td>
+  <td>
+	</td>
+
+</tr>
+
+        <tr class="narr_tr">
+  
+  <td>Functional Status Result</td>
+  <td>
+      <b>
+          LOINC: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a000203_false_LOINC_72102-7')" onmouseout="hideCodes(event,'559fdfe0637970052a000203_false_LOINC_72102-7')" style="cursor:pointer;">72102-7</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a000203_false_LOINC_72102-7" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Pain score [KOOS] </span>
+      <br/>
+  </td>
+  <td>February 1st, 2013 15:15 - February 1st, 2013 15:30</td>
+  <td></td>   
+  <td>
+        80 <br/>
+  </td>
+  <td>
+	</td>
+
+</tr>
+
+        <tr class="narr_tr">
+  
+  <td>Functional Status Result</td>
+  <td>
+      <b>
+          LOINC: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a000207_false_LOINC_71940-1')" onmouseout="hideCodes(event,'559fdfe0637970052a000207_false_LOINC_71940-1')" style="cursor:pointer;">71940-1</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a000207_false_LOINC_71940-1" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Overall summary score [KCCQ] </span>
+      <br/>
+  </td>
+  <td>June 1st, 2013 14:00 - June 1st, 2013 14:00</td>
+  <td></td>   
+  <td>
+        35 <br/>
+  </td>
+  <td>
+	</td>
+
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+    <h3><a name="_link" href="#toc">Procedures</a></h3>
+<div>
+  <table class="narr_table" border="1" width="100%">
+    <thead>
+      <tr class="narr_tr">
+        <th class="narr_th" width="30%">Description</th>
+        <th class="narr_th" width="15%">Codes</th>
+        <th class="narr_th" width="15%">Time</th>
+        <th class="narr_th" width="10%">Status</th>
+        <th class="narr_th" width="15%">Results</th>
+        <th class="narr_th" width="15%">Fields</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr class="narr_tr">
+  
+  <td>Procedure, Performed</td>
+  <td>
+      <b>
+          HCPCS: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0001fa_false_HCPCS_G0105')" onmouseout="hideCodes(event,'559fdfe0637970052a0001fa_false_HCPCS_G0105')" style="cursor:pointer;">G0105</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0001fa_false_HCPCS_G0105" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Colorectal cancer screening; colonoscopy on individual at high risk </span>
+      <br/>
+      <b>
+          CPT: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0001fa_false_CPT_45378')" onmouseout="hideCodes(event,'559fdfe0637970052a0001fa_false_CPT_45378')" style="cursor:pointer;">45378</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0001fa_false_CPT_45378" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Colonoscopy, flexible, proximal to splenic flexure; diagnostic, with or without collection of specimen(s) by brushing or washing, with or without colon decompression (separate procedure) </span>
+      <br/>
+      <b>
+          SNOMED-CT: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0001fa_false_SNOMED-CT_444783004')" onmouseout="hideCodes(event,'559fdfe0637970052a0001fa_false_SNOMED-CT_444783004')" style="cursor:pointer;">444783004</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0001fa_false_SNOMED-CT_444783004" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Screening colonoscopy (procedure) </span>
+      <br/>
+  </td>
+  <td>August 1st, 2012 14:00 - August 1st, 2012 15:00</td>
+  <td>performed</td>   
+  <td>
+  </td>
+  <td>
+	</td>
+
+</tr>
+
+        <tr class="narr_tr">
+  
+  <td>Procedure, Performed</td>
+  <td>
+      <b>
+          SNOMED-CT: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0001fd_false_SNOMED-CT_15163009')" onmouseout="hideCodes(event,'559fdfe0637970052a0001fd_false_SNOMED-CT_15163009')" style="cursor:pointer;">15163009</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0001fd_false_SNOMED-CT_15163009" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Total arthroplasty of hip, low friction (procedure) </span>
+      <br/>
+      <b>
+          CPT: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0001fd_false_CPT_27130')" onmouseout="hideCodes(event,'559fdfe0637970052a0001fd_false_CPT_27130')" style="cursor:pointer;">27130</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0001fd_false_CPT_27130" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Arthroplasty, acetabular and proximal femoral prosthetic replacement (total hip arthroplasty), with or without autograft or allograft </span>
+      <br/>
+      <b>
+          HCPCS: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0001fd_false_HCPCS_S2118')" onmouseout="hideCodes(event,'559fdfe0637970052a0001fd_false_HCPCS_S2118')" style="cursor:pointer;">S2118</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0001fd_false_HCPCS_S2118" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Metal-on-metal total hip resurfacing, including acetabular and femoral components </span>
+      <br/>
+  </td>
+  <td>September 1st, 2012 14:00 - September 1st, 2012 15:00</td>
+  <td>performed</td>   
+  <td>
+  </td>
+  <td>
+	</td>
+
+</tr>
+
+        <tr class="narr_tr">
+  
+  <td>Procedure, Performed</td>
+  <td>
+      <b>
+          SNOMED-CT: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0001fe_false_SNOMED-CT_179344006')" onmouseout="hideCodes(event,'559fdfe0637970052a0001fe_false_SNOMED-CT_179344006')" style="cursor:pointer;">179344006</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0001fe_false_SNOMED-CT_179344006" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Primary cemented total knee replacement (procedure) </span>
+      <br/>
+      <b>
+          CPT: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0001fe_false_CPT_27447')" onmouseout="hideCodes(event,'559fdfe0637970052a0001fe_false_CPT_27447')" style="cursor:pointer;">27447</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0001fe_false_CPT_27447" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Arthroplasty, knee, condyle and plateau; medial AND lateral compartments with or without patella resurfacing (total knee arthroplasty) </span>
+      <br/>
+  </td>
+  <td>November 1st, 2012 15:00 - November 1st, 2012 16:00</td>
+  <td>performed</td>   
+  <td>
+  </td>
+  <td>
+	</td>
+
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+    <h3><a name="_link" href="#toc">Risk Category Assessments</a></h3>
+<div>
+  <table class="narr_table" border="1" width="100%">
+    <thead>
+      <tr class="narr_tr">
+        <th class="narr_th" width="30%">Description</th>
+        <th class="narr_th" width="15%">Codes</th>
+        <th class="narr_th" width="15%">Time</th>
+        <th class="narr_th" width="10%">Status</th>
+        <th class="narr_th" width="15%">Results</th>
+        <th class="narr_th" width="15%">Fields</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr class="narr_tr">
+  
+  <td>Risk Category Assessment</td>
+  <td>
+      <b>
+          LOINC: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a000205_false_LOINC_58151-2')" onmouseout="hideCodes(event,'559fdfe0637970052a000205_false_LOINC_58151-2')" style="cursor:pointer;">58151-2</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a000205_false_LOINC_58151-2" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Prior assessment Brief Interview for Mental Status (BIMS) summary score [MDSv3] </span>
+      <br/>
+  </td>
+  <td>February 1st, 2013 15:30 - February 1st, 2013 15:30</td>
+  <td></td>   
+  <td>
+        positive <br/>
+  </td>
+  <td>
+	</td>
+
+</tr>
+
+        <tr class="narr_tr">
+  
+  <td>Risk Category Assessment</td>
+  <td>
+      <b>
+          LOINC: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a000209_false_LOINC_57254-5')" onmouseout="hideCodes(event,'559fdfe0637970052a000209_false_LOINC_57254-5')" style="cursor:pointer;">57254-5</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a000209_false_LOINC_57254-5" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Fall risk assessment [OASIS-C] </span>
+      <br/>
+  </td>
+  <td>June 1st, 2013 14:00 - June 1st, 2013 15:00</td>
+  <td></td>   
+  <td>
+  </td>
+  <td>
+	</td>
+
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+  
+</div>
+
+    
+    <br /><br />
+    <br /><br />
+    <br /><br />
+    <br /><br />
+  </body>
+</html>

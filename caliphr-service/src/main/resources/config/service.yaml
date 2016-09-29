@@ -1,0 +1,95 @@
+#
+#   If false, this will throw an exception if a provider is imported from a C-CDA file
+#   without an NPI
+ALLOW.PROVIDER.WITH.EMPTY.NPI: true
+
+#
+#   If false, this will throw an exception if the patient is sent from an unknown source
+ALLOW.PATIENT.WITH.UNKNOWN.SOURCE: true
+
+#
+#   If false, this will throw an exception if the provider is sent from an unknown source (see HL7 message parsing)
+ALLOW.PROVIDER.WITH.UNKNOWN.SOURCE: true
+
+#
+#
+#   Location as to where to store the individual bundles received from the National Library of Medicine
+BUNDLE.FILESYSTEM.ROOT: C:/nlm-bundle
+
+#
+#
+#   Location as to where to store C-CDA files when retrieved and processed (ciphertext) or decrypted (if decrypt process is run)
+CLINICAL.DOCUMENT:
+  BACKUP.ROOT: C:/cqm-ccda
+  PLAINTEXT.ROOT: C:/plaintext-ccda
+
+#
+#
+#   Number of threads to use for the executor service thread pool
+EXECUTOR.THREAD.POOL.SIZE: 4
+
+#
+#
+#  DataSource properties.  
+
+#  You have a choice to specify the database password either in plaintext or encrypted by specifying one of
+#  the properties below (if MAIN.DATASOURCE.ENCRYPTED.PASSWORD is specified it is used instead of MAIN.DATASOURCE.PLAINTEXT.PASSWORD).
+#
+#  if you choose to use an encrypted password, the password should be encrypted using DatabasePasswordUtilNoDependencies, 
+#  with the same key as specified in DATABASE.ENCRYPTION.SYM.KEY.LOCATION below.
+MAIN.DATASOURCE:
+  JDBC.URL: jdbc:postgresql://localhost/caliphr_db
+  USERNAME: caliphr_db_user
+  PLAINTEXT.PASSWORD: n6N6pJgqjp2re9G
+# ENCRYPTED.PASSWORD: 9PP5mm3JLHcP0ugasMLT+w==
+
+
+#
+#
+#   SMTP server information.  If you do not have a SMTP server, it is recommended to run a
+#   local one such as PaperCut (https://papercut.codeplex.com/)
+SMTP:
+  FROM: donotreply@test.com
+  PORT: 25
+  AUTH: false
+  STARTTLS: false
+  PROTOCOL: smtp
+  DEBUG: false
+  HOST: localhost
+  USER: 
+  PASS: 
+  
+#
+#
+#   CCDA parse error email information
+DEV.SUPPORT.ERROR.EMAIL: test@test.com
+
+#  Location to find the AES-256 Symmetric key for database column encryption.  For testing, a key
+#  is provided on the classpath.  It is recommended for deployed applications, however, to place
+#  the key somewhere on the filesystem in a protected place accessible to the application server
+DATABASE.ENCRYPTION.SYM.KEY.LOCATION: classpath:localDatabaseEncryptionKey.txt
+
+#
+#
+#   URL to the public facing website (for resetting passwords)
+CALIPHR.PASSWORD.RESET.URL.FORMAT.STRING: https://localhost:8445/web/auth/password/t/%s
+
+#
+#
+#   SUBJECT.PREFIX - Append a prefix to subjects in emails being sent from application
+#   LOGO.IMG - Location of logo image to inline in emails
+EMAIL:
+  SUBJECT.PREFIX: local
+  LOGO.IMG: templates/email/Caliphr_logo_transparent_AI.png
+  COMPANY.NAME: Ai
+  COMPANY.DESCRIPTION: |
+    Audacious Inquiry (Ai) is a health information technology and policy company. We
+    are leading the charge to make health care smarter and more connected.
+ 
+    Our nationally-recognized consultants work with government, private, and
+    non-profit organizations to rethink how health information is shared, managed,
+    leveraged, and protected. We have built a reputation for taking on complex
+    technical challenges by working collaboratively among our strategy, policy, and
+    engineering teams.
+  
+  COPYRIGHT.TXT: Copyright &copy; 2016 Audacious Inquiry, LLC.

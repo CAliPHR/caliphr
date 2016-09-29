@@ -1,0 +1,53 @@
+/*
+ * 	Print Styles
+ */
+
+/*
+ * 	Body and wrapper
+ */
+* {
+	
+}
+
+body {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	line-height: 1.5em;
+}
+
+#notModernBrowser { display : none; }
+
+div#header, footer {
+	display: none !important;
+}
+
+.specialty {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 10px;
+    margin-left: 40px;
+}
+
+h4 {
+    font-size: 25px;
+}
+
+h5 {
+    font-size: 16px;
+}
+
+address {
+    display: block;
+    font-size: 14px;
+    font-style: normal;
+    margin-bottom: 10px;
+}
+
+dt {
+    font-size: 16px;
+    font-style: italic;
+}
+
+dd {
+    font-size: 14px;
+    margin: 10px 0 10px 25px;
+}

@@ -1,0 +1,25 @@
+<bindings xmlns="http://java.sun.com/xml/ns/jaxb"
+          xmlns:xs="http://www.w3.org/2001/XMLSchema"
+          version="2.0">
+
+	<globalBindings generateMixedExtensions="true"/>
+	
+    <bindings schemaLocation="infrastructure/cda/POCD_MT000040.xsd" node="/xs:schema">
+        <bindings node="//xs:complexType[@name='POCD_MT000040.ObservationMedia']/xs:attribute[@name='ID']">
+            <property name="xsid"/>
+        </bindings>
+    </bindings>
+
+    <bindings schemaLocation="infrastructure/cda/POCD_MT000040.xsd" node="/xs:schema">
+        <bindings node="//xs:complexType[@name='POCD_MT000040.RegionOfInterest']/xs:attribute[@name='ID']">
+            <property name="xsid"/>
+        </bindings>
+    </bindings>
+
+    <bindings schemaLocation="infrastructure/cda/POCD_MT000040.xsd" node="/xs:schema">
+        <bindings node="//xs:complexType[@name='POCD_MT000040.Section']/xs:attribute[@name='ID']">
+            <property name="xsid"/>
+        </bindings>
+    </bindings>
+
+</bindings>

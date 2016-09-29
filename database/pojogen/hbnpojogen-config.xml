@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<appconfig>
+    <dbType>PostgreSQL</dbType>
+    <driver>org.postgresql.Driver</driver>
+    <jdbcConnectionString>jdbc:postgresql://localhost:5432/caliphr_db</jdbcConnectionString>
+    <databaseIP>localhost</databaseIP>
+    <databaseUsername>crisp_caliphr_db_user</databaseUsername>
+    <databasePassword>n6N6pJgqjp2re9G</databasePassword>
+    <databaseSchema>caliphr</databaseSchema>
+    <sourceTarget>src/pojogen</sourceTarget>
+    <projectName>persistence</projectName>
+    <topLevel>com.ainq.caliphr</topLevel>
+    <libPath>libs</libPath>
+    <schemaStrategy>FULL</schemaStrategy>
+    <sourceFolderName></sourceFolderName>
+    <resourceFolder>to_be_deleted</resourceFolder>
+    <testFolderName>to_be_deleted</testFolderName>
+    <testResourceFolder>to_be_deleted</testResourceFolder>
+    <enableMockitoBeans>false</enableMockitoBeans>
+    <applicationContextFilename disableGeneration="true" />
+    <disableBackLinks>
+        <nobacklink from="caliphr.application.code_mapping" to="caliphr.application.code" from-field="*"/>
+        <nobacklink from="caliphr.application.code_mapping_to_code" to="caliphr.application.code"
+                    from-field="*"/>
+        <nobacklink from="caliphr.application.patient_advanced_directive" to="caliphr.application.code"
+                    from-field="*"/>
+        <nobacklink from="caliphr.application.patient_allergy" to="caliphr.application.code"
+                    from-field="*"/>
+        <nobacklink from="caliphr.application.patient_encounter" to="caliphr.application.code"
+                    from-field="*"/>
+        <nobacklink from="caliphr.application.patient_encounter_diagnosis" to="caliphr.application.code"
+                    from-field="*"/>
+        <nobacklink from="caliphr.application.patient_family_history" to="caliphr.application.code"
+                    from-field="*"/>
+        <nobacklink from="caliphr.application.patient_func_cog_status" to="caliphr.application.code"
+                    from-field="*"/>
+        <nobacklink from="caliphr.application.patient_info" to="caliphr.application.code" from-field="*"/>
+        <nobacklink from="caliphr.application.patient_immunization" to="caliphr.application.code"
+                    from-field="*"/>
+        <nobacklink from="caliphr.application.patient_instruction" to="caliphr.application.code"
+                    from-field="*"/>
+        <nobacklink from="caliphr.application.patient_medical_equipment" to="caliphr.application.code"
+                    from-field="*"/>
+        <nobacklink from="caliphr.application.patient_medication" to="caliphr.application.code"
+                    from-field="*"/>
+        <nobacklink from="caliphr.application.patient_negation_detail" to="caliphr.application.code"
+                    from-field="*"/>
+        <nobacklink from="caliphr.application.patient_payer" to="caliphr.application.code" from-field="*"/>
+        <nobacklink from="caliphr.application.patient_plan_of_care" to="caliphr.application.code"
+                    from-field="*"/>
+        <nobacklink from="caliphr.application.patient_problem" to="caliphr.application.code"
+                    from-field="*"/>
+        <nobacklink from="caliphr.application.patient_procedure" to="caliphr.application.code"
+                    from-field="*"/>
+        <nobacklink from="caliphr.application.patient_reason_for_referral" to="caliphr.application.code"
+                    from-field="*"/>
+        <nobacklink from="caliphr.application.patient_reason_for_visit" to="caliphr.application.code"
+                    from-field="*"/>
+        <nobacklink from="caliphr.application.patient_result" to="caliphr.application.code" from-field="*"/>
+        <nobacklink from="caliphr.application.patient_social_history" to="caliphr.application.code"
+                    from-field="*"/>
+        <nobacklink from="caliphr.application.patient_vital_sign" to="caliphr.application.code"
+                    from-field="*"/>
+        <nobacklink from="caliphr.application.result_supplemental" to="caliphr.application.code"
+                    from-field="*"/>
+        <!--<nobacklink from="caliphr.application.value_set_code" to="caliphr.application.code" from-field="*"/>-->
+    </disableBackLinks>
+</appconfig>

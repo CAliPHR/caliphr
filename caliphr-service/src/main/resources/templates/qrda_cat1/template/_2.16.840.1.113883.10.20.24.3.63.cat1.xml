@@ -1,0 +1,27 @@
+<entry>
+    <procedure classCode="PROC" moodCode="RQO" th:attr="negationInd=${entry.negationInd}">
+        <!-- Consolidated Plan of Care Activity Procedure TemplateId (Implied Template) -->
+        <templateId root="2.16.840.1.113883.10.20.22.4.41"/>
+        <!-- QRDA Procedure, Order TemplateId -->
+        <templateId root="2.16.840.1.113883.10.20.24.3.63"/>
+        <id root="1.3.6.1.4.1.115" th:attr="extension=${entry.id}"/>
+        <code th:attr="code=${entry.codeCode}, codeSystem=${entry.codeSystem}, 'sdtc:valueSet'=${entry.codeValueSetOid}">
+            <originalText th:text="${entry.codeDescription}"/>
+        </code>
+        <text th:text="${entry.description}"/>
+        <statusCode code="new"/>
+
+        <!-- Attribute: method-->
+        <methodCode nullFlavor="UNK"/>
+
+        <!-- Attribute: datetime -->
+        <author>
+            <time th:value="${entry.low}"/>
+            <assignedAuthor>
+                <id nullFlavor="NA"/>
+            </assignedAuthor>
+        </author>
+        <th:block th:include="qrda_cat1/_reason.cat1.xml" th:with="reason=${entry.reason}"
+                  th:if="${entry.reason != null}"/>
+    </procedure>
+</entry>

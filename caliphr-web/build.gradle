@@ -1,0 +1,162 @@
+configurations {
+}
+
+/*
+ * 	Configuration to build WAR
+ */
+buildscript {
+    ext {
+        springBootVersion = '1.3.7.RELEASE'
+    }
+    repositories {
+        // NOTE: You should declare only repositories that you need here
+        jcenter()
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+	classpath("io.spring.gradle:dependency-management-plugin:0.6.0.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath 'com.bmuschko:gradle-cargo-plugin:2.2.2'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: "idea"
+apply plugin: 'spring-boot'
+apply plugin: 'war'
+apply plugin: 'groovy'
+apply plugin: 'com.bmuschko.cargo-base'
+
+// Build runnable jar if necessary
+jar {
+    archiveName = 'CAliPHR-WEB.jar'
+}
+
+// Run application using appStartWar
+apply plugin: 'war'
+apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
+war {
+    archiveName = 'CAliPHR-WEB.war'
+}
+
+gretty {
+	port = 8083
+    contextPath = '/'
+    httpsEnabled = true
+    httpsPort = 8445
+
+    // Fix to -> java.lang.Exception: Timeout scanning annotations
+    jvmArgs = ['-Djava.net.preferIPv4Stack=true', '-Dorg.eclipse.jetty.annotations.maxWait=180']
+
+}
+
+repositories {
+    // NOTE: You should declare only repositories that you need here
+    jcenter()
+    mavenLocal()
+    mavenCentral()
+}
+
+ext {
+
+    // VERSIONS
+    jacksonVersion = "2.6.3"
+    springVersion = "4.1.9.RELEASE"
+
+}
+
+// tag::dependencies[]
+dependencies {
+
+    // SERVLET
+    providedCompile "javax.servlet:javax.servlet-api:3.1.0", "javax.servlet.jsp:jsp-api:2.1"
+    runtime("javax.servlet:jstl:1.2") {
+        exclude group: "javax.servlet", module: "javax.servlet-api"
+        exclude group: "javax.servlet", module: "jsp-api"
+    }
+
+    // SPRING
+    compile "org.springframework.boot:spring-boot-starter-web:1.3.7.RELEASE"
+    compile 'org.springframework.boot:spring-boot-starter-thymeleaf:1.3.7.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-security:1.3.7.RELEASE'
+    compile 'org.springframework.data:spring-data-rest-webmvc:2.4.1.RELEASE'
+    testCompile 'org.springframework.boot:spring-boot-starter-test:1.3.7.RELEASE'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+
+    // THYMELEAF
+    compile 'org.thymeleaf.extras:thymeleaf-extras-springsecurity4:2.1.2.RELEASE'
+
+    // JACKSON
+    compile "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
+    compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+    compile "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
+    compile "com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.5.4"
+
+    // Apache POI
+    compile "org.apache.poi:poi:3.11"
+    compile "org.apache.poi:poi-ooxml:3.11"
+
+    //org.json
+    compile "org.json:json:20140107"
+
+    //Apache Commons csv
+    compile "org.apache.commons:commons-csv:1.2"
+
+    // CXF
+    compile 'org.apache.cxf:cxf-api:2.7.12'
+    compile 'org.apache.cxf:cxf-rt-frontend-simple:2.7.12'
+    compile 'org.apache.cxf:cxf-rt-ws-security:2.7.12'
+    compile 'org.apache.cxf:cxf-rt-frontend-jaxws:2.7.12'
+    compile 'org.apache.cxf:cxf-rt-transports-http:2.7.12'
+
+    // Neko HTML (used with Thymeleaf and EmberJs)
+    compile 'net.sourceforge.nekohtml:nekohtml:1.9.21'
+
+    // JUNIT AND MOCKITO
+    testCompile "junit:junit:4.11"
+    testCompile "org.springframework:spring-test:$springVersion"
+    testCompile 'org.mockito:mockito-all:1.10.19'
+    testCompile 'org.powermock:powermock-mockito-release-full:1.6.2'
+    testCompile 'org.powermock:powermock-api-easymock:1.6.2'
+    testCompile 'org.easymock:easymock:3.3.1'
+
+}
+// end::dependencies[]
+
+/*
+ * 	Tasks
+ */
+
+task wrapper(type: Wrapper) { gradleVersion = '1.11' }
+
+task afterEclipseImport {
+}
+
+/*
+    Deployment
+ */
+//import com.bmuschko.gradle.cargo.convention.Deployable
+//import com.bmuschko.gradle.cargo.tasks.remote.CargoRedeployRemote
+
+//  Connection information in each properties file
+//Properties tomcat = new Properties()
+//File propertiesFile = new File("$projectDir/src/main/resources/tomcat.properties")
+//propertiesFile.withInputStream {
+//    tomcat.load(it)
+//}
+
+//  Might need another task if file missing
+//task deployWebToTomcat(type: CargoRedeployRemote) {
+//    dependsOn war
+
+//    containerId = 'tomcat8x'
+//    protocol = tomcat.protocol
+//    hostname = tomcat.hostname
+//    port = tomcat.port as Integer
+//    username = tomcat.username
+//    password = tomcat.password
+//    deployables = [new Deployable(
+//            file: file("$buildDir/libs/CAliPHR-WEB.war")
+//            , context: tomcat.context)]
+//}

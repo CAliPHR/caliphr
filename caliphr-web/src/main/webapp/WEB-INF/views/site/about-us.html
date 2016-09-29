@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport"
+		  content="width=device-width; initial-scale=1.0; maximum-scale=1.0; minimum-scale=1.0; user-scalable=0;"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="Content-Language" content="en-us"/>
+	<meta name="author" th:content="#{head.meta.author}"/>
+	<title th:text="#{head.title}"></title>
+
+	<link rel="stylesheet" th:href="@{/resources/styles/master.css}"/>
+	<link rel="stylesheet" th:href="@{/resources/styles/login.css}"/>
+	<link rel="stylesheet" th:href="@{/resources/styles/pushMenu.css}"/>
+	<link rel="stylesheet" type="text/css" media="screen"
+		  th:href="@{/resources/bower_components/bootstrap/dist/css/bootstrap.min.css}"/>
+	<link th:href='@{http://fonts.googleapis.com/css?family=Source+Sans+Pro}' rel='stylesheet' type='text/css'/>
+	<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css}"/>
+	<link rel="stylesheet" type="text/css"
+		  th:href="@{/resources/bower_components/bootstrap-daterangepicker/daterangepicker.css}"/>
+
+</head>
+<body>
+<div th:include="master/loggedout :: head"></div>
+<section id="content">
+	<div class="wrap">
+
+		<div id="view_register">
+			<div class="login_pannel">
+				<div class="panel panel-default" style="height:400px;width:450px;">
+					<div class="panel-body">
+						<div class="companyLogo">
+
+							<div class="logInRow">
+								<h3>About Us</h3>
+							</div>
+							<div style="padding-top:30px;" class="logInText">
+								<p>Page under construction.</p>
+							</div>
+						</div>
+						<div class="logmod__form">
+							<form accept-charset="utf-8" th:action="@{/web/auth/password/reset}" class="simform" method="post">
+								<div class="copyright">
+									<!--<p style="font-size:10px;color:#888;">Copyright &copy; 2016 CAliPHR</p>-->
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</section>
+<div th:include="master/loggedout :: foot"></div>
+
+</body>
+</html>

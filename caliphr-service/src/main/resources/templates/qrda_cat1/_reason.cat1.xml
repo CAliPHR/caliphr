@@ -1,0 +1,14 @@
+<entryRelationship typeCode="RSON">
+    <observation classCode="OBS" moodCode="EVN">
+        <templateId root="2.16.840.1.113883.10.20.24.3.88"/>
+        <id th:attr="extension=${reason.id}"/>
+        <code code="410666004"
+              codeSystem="2.16.840.1.113883.6.96"
+              displayName="reason"
+              codeSystemName="SNOMED CT"/>
+        <statusCode code="completed"/>
+        <effectiveTime th:text="${reason.effectiveTime}"/>
+        <value xsi:type="CD"
+               th:attr="code=${reason.reasonCode}, codeSystem=${reason.reasonCodeSystem}, displayName={reason.reasonCodeDescription}, sdtc:valueSet=${reason.reasonCodeValueSetOid}"/>
+    </observation>
+</entryRelationship>

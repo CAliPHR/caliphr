@@ -1,0 +1,676 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:n1="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Cypress Certification Patient Test Record: STROKE_ADULT B</title>
+    <style type="text/css">
+      body {
+        color: #003366;
+        background-color: #FFFFFF;
+        font-family: Verdana, Tahoma, sans-serif;
+        font-size: 11px;
+      }
+      a {
+        color: #003366;
+        background-color: #FFFFFF;
+      }
+      h1 {
+        font-size: 12pt;
+        font-weight: bold;
+      }
+      h2 {
+        font-size: 11pt;
+        font-weight: bold;
+      }
+      h3 {
+        font-size: 10pt;
+        font-weight: bold;
+      }
+      h4 {
+        font-size: 8pt;
+        font-weight: bold;
+      }
+      div {
+        width: 95%;
+      }
+      table {
+        line-height: 10pt;
+        width: 90%;
+      }
+      tr {
+        background-color: #ccccff;
+      }
+      td {
+        padding: 0.1cm 0.2cm;
+        vertical-align: top;
+      }
+      .h1center {
+        font-size: 12pt;
+        font-weight: bold;
+        text-align: center;
+        width: 80%;
+      }
+      .header_table{
+        border: 1pt inset #00008b;
+      }
+      .narr_table {
+        width: 100%;
+      }
+      .narr_tr {
+        background-color: #ffffcc;
+      }
+      .narr_th {
+        background-color: #ffd700;
+      }
+      .td_label{
+        font-weight: bold;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="h1center">Cypress Certification Patient Test Record: STROKE_ADULT B</h1>
+    <table class="header_table">
+  <tbody>
+    <tr>
+      <td width="20%" bgcolor="#3399ff"><span class="td_label">Patient</span></td>
+      <td witdh="30%">STROKE_ADULT B</td>
+      <td width="15%" bgcolor="#3399ff"><span class="td_label">Sex</span></td>
+      <td>Male</td>
+    </tr>
+    <tr>
+      <td width="20%" bgcolor="#3399ff"><span class="td_label">Date of birth</span></td>
+      <td width="30%">March 6th, 1938 15:30</td>
+      <td width="15%" bgcolor="#3399ff"><span class="td_label">Date of expiration</span></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td width="20%" bgcolor="#3399ff"><span class="td_label">Race</span></td>
+      <td width="30%">American Indian or Alaska Native</td>
+      <td width="15%" bgcolor="#3399ff"><span class="td_label">Ethnicity</span></td>
+      <td>Not Hispanic or Latino</td>
+    </tr>    
+    <tr>
+      <td bgcolor="#3399ff"><span class="td_label">Insurance Providers</span></td>
+      <td>
+      	Other
+      </td>
+      <td bgcolor="#3399ff"><span class="td_label">Patient IDs</span></td>
+      <td>559fdfe0637970052a0000a8 Cypress</td>
+    </tr>
+    <tr>
+      <td bgcolor="#3399ff"><span class="td_label">Contact info</span></td>
+      <td colspan="3"> 
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="header_table">
+  <tbody>
+    <tr>
+      <td width="20%" bgcolor="#3399ff"><span class="td_label">Document Id</span></td>
+      <td width="80%">559fdfe0637970052a0000a8 2.16.840.1.113883.3.72</td>
+    </tr>
+    <tr>
+      <td width="20%" bgcolor="#3399ff"><span class="td_label">Document Created:</span></td>
+      <td width="80%">July 10th, 2015 16:37</td>
+    </tr>
+  </tbody>
+</table>
+<table class="header_table">
+  <tbody>
+    <tr>
+      <td width="20%" bgcolor="#3399ff"><span class="td_label">Author</span></td>
+      <td width="80%">Auto Generated</td>
+    </tr>
+    <tr>
+      <td bgcolor="#3399ff"><span class="td_label">Contact info</span></td>
+      <td>
+        Tel:  +1-781-271-3000<br />
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table class="header_table">
+  <tbody>
+    <tr>
+      <td width="20%" bgcolor="#3399ff"><span class="td_label">Document maintained by</span></td>
+      <td width="80%">Cypress</td>
+    </tr>
+    <tr>
+      <td bgcolor="#3399ff"><span class="td_label">Contact info</span></td>
+      <td width="80%">202 Burlington Rd.<br />Bedford, MA 01730<br />Tel:  +1-781-271-3000<br /></td>
+    </tr>
+  </tbody>
+</table>
+
+    <!--h2><a name="toc">Table of Contents</a></h2>
+    <ul>
+      <li><a href="#idp190080">Allergies and Adverse Reactions</a></li>
+      <li><a href="#idp553808">Medications - Prescription and Non-Prescription</a></li>
+      <li><a href="#idp266352">Encounters</a></li>
+      <li><a href="#idp594640">Problems</a></li>
+    </ul-->
+    <script language="javascript">
+      var cur_view = "section";
+      function toggle(id) {
+        var e = document.getElementById(id);
+        if (cur_view=="section"){
+         document.getElementById("patient_information_by_section").style.display = 'none';
+         document.getElementById("table_by_encounter").style.display = 'block';
+         document.getElementById('toggle_button').innerHTML="View By Section";
+         cur_view = "encounter";
+        }else{
+         document.getElementById("patient_information_by_section").style.display = 'block';
+         document.getElementById("table_by_encounter").style.display = 'none';
+         document.getElementById('toggle_button').innerHTML="View By Encounter";
+         cur_view = "section";
+        }      
+      }
+      
+      function showConcepts(ev, id) {
+        var left = ev.clientX + document.documentElement.scrollLeft;
+        var top = ev.clientY + document.documentElement.scrollTop;
+
+        var concepts = document.getElementById(id);
+        concepts.style.display = 'block';
+        concepts.style.left = left + 'px';
+        concepts.style.top = top + 'px';
+      }
+      function hideConcepts(ev, id) {
+        var concepts = document.getElementById(id);
+        concepts.style.display = 'none';
+      }
+      function showCodes(event, id) {
+        //var left = ev.clientX + document.documentElement.scrollLeft;
+        //var top = ev.clientY + document.documentElement.scrollTop;
+
+        // Calculate pageX/Y if missing and clientX/Y available
+        if ( event.pageX == null && event.clientX != null ) {
+          var doc = document.documentElement, body = document.body;
+          event.pageX = event.clientX + (doc && doc.scrollLeft || body && body.scrollLeft || 0) - (doc && doc.clientLeft || body && body.clientLeft || 0);
+          event.pageY = event.clientY + (doc && doc.scrollTop  || body && body.scrollTop  || 0) - (doc   && doc.clientTop  || body && body.clientTop  || 0);
+        }
+        var left = event.pageX;
+        var top = event.pageY;
+        var codes = document.getElementById(id);
+        codes.style.display = 'block';
+        codes.style.left = left + 'px';
+        codes.style.top = top + 'px';
+      }
+      function hideCodes(ev, id) {
+        var codes = document.getElementById(id);
+        codes.style.display = 'none';
+      }
+    </script>
+    <div id="patient_information_by_section" style="display:block">
+    <h3><a name="_link" href="#toc">Diagnoses</a></h3>
+<div>
+  <table class="narr_table" border="1" width="100%">
+    <thead>
+      <tr class="narr_tr">
+        <th class="narr_th" width="30%">Description</th>
+        <th class="narr_th" width="15%">Codes</th>
+        <th class="narr_th" width="15%">Time</th>
+        <th class="narr_th" width="10%">Status</th>
+        <th class="narr_th" width="15%">Results</th>
+        <th class="narr_th" width="15%">Fields</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr class="narr_tr">
+  
+  <td>Diagnosis, Active</td>
+  <td>
+      <b>
+          SNOMED-CT: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0000a9_false_SNOMED-CT_195080001')" onmouseout="hideCodes(event,'559fdfe0637970052a0000a9_false_SNOMED-CT_195080001')" style="cursor:pointer;">195080001</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0000a9_false_SNOMED-CT_195080001" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Atrial fibrillation and flutter (disorder) </span>
+      <br/>
+      <b>
+          ICD-9-CM: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0000a9_false_ICD-9-CM_427.31')" onmouseout="hideCodes(event,'559fdfe0637970052a0000a9_false_ICD-9-CM_427.31')" style="cursor:pointer;">427.31</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0000a9_false_ICD-9-CM_427.31" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Atrial fibrillation </span>
+      <br/>
+      <b>
+          ICD-10-CM: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0000a9_false_ICD-10-CM_I48.0')" onmouseout="hideCodes(event,'559fdfe0637970052a0000a9_false_ICD-10-CM_I48.0')" style="cursor:pointer;">I48.0</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0000a9_false_ICD-10-CM_I48.0" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Paroxysmal atrial fibrillation </span>
+      <br/>
+  </td>
+  <td>March 31st, 2013 14:30 - April 5th, 2013 14:30</td>
+  <td>active</td>   
+  <td>
+  </td>
+  <td>
+	</td>
+
+</tr>
+
+        <tr class="narr_tr">
+  
+  <td>Diagnosis, Active</td>
+  <td>
+      <b>
+          SNOMED-CT: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0000aa_false_SNOMED-CT_111297002')" onmouseout="hideCodes(event,'559fdfe0637970052a0000aa_false_SNOMED-CT_111297002')" style="cursor:pointer;">111297002</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0000aa_false_SNOMED-CT_111297002" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Nonparalytic stroke (disorder) </span>
+      <br/>
+      <b>
+          ICD-9-CM: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0000aa_false_ICD-9-CM_433.01')" onmouseout="hideCodes(event,'559fdfe0637970052a0000aa_false_ICD-9-CM_433.01')" style="cursor:pointer;">433.01</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0000aa_false_ICD-9-CM_433.01" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Occlusion and stenosis of basilar artery with cerebral infarction </span>
+      <br/>
+      <b>
+          ICD-10-CM: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0000aa_false_ICD-10-CM_I63.00')" onmouseout="hideCodes(event,'559fdfe0637970052a0000aa_false_ICD-10-CM_I63.00')" style="cursor:pointer;">I63.00</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0000aa_false_ICD-10-CM_I63.00" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Cerebral infarction due to thrombosis of unspecified precerebral artery </span>
+      <br/>
+  </td>
+  <td>April 2nd, 2013 18:00 - April 5th, 2013 14:30</td>
+  <td>active</td>   
+  <td>
+  </td>
+  <td>
+        <dl>
+            <dt><b>Ordinality</b>: code_system: SNOMED-CT code: 63161005 title: Principal</dt>
+        <dl>
+	</td>
+
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+    <h3><a name="_link" href="#toc">Encounters</a></h3>
+<div>
+  <table class="narr_table" border="1" width="100%">
+    <thead>
+      <tr class="narr_tr">
+        <th class="narr_th" width="30%">Description</th>
+        <th class="narr_th" width="15%">Codes</th>
+        <th class="narr_th" width="15%">Time</th>
+        <th class="narr_th" width="10%">Status</th>
+        <th class="narr_th" width="15%">Results</th>
+        <th class="narr_th" width="15%">Fields</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr class="narr_tr">
+  
+  <td>Encounter, Performed</td>
+  <td>
+      <b>
+          SNOMED-CT: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0000ab_false_SNOMED-CT_4525004')" onmouseout="hideCodes(event,'559fdfe0637970052a0000ab_false_SNOMED-CT_4525004')" style="cursor:pointer;">4525004</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0000ab_false_SNOMED-CT_4525004" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Emergency department patient visit (procedure) </span>
+      <br/>
+  </td>
+  <td>January 13th, 2013 17:00 - January 13th, 2013 21:00</td>
+  <td>performed</td>   
+  <td>
+  </td>
+  <td>
+        <dl>
+            <dt><b>Facility:</b></dt>
+                    <dd>Start Time: <i>January 13th, 2013 17:00</i></dd>
+                    <dd>Name: <i>none</i></dd>
+                    <dd>End Time: <i>January 13th, 2013 21:00</i></dd>
+                    <dd>Code: <i>none</i></dd>
+        <dl>
+	</td>
+
+</tr>
+
+        <tr class="narr_tr">
+  
+  <td>Encounter, Performed</td>
+  <td>
+      <b>
+          SNOMED-CT: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0000ad_false_SNOMED-CT_4525004')" onmouseout="hideCodes(event,'559fdfe0637970052a0000ad_false_SNOMED-CT_4525004')" style="cursor:pointer;">4525004</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0000ad_false_SNOMED-CT_4525004" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Emergency department patient visit (procedure) </span>
+      <br/>
+  </td>
+  <td>March 30th, 2013 15:00 - April 2nd, 2013 14:55</td>
+  <td>performed</td>   
+  <td>
+  </td>
+  <td>
+        <dl>
+            <dt><b>Facility:</b></dt>
+                    <dd>Start Time: <i>March 30th, 2013 15:00</i></dd>
+                    <dd>Name: <i>none</i></dd>
+                    <dd>End Time: <i>April 2nd, 2013 14:55</i></dd>
+                    <dd>Code: <i>none</i></dd>
+        <dl>
+	</td>
+
+</tr>
+
+        <tr class="narr_tr">
+  
+  <td>Encounter, Ordered</td>
+  <td>
+      <b>
+          SNOMED-CT: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0000af_false_SNOMED-CT_10378005')" onmouseout="hideCodes(event,'559fdfe0637970052a0000af_false_SNOMED-CT_10378005')" style="cursor:pointer;">10378005</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0000af_false_SNOMED-CT_10378005" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Hospital admission, emergency, from emergency room, accidental injury (procedure) </span>
+      <br/>
+  </td>
+  <td>April 2nd, 2013 14:30 - April 2nd, 2013 14:30</td>
+  <td>ordered</td>   
+  <td>
+  </td>
+  <td>
+	</td>
+
+</tr>
+
+        <tr class="narr_tr">
+  
+  <td>Encounter, Performed</td>
+  <td>
+      <b>
+          SNOMED-CT: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0000b0_false_SNOMED-CT_183452005')" onmouseout="hideCodes(event,'559fdfe0637970052a0000b0_false_SNOMED-CT_183452005')" style="cursor:pointer;">183452005</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0000b0_false_SNOMED-CT_183452005" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Emergency hospital admission (procedure) </span>
+      <br/>
+  </td>
+  <td>April 2nd, 2013 15:00 - April 5th, 2013 14:30</td>
+  <td>performed</td>   
+  <td>
+  </td>
+  <td>
+        <dl>
+            <dt><b>Admit Time</b>: April 2nd, 2013 15:00</dt>
+        <dl>
+        <dl>
+            <dt><b>Discharge Disposition</b>: code_system: SNOMED-CT code: 10161009 title: Discharge To Home Or Police Custody</dt>
+        <dl>
+        <dl>
+            <dt><b>Discharge Time</b>: April 5th, 2013 14:30</dt>
+        <dl>
+	</td>
+
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+    <h3><a name="_link" href="#toc">Medications</a></h3>
+<div>
+  <table class="narr_table" border="1" width="100%">
+    <thead>
+      <tr class="narr_tr">
+        <th class="narr_th" width="30%">Description</th>
+        <th class="narr_th" width="15%">Codes</th>
+        <th class="narr_th" width="15%">Time</th>
+        <th class="narr_th" width="10%">Status</th>
+        <th class="narr_th" width="15%">Results</th>
+        <th class="narr_th" width="15%">Fields</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr class="narr_tr">
+  
+  <td>Medication, Administered</td>
+  <td>
+      <b>
+          RxNorm: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0000b1_false_RxNorm_308056')" onmouseout="hideCodes(event,'559fdfe0637970052a0000b1_false_RxNorm_308056')" style="cursor:pointer;">308056</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0000b1_false_RxNorm_308056" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Alteplase 1 MG/ML Injectable Solution </span>
+      <br/>
+  </td>
+  <td>March 30th, 2013 15:05 - March 30th, 2013 16:05</td>
+  <td>administered</td>   
+  <td>
+  </td>
+  <td>
+        <dl>
+            <dt><b>Route</b>: code_system: SNOMED-CT code: 418114005 title: Intravenous route</dt>
+        <dl>
+	</td>
+
+</tr>
+
+        <tr class="narr_tr">
+  
+  <td>Medication, Discharge</td>
+  <td>
+      <b>
+          RxNorm: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0000b2_false_RxNorm_617312')" onmouseout="hideCodes(event,'559fdfe0637970052a0000b2_false_RxNorm_617312')" style="cursor:pointer;">617312</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0000b2_false_RxNorm_617312" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> atorvastatin 10 MG Oral Tablet </span>
+      <br/>
+  </td>
+  <td>April 5th, 2013 14:00 - April 5th, 2013 14:00</td>
+  <td>discharge</td>   
+  <td>
+  </td>
+  <td>
+	</td>
+
+</tr>
+
+        <tr class="narr_tr">
+  
+  <td>Medication, Discharge</td>
+  <td>
+      <b>
+          RxNorm: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0000b3_false_RxNorm_1037045')" onmouseout="hideCodes(event,'559fdfe0637970052a0000b3_false_RxNorm_1037045')" style="cursor:pointer;">1037045</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0000b3_false_RxNorm_1037045" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> dabigatran etexilate 150 MG Oral Capsule </span>
+      <br/>
+  </td>
+  <td>April 5th, 2013 14:00 - April 5th, 2013 14:00</td>
+  <td>discharge</td>   
+  <td>
+  </td>
+  <td>
+	</td>
+
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+    <h3><a name="_link" href="#toc">Physical Exams</a></h3>
+<div>
+  <table class="narr_table" border="1" width="100%">
+    <thead>
+      <tr class="narr_tr">
+        <th class="narr_th" width="30%">Description</th>
+        <th class="narr_th" width="15%">Codes</th>
+        <th class="narr_th" width="15%">Time</th>
+        <th class="narr_th" width="10%">Status</th>
+        <th class="narr_th" width="15%">Results</th>
+        <th class="narr_th" width="15%">Fields</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr class="narr_tr">
+  
+  <td>Physical Exam</td>
+  <td>
+      <b>
+          SNOMED-CT: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0000b4_false_SNOMED-CT_405795006')" onmouseout="hideCodes(event,'559fdfe0637970052a0000b4_false_SNOMED-CT_405795006')" style="cursor:pointer;">405795006</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0000b4_false_SNOMED-CT_405795006" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Time of symptom onset (observable entity) </span>
+      <br/>
+  </td>
+  <td>March 30th, 2013 13:00 - March 30th, 2013 13:00</td>
+  <td></td>   
+  <td>
+  </td>
+  <td>
+	</td>
+
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+    <h3><a name="_link" href="#toc">Procedures</a></h3>
+<div>
+  <table class="narr_table" border="1" width="100%">
+    <thead>
+      <tr class="narr_tr">
+        <th class="narr_th" width="30%">Description</th>
+        <th class="narr_th" width="15%">Codes</th>
+        <th class="narr_th" width="15%">Time</th>
+        <th class="narr_th" width="10%">Status</th>
+        <th class="narr_th" width="15%">Results</th>
+        <th class="narr_th" width="15%">Fields</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr class="narr_tr">
+  
+  <td>Procedure, Performed</td>
+  <td>
+      <b>
+          SNOMED-CT: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0000b5_false_SNOMED-CT_108305003')" onmouseout="hideCodes(event,'559fdfe0637970052a0000b5_false_SNOMED-CT_108305003')" style="cursor:pointer;">108305003</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0000b5_false_SNOMED-CT_108305003" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Physical rehabilitation therapy procedure (regime/therapy) </span>
+      <br/>
+  </td>
+  <td>April 5th, 2013 14:00 - April 5th, 2013 14:00</td>
+  <td>performed</td>   
+  <td>
+  </td>
+  <td>
+	</td>
+
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+    <h3><a name="_link" href="#toc">Communication From Patient To Providers</a></h3>
+<div>
+  <table class="narr_table" border="1" width="100%">
+    <thead>
+      <tr class="narr_tr">
+        <th class="narr_th" width="30%">Description</th>
+        <th class="narr_th" width="15%">Codes</th>
+        <th class="narr_th" width="15%">Time</th>
+        <th class="narr_th" width="10%">Status</th>
+        <th class="narr_th" width="15%">Results</th>
+        <th class="narr_th" width="15%">Fields</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr class="narr_tr">
+  
+  <td><b>Not Done: </b>Communication From Patient To Provider</td>
+  <td>
+      <b>
+          SNOMED-CT: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0000b6_false_SNOMED-CT_413318004')" onmouseout="hideCodes(event,'559fdfe0637970052a0000b6_false_SNOMED-CT_413318004')" style="cursor:pointer;">413318004</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0000b6_false_SNOMED-CT_413318004" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Patient given written information (qualifier value) </span>
+      <br/>
+  </td>
+  <td>April 5th, 2013 14:00 - April 5th, 2013 14:00</td>
+  <td></td>   
+  <td>
+  </td>
+  <td>
+        <dl>
+            <dt><b>Negation Reason</b>: code_system: SNOMED-CT code: 105480006</dt>
+        <dl>
+	</td>
+
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+    <h3><a name="_link" href="#toc">Laboratory Tests</a></h3>
+<div>
+  <table class="narr_table" border="1" width="100%">
+    <thead>
+      <tr class="narr_tr">
+        <th class="narr_th" width="30%">Description</th>
+        <th class="narr_th" width="15%">Codes</th>
+        <th class="narr_th" width="15%">Time</th>
+        <th class="narr_th" width="10%">Status</th>
+        <th class="narr_th" width="15%">Results</th>
+        <th class="narr_th" width="15%">Fields</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr class="narr_tr">
+  
+  <td>Laboratory Test</td>
+  <td>
+      <b>
+          LOINC: <i>
+                              <span onmouseover="showCodes(event,'559fdfe0637970052a0000b7_false_LOINC_13457-7')" onmouseout="hideCodes(event,'559fdfe0637970052a0000b7_false_LOINC_13457-7')" style="cursor:pointer;">13457-7</span>
+                      </i>
+      </b>
+          <span id="559fdfe0637970052a0000b7_false_LOINC_13457-7" style="display: none; position: absolute; background: #EEE; padding: 10px; paddint-left: 30px; width: 200px; overflow: auto; z-index: 3000;"> Cholesterol in LDL [Mass/volume] in Serum or Plasma by calculation </span>
+      <br/>
+  </td>
+  <td>April 2nd, 2013 21:00 - April 2nd, 2013 21:00</td>
+  <td></td>   
+  <td>
+        110 mg/dL<br/>
+  </td>
+  <td>
+	</td>
+
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+  
+</div>
+
+    
+    <br /><br />
+    <br /><br />
+    <br /><br />
+    <br /><br />
+  </body>
+</html>

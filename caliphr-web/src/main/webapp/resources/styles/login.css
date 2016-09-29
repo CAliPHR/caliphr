@@ -1,0 +1,97 @@
+.login_pannel{
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:5%;
+	height:400px;
+	width:450px;
+}
+.companyLogo{
+	text-align:center;
+	margin-top:10px;
+	font-size: 18px;
+}
+.logInRow{
+	font-size: 16px;
+}
+.logInText{
+	font-size: 14px;
+	color:#888;
+}
+.logmod__form {
+  border-top: 1px solid #e5e5e5;
+}
+.simform {
+  position: relative;
+}
+.sminputs {
+  border-bottom: 1px solid #E5E5E5;
+}
+.sminputs::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+.sminputs .input {
+  display: block;
+  position: relative;
+  width: 50%;
+  height: 71px;
+  padding: 11px 24px;
+  border-bottom: none;
+  float: left;
+  background-color: #FFF;
+  border-radius: 0;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.sminputs .input.active {
+  background: #eee;
+}
+.sminputs .input.active .hide-password {
+  background: #eee;
+}
+.sminputs .input.full {
+  width: 100%;
+}
+.sminputs .input label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+  line-height: 24px;
+}
+.sminputs .input input {
+  postion: relative;
+  display: inline-block;
+  height: 24px;
+  font-size: 15px;
+  line-height: 19.2px;
+  color: #555;
+  border-radius: 4px;
+  vertical-align: middle;
+  box-shadow: none;
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background-color: transparent;
+  color: rgba(75, 89, 102, 0.85);
+}
+.simform__actions{
+	margin-top:25px;
+	text-align: center;
+}
+.copyright{
+	margin-top:25px;
+	text-align:center;
+}

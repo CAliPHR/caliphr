@@ -1,0 +1,31 @@
+{
+  "name": "ember-pikaday",
+  "version": "0.1.8",
+  "dependencies": {
+    "pikaday": "~1.2.0",
+    "moment": "^2.6"
+  },
+  "devDependencies": {
+    "ember": "^1.3.2",
+    "ember-data": "^1.0.0-beta.5",
+    "ember-mocha-adapter": "0.1.2",
+    "handlebars": "^1.2.1"
+  },
+  "ignore": [
+    "app/",
+    "dist/",
+    "lib/"
+  ],
+  "main": "build/ember-plugin.js",
+  "homepage": "https://github.com/Frozenfire92/ember-pikaday",
+  "_release": "0.1.8",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.1.8",
+    "commit": "c6f067a198a894fabb95f0bbb7108e9e2e2cf7ba"
+  },
+  "_source": "git://github.com/Frozenfire92/ember-pikaday.git",
+  "_target": "~0.1.8",
+  "_originalSource": "ember-pikaday",
+  "_direct": true
+}

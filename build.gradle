@@ -1,0 +1,51 @@
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    
+    sourceCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+    }
+    
+    dependencies {
+        testCompile 'junit:junit:4.8.2'
+        
+    }
+
+    version = '1.0'
+
+    jar {
+        manifest.attributes provider: 'Caliphr'
+    }
+}
+
+/*
+    Caliphr service tier (JPA)
+ */
+project(':caliphr-service') {
+    dependencies {
+        // Common project
+        compile project(':caliphr-common')
+    }
+}
+
+/*
+    Caliphr web application
+ */
+project(':caliphr-web') {
+    dependencies {
+        // Common project
+        compile project(':caliphr-common')
+    }
+}
+
+/*
+    Caliphr HQMF processor
+ */
+project(':caliphr-hqmf') {
+    dependencies {
+        // Service project
+        compile project(':caliphr-service')
+    }
+}
