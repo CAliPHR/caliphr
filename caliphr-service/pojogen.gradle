@@ -1,0 +1,167 @@
+configurations {
+    generator
+}
+
+ext {
+	pojogenGeneratedDir = file("src/pojogen")
+	pojogenToBeDeletedDir = file("$pojogenGeneratedDir/to_be_deleted")
+}
+
+dependencies {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    generator   "com.github.wwadge:hbnpojogen-maven-plugin:1.4.32"
+}
+
+// run the HbnPojogen Generator
+task runHbnPojoGenerator(type: JavaExec) {
+
+	doFirst {
+		pojogenToBeDeletedDir.mkdirs();
+	}
+
+    main = 'com.github.wwadge.hbnpojogen.HbnPojoGen'
+    classpath configurations.generator
+    args "../database/pojogen/hbnpojogen-config.xml"
+    
+    doLast {
+		delete pojogenToBeDeletedDir
+		delete 'velocity.log'
+
+
+	    /*
+	        Force sequence generators to use allocation size of 1 for all entities.
+	     */
+	    ant.replaceregexp(match: "(@SequenceGenerator\\()", replace: "@SequenceGenerator(allocationSize = 1, ",
+	            flags: 'g', byline: true) {
+	        fileset(dir: "src/pojogen/com/ainq/caliphr/persistence/model/obj/caliphrDb/",
+	                includes: '*.java')
+	    }
+	    println("*** added allocation size of 1 to all entities ***")
+	
+	    /*
+	        Replace with jackson annotations to fix circular references in JSON output.
+	     */
+	    ant.replaceregexp(match: "@ManyToOne", replace: "@JsonBackReference @ManyToOne",
+	            flags: 'g', byline: true) {
+	        fileset(dir: "src/pojogen/com/ainq/caliphr/persistence/model/obj/caliphrDb/",
+	                includes: '*.java')
+	    }
+		ant.replaceregexp(match: "@OneToMany", replace: "@JsonManagedReference @OneToMany",
+	            flags: 'g', byline: true) {
+	        fileset(dir: "src/pojogen/com/ainq/caliphr/persistence/model/obj/caliphrDb/",
+	                includes: '*.java')
+	    }
+	    ant.replaceregexp(match: "@Entity", replace: "import com.fasterxml.jackson.annotation.JsonBackReference;"
+	            + "\nimport com.fasterxml.jackson.annotation.JsonManagedReference;\n\n"
+	            + "\nimport javax.persistence.*;\n\n"
+	            + "@Entity",
+	            flags: 'g', byline: true) {
+	        fileset(dir: "src/pojogen/com/ainq/caliphr/persistence/model/obj/caliphrDb/",
+	                includes: '*.java')
+	    }
+	    println("*** added jackson annotations for all entities ***")
+	
+	    /*
+	        Add method to set dateUpdated for all entities
+	     */
+	    ant.replaceregexp(match: "}\$", replace: "\t@PreUpdate\n" +
+	            "\tpublic void preUpdate() {\n" +
+	            "\t\tthis.dateUpdated = new Date();\n" +
+	            "\t}\n" +
+	            "}",
+	            flags: 'g', byline: false) {
+	        fileset(dir: "src/pojogen/com/ainq/caliphr/persistence/model/obj/caliphrDb/",
+	                includes: '*.java')
+	    }
+	    println("*** dateUpdated method added for all entities ***")
+	
+		/*
+			Fix up generation error - double period in package name
+		*/	
+		ant.replace(token: "com.ainq.caliphr.persistence.model.obj..",
+				value: "com.ainq.caliphr.persistence.model.obj.",
+	        	dir: "src/pojogen/com/ainq/caliphr/persistence")
+	    
+	    /*
+			Fix up generation error - incorrect package name
+		*/	
+		ant.replace(token: "com.ainq.caliphr.persistence.model.obj.caliphr.",
+				value: "com.ainq.caliphr.persistence.model.obj.caliphrDb.",
+	        	dir: "src/pojogen/com/ainq/caliphr/persistence/factories/caliphr")
+	    println("*** fixed incorrect package names ***")
+	    
+	    /*
+	        @Cacheable
+	     */
+	    ant.replaceregexp(match: "public class", replace: "@Cacheable\npublic class",
+	            flags: 'g', byline: true) {
+	        fileset(dir: "src/pojogen/com/ainq/caliphr/persistence/model/obj/caliphrDb/") {
+	            include(name: 'Code.java')
+	            include(name: 'CodeMapping.java')
+	            include(name: 'CodeMappingToCode.java')
+	            include(name: 'CodeMappingType.java')
+	            include(name: 'CodeSystem.java')
+	            include(name: 'DocumentType.java')
+	            include(name: 'EhrVendor.java')
+	            include(name: 'ParseStatusType.java')
+	            include(name: 'PracticeGroup.java')
+	            include(name: 'Provider.java')
+	            include(name: 'ProviderPhoneNumber.java')
+	            include(name: 'State.java')
+	            include(name: 'StatusCode.java')
+	            include(name: 'TemplateRoot.java')
+	        }
+	    }
+	    println("*** added @Cacheable ***")
+	
+		/*
+	        Change allocation size to 10
+	     */
+	    ant.replaceregexp(match: "allocationSize = 1", replace: "allocationSize = 10",
+	            flags: 'g', byline: true) {
+	        fileset(dir: "src/pojogen/com/ainq/caliphr/persistence/model/obj/caliphrDb/",
+	                includes: 'Code.java')
+	    }
+	    println("*** set allocation size set to 10 for appropriate entities ***")
+		
+	
+	    /*
+	        Change allocation size to 50
+	     */
+	    ant.replaceregexp(match: "allocationSize = 1", replace: "allocationSize = 50",
+	            flags: 'g', byline: true) {
+	        fileset(dir: "src/pojogen/com/ainq/caliphr/persistence/model/obj/caliphrDb/") {
+	            include(name: 'ApplicationUserAudit.java')
+	            include(name: 'ClinicalDocument.java')
+	            include(name: 'PatientAdvancedDirective.java')
+	            include(name: 'PatientAllergy.java')
+	            include(name: 'PatientAdvancedDirective.java')
+	            include(name: 'PatientEncounter.java')
+	            include(name: 'PatientEncounterDiagnosis.java')
+	            include(name: 'PatientFamilyHistory.java')
+	            include(name: 'PatientFuncCogStatus.java')
+	            include(name: 'PatientImmunization.java')
+	            include(name: 'PatientInstruction.java')
+	            include(name: 'PatientMedicalEquipment.java')
+	            include(name: 'PatientMedication.java')
+	            include(name: 'PatientPayer.java')
+	            include(name: 'PatientPlanOfCare.java')
+	            include(name: 'PatientProblem.java')
+	            include(name: 'PatientProcedure.java')
+	            include(name: 'PatientReasonForReferral.java')
+	            include(name: 'PatientReasonForVisit.java')
+	            include(name: 'PatientResult.java')
+	            include(name: 'PatientSocialHistory.java')
+	            include(name: 'PatientVitalSign.java')
+	            include(name: 'PatientVitalSign.java')
+	            include(name: 'Result*.java')
+	            include(name: 'Hqmf*.java')
+	        }
+	    }
+	    println("*** set allocation size set to 50 for appropriate entities ***")
+	}
+}
+

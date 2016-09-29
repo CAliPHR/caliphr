@@ -1,0 +1,159 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+// External Gradle scripts
+apply from: 'xjc.gradle'
+apply from: 'pojogen.gradle'
+
+version = '1.0'
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'CAliPHR - Service', 'Implementation-Version': version
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+	generatedSourcesDir = file("${buildDir}/generated-sources")
+	querydslVersion    	= "3.7.2"
+	
+	pojogenGeneratedDir = file("src/pojogen")
+	pojogenToBeDeletedDir = file("$pojogenGeneratedDir/to_be_deleted")
+}
+configurations {
+	querydslapt
+	provided
+	compile.extendsFrom provided
+}
+
+eclipse.classpath.plusConfigurations += [configurations.provided]
+idea.module.scopes.COMPILE.plus += [configurations.provided]
+
+sourceSets {
+	main {
+		java {
+			srcDir "src/main/java"
+			srcDir pojogenGeneratedDir
+			srcDir generatedSourcesDir
+		}
+	}
+	main.compileClasspath += configurations.provided
+	test.compileClasspath += configurations.provided
+	test.runtimeClasspath += configurations.provided
+}
+
+task generateQueryDSL(type: JavaCompile, group: 'build', description: 'Generates the QueryDSL query types') {
+	source = sourceSets.main.java
+	classpath = configurations.compile + configurations.querydslapt
+
+	options.compilerArgs = [
+			"-proc:only",
+			"-processor", "com.mysema.query.apt.jpa.JPAAnnotationProcessor"
+	]
+	destinationDir = generatedSourcesDir
+}
+
+compileJava {
+	doFirst {
+		generatedSourcesDir.mkdirs();
+	}
+
+	options.compilerArgs += ['-s', pojogenGeneratedDir]
+	options.compilerArgs += ['-s', generatedSourcesDir]
+	dependsOn generateQueryDSL
+}
+
+dependencies {
+    compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+	
+	// Apache Commons
+	compile 'commons-io:commons-io:2.4'
+	compile 'org.apache.commons:commons-lang3:3.4'
+
+	// Persistence
+	compile 'org.eclipse.persistence:javax.persistence:2.1.0'
+
+	// Hibernate
+	compile 'org.hibernate:hibernate-core:4.3.11.Final'
+	compile 'org.hibernate:hibernate-entitymanager:4.3.11.Final'
+	compile 'org.hibernate:hibernate-ehcache:4.3.11.Final'
+	compile 'net.sf.ehcache:ehcache-core:2.6.11'
+	compile 'org.hibernate:hibernate-validator:5.1.2.Final'
+	
+	// Spring
+	compile 'org.springframework.boot:spring-boot-starter-web:1.3.7.RELEASE'
+	compile 'org.springframework.boot:spring-boot-starter:1.3.7.RELEASE'
+	compile 'org.springframework.boot:spring-boot-starter-test:1.3.7.RELEASE'
+	compile 'org.springframework.boot:spring-boot-starter-data-jpa:1.3.7.RELEASE'
+	compile 'org.springframework.data:spring-data-commons:1.11.1.RELEASE'
+	compile 'org.springframework:spring-context-support:4.2.7.RELEASE'
+
+	// LogBack
+	compile 'ch.qos.logback:logback-classic:1.1.7'
+
+	// Google
+	compile 'com.google.guava:guava:19.0'
+
+	// Query DSL
+	compile  "com.mysema.querydsl:querydsl-core:${querydslVersion}"
+    compile  "com.mysema.querydsl:querydsl-jpa:${querydslVersion}"
+	compile  "com.mysema.querydsl:querydsl-sql:${querydslVersion}"
+    querydslapt  "com.mysema.querydsl:querydsl-apt:${querydslVersion}"
+	
+	// Mockito
+	compile 'org.mockito:mockito-all:1.10.8'
+	
+	// Postgres
+	compile 'org.postgresql:postgresql:9.4-1201-jdbc41'
+
+	// JDBC connection pool
+	compile 'com.zaxxer:HikariCP:2.4.3'
+
+	// GSON
+	compile 'com.google.code.gson:gson:2.3.1'
+
+	// Thymeleaf
+	compile 'org.thymeleaf:thymeleaf:2.1.4.RELEASE'
+	compile 'org.thymeleaf:thymeleaf-spring4:2.1.4.RELEASE'
+	
+	// XJC (XSD TO JAXB)
+	jaxb 'com.sun.xml.bind:jaxb-core:2.2.11'
+	jaxb 'com.sun.xml.bind:jaxb-xjc:2.2.11'
+	jaxb 'com.sun.xml.bind:jaxb-impl:2.2.11'
+	
+	compile 'com.sun.xml.bind:jaxb-core:2.2.11'
+	compile 'com.sun.xml.bind:jaxb-xjc:2.2.11'
+	compile 'com.sun.xml.bind:jaxb-impl:2.2.11'
+	compile(files(genJaxb.classesDir).builtBy(genJaxb))
+
+	// JAVA SPEC MAIL
+	compile 'javax.mail:javax.mail-api:1.5.2'
+	compile 'com.sun.mail:javax.mail:1.5.2'
+	
+	// zip4j for encrypted zip files
+	compile 'net.lingala.zip4j:zip4j:1.3.2'
+
+	// Joda time
+	compile 'joda-time:joda-time:2.8.2'
+
+	// Use lombok at compile time
+	provided group: 'org.projectlombok', name: 'lombok', version: '1.16.10'
+
+}
+
+test {
+    systemProperties 'property': 'value'
+}
+
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'repos'
+       }
+    }
+}

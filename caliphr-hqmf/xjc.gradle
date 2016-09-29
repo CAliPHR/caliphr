@@ -1,0 +1,38 @@
+/*
+ * 	GENERATE SERVICE JAXB CLASSES (XSDb)
+ */
+task genServiceJaxb {
+	
+	// Source code
+	ext.sourcesDir = "${buildDir}/generated-sources/service/jaxb"
+	
+	// Classes
+	ext.classesDir = "${buildDir}/classes/service/jaxb"
+	outputs.dir classesDir
+
+	doLast() {
+		project.ant {
+
+			mkdir(dir: sourcesDir)
+			mkdir(dir: classesDir)
+
+			// Generate JAXB classes
+			taskdef name: 'wsimport', classname: 'com.sun.tools.ws.ant.WsImport', classpath: configurations.generate.asPath
+			wsimport wsdl: sourceSets.main.resources.srcDirs.toList()[0].getPath()+"/schema/service/XDSb.Support.Materials.v10/wsdl/XDS.b_DocumentRepository.wsdl", sourcedestdir: sourcesDir, package: 'com.ainq.caliphr.hqmf.schema.service', xnocompile: true
+
+			// Compile
+			javac(destdir: classesDir, source: 1.7, target: 1.7, debug: true,
+			debugLevel: "lines,vars,source",
+			classpath: configurations.jaxb.asPath) {
+				src(path: sourcesDir)
+				include(name: "**/*.java")
+				include(name: "*.java")
+			}
+
+			// Copy classes from above
+			copy(todir: classesDir) {
+				fileset(dir: sourcesDir, erroronmissingdir: false) { exclude(name: "**/*.java") }
+			}
+		}
+	}
+}

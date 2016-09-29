@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<div th:fragment="head">
+    <header class="navbar navbar-inverse navbar-static-top " role="banner" id="navBar">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a th:href="@{/}" class="navbar-brand">
+                    <img th:style="#{header.companyLogoStyle}" th:src="#{header.companyLogoImage}" />
+                </a>
+
+                <h3 style="width:400px;padding-top:10px;color:white;margin-bottom:1px;margin-top:10px;">CAliPHR</h3>
+                <h6 style="color:white;margin-left:65px;margin-top:2px;">CQM Aligned Population Health Reporting Tool</h6>
+
+            </div>
+            <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown"><a th:href="@{/}" style="padding-top:30px;"><span class="glyphicon glyphicon-home">&nbsp;Home</span></a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="dropdownMenu1" style="padding-top:30px;"><span
+                                class="glyphicon glyphicon-user">&nbsp;User-ID  <b class="caret"></b></span></a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">Help</a></li>
+                            <li><a href="#">Account </a></li>
+                            <li><a href="#">F.A.Q</a></li>
+                           <!-- <li><a href="#">Getting Started</a></li>-->
+                            <li><a href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+</div>
+<div th:fragment="foot">
+    <footer class="footer">
+        <div class="container">
+            <div class="contactInfo">
+                <ul class="pipedFooter">
+                    <li class="companyName" th:text="#{footer.companyName}"> />
+                	<li class="companyName" th:text="#{footer.companyAddress}" />
+                	<li class="companyName" th:text="#{footer.companyCityStateZip}" />
+                	<li class="companyName" th:text="#{footer.companyTel}" />
+                	<li class="companyName" th:text="#{footer.companyFax}" />
+                	<li class="companyName" th:text="#{footer.companyEmail}" />
+                </ul>
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

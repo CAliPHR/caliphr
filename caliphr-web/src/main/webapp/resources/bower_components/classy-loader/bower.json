@@ -1,0 +1,17 @@
+{
+  "name": "classy-loader",
+  "version": "0.0.1",
+  "homepage": "https://github.com/shootermv/org.webjars-jquery.classyLoader",
+  "authors": [
+    "Marius Stanciu"
+  ],
+  "description": "jquery plugin for loader animation",
+  "main": "jquery.classyloader.js",
+  "keywords": [
+    "jquery"
+  ],
+  "dependencies": {
+    "jquery": ">= 1.9.0"
+  },
+  "license": "MIT"
+}

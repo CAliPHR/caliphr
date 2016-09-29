@@ -1,0 +1,28 @@
+<entry>
+    <!--Medication dispensed -->
+    <supply classCode="SPLY" moodCode="EVN">
+        <!--  Medication Dispensed template -->
+        <templateId root="2.16.840.1.113883.10.20.24.3.45"/>
+        <!-- Medication Dispense template -->
+        <templateId root="2.16.840.1.113883.10.20.22.4.18"/>
+        <id root="1.3.6.1.4.1.115" th:attr="extension=${entry.id}"/>
+        <text th:text="${entry.description}"/>
+        <statusCode code="completed"/>
+        <effectiveTime xsi:type="IVL_TS">
+            <low th:attr="value=${entry.low}" />
+            <high th:attr="value=${entry.high}" />
+        </effectiveTime>
+        <product>
+            <manufacturedProduct classCode="MANU">
+                <!-- Medication Information (consolidation) template -->
+                <templateId root="2.16.840.1.113883.10.20.22.4.23"/>
+                <id th:attr="root=${entry.uuid}"/>
+                <manufacturedMaterial>
+                    <code th:if="${! #strings.isEmpty(entry.valueCode)}" th:attr="code=${entry.valueCode}, codeSystem=${entry.valueCodeSystem}, 'sdtc:valueSet'=${entry.valueValueSetOid}">
+                        <originalText th:text="${entry.valueDescription}"/>
+                    </code>
+                </manufacturedMaterial>
+            </manufacturedProduct>
+        </product>
+    </supply>
+</entry>

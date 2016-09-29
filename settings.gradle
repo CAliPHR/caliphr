@@ -1,0 +1,4 @@
+
+include "caliphr-service", "caliphr-web", "caliphr-hqmf"
+include 'caliphr-common'
+

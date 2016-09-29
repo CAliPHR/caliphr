@@ -1,0 +1,28 @@
+<entry>
+    <supply classCode="SPLY" moodCode="RQO" th:attr="negationInd=${entry.negationInd}">
+        <!-- Plan of Care Activity Supply -->
+        <templateId root="2.16.840.1.113883.10.20.22.4.43"/>
+        <!-- Device, Order -->
+        <templateId root="2.16.840.1.113883.10.20.24.3.9"/>
+        <id root="1.3.6.1.4.1.115" th:attr="extension=${entry.id}"/>
+        <text th:text="${entry.description}"/>
+        <statusCode code="new"/>
+
+        <effectiveTime>
+            <low th:attr="value=${entry.low}" />
+            <high th:attr="value=${entry.high}" />
+        </effectiveTime>
+
+        <participant typeCode="DEV">
+            <participantRole classCode="MANU">
+                <playingDevice classCode="DEV">
+                    <code th:attr="code=${entry.codeCode}, codeSystem=${entry.codeSystem}, 'sdtc:valueSet'=${entry.codeValueSetOid}">
+                        <originalText th:text="${entry.codeDescription}"/>
+                    </code>
+                </playingDevice>
+            </participantRole>
+        </participant>
+        <th:block th:include="qrda_cat1/_reason.cat1.xml" th:with="reason=${entry.reason}"
+                  th:if="${entry.reason != null}"/>
+    </supply>
+</entry>

@@ -1,0 +1,54 @@
+<bindings xmlns="http://java.sun.com/xml/ns/jaxb"
+          xmlns:xs="http://www.w3.org/2001/XMLSchema"
+          version="2.1">
+
+    <bindings schemaLocation="./POCD_MT000040.xsd" node="/xs:schema">
+        <bindings node="//xs:complexType[@name='POCD_MT000040.ObservationMedia']/xs:attribute[@name='ID']">
+            <property name="xsid"/>
+        </bindings>
+    </bindings>
+
+    <bindings schemaLocation="./POCD_MT000040.xsd" node="/xs:schema">
+        <bindings node="//xs:complexType[@name='POCD_MT000040.RegionOfInterest']/xs:attribute[@name='ID']">
+            <property name="xsid"/>
+        </bindings>
+    </bindings>
+
+    <bindings schemaLocation="./POCD_MT000040.xsd" node="/xs:schema">
+        <bindings node="//xs:complexType[@name='POCD_MT000040.Section']/xs:attribute[@name='ID']">
+            <property name="xsid"/>
+        </bindings>
+    </bindings>
+
+    <!--
+        Override some of the base types in patient serialization.
+    -->
+    <bindings schemaLocation="../../processable/coreschemas/datatypes-base.xsd">
+        <bindings node="//xs:element[@name='family']">
+            <property >
+                <baseType name="java.lang.String"></baseType>
+            </property>
+        </bindings>
+        <bindings node="//xs:element[@name='given']">
+            <property >
+                <baseType name="java.lang.String"></baseType>
+            </property>
+        </bindings>
+        <bindings node="//xs:element[@name='prefix']">
+            <property >
+                <baseType name="java.lang.String"></baseType>
+            </property>
+        </bindings>
+        <bindings node="//xs:element[@name='suffix']">
+            <property >
+                <baseType name="java.lang.String"></baseType>
+            </property>
+        </bindings>
+        <bindings node="//xs:element[@name='delimiter']">
+            <property >
+                <baseType name="java.lang.String"></baseType>
+            </property>
+        </bindings>
+    </bindings>
+
+</bindings>

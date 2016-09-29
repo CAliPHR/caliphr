@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ClinicalDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns="urn:hl7-org:v3"
+ xmlns:cda="urn:hl7-org:v3">
+
+  <!--QRDA Header-->
+  <realmCode code="US"/>
+  <typeId root="2.16.840.1.113883.1.3" extension="POCD_HD000040"/>
+  <!-- QRDA Category III Release 1 template ID (this template ID differs from QRDA III comment only template ID). -->
+  <templateId root="2.16.840.1.113883.10.20.27.1.1"/>
+  <!--This is the globally unique identifier for this QRDA document-->
+  <id root="88414c01-715a-45bb-83bb-db7ac860fe9d"/>
+
+  <!--Quality Reporting Document Architecture Calculated Summary Report-->
+  <code code="55184-6" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Quality Reporting Document Architecture Calculated Summary Report"/>
+  <title>QRDA Calculated Summary Report</title>
+  <!--This is the document creation time-->
+  <effectiveTime th:value="${#dates.format(#dates.createNow(), 'yyyyMMddHHmm')}"/>
+  <confidentialityCode codeSystem="2.16.840.1.113883.5.25" code="N"/>
+  <languageCode code="en"/>
+  <versionNumber value="1"/>
+  <recordTarget>
+    <patientRole>
+      <id nullFlavor="NA"/>
+    </patientRole>
+  </recordTarget>
+	<author>
+		<time th:value="${#dates.format(#dates.createNow(), 'yyyyMMddHHmm')}"/>
+		<assignedAuthor>
+			<!-- Registry author ID -->
+			<id extension="Caliphr" />
+			<assignedAuthoringDevice>
+				<softwareName></softwareName>
+			</assignedAuthoringDevice>
+			<representedOrganization>
+				<!-- Represents unique registry organization TIN -->
+				<id root="root" extension="ext"/>
+				<!-- Contains name - specific registry not required-->
+				<name></name>
+			</representedOrganization>
+		</assignedAuthor>
+	</author>
+
+  <!-- The custodian of the CDA document is the same as the legal authenticator in this 
+	example and represents the reporting organization. -->
+	<!-- SHALL -->
+	<custodian>
+		<assignedCustodian>
+			<representedCustodianOrganization>
+				<!-- SHALL have an id - This is an example root -->
+				<id root="root"/>
+				<!-- SHOULD Name not required -->
+				<name>Audacious Inquiry</name>
+			</representedCustodianOrganization>
+		</assignedCustodian>
+	</custodian>
+  <!-- The legal authenticator of the CDA document is a single person who is at the 
+		same organization as the custodian in this example. This element must be present. -->
+	<!-- SHALL -->
+	<legalAuthenticator>
+		<!-- SHALL -->
+		<time th:value="${#dates.format(#dates.createNow(), 'yyyyMMddHHmm')}"/>
+		<!-- SHALL -->
+		<signatureCode code="S"/>
+		<assignedEntity>
+			<!-- SHALL ID -->
+			<id root="root"/>
+			<!-- SHALL -->
+			<representedOrganization>
+				<!-- SHALL Id -->
+				<!-- example root -->
+				<id root="root"/>
+			</representedOrganization>
+		</assignedEntity>
+	</legalAuthenticator>
+
+  <component>
+    <structuredBody>
+      <!--
+********************************************************
+QRDA Category III Reporting Parameters
+********************************************************
+-->
+
+			<component>
+				<section th:with="mpLow=${hqmfDocs[0].measurePeriod.low}, mpLowDate=${#dates.create(#strings.substring(mpLow, 0, 4), #strings.substring(mpLow, 4, 6), #strings.substring(mpLow, 6, 8))}, mpHigh=${hqmfDocs[0].measurePeriod.high}, mpHighDate=${#dates.create(#strings.substring(mpHigh, 0, 4), #strings.substring(mpHigh, 4, 6), #strings.substring(mpHigh, 6, 8))}">
+					<!-- Reporting Parameters templateId -->
+					<templateId root="2.16.840.1.113883.10.20.17.2.1"/>
+					<!-- QRDA Category III Reporting Parameters templateId -->
+					<templateId root="2.16.840.1.113883.10.20.27.2.2"/>
+					<code code="55187-9" codeSystem="2.16.840.1.113883.6.1"/>
+					<title>Reporting Parameters</title>
+					<text>
+						<list>
+							<item th:text="'Reporting period: ' + ${#dates.format(mpLowDate, 'dd MMMM yyyy')} + ' - ' + ${#dates.format(mpHighDate, 'dd MMMM yyyy')}" />
+						</list>
+					</text>
+					<entry typeCode="DRIV">
+						<act classCode="ACT" moodCode="EVN">
+							<!-- This is the templateId for Reporting Parameters Act -->
+              				<templateId root="2.16.840.1.113883.10.20.17.3.8"/>
+							<id root="55a43e20-6463-46eb-81c3-9a3a1ad41225"/>
+							<code code="252116004" codeSystem="2.16.840.1.113883.6.96"
+								displayName="Observation Parameters"/>
+							<!-- This reporting period shows that Good Health Clinic is sending data for the first quarter of the year.
+							The referenced measure definition may be valid for the entire year or more-->
+							<effectiveTime>
+								<low th:value="${#strings.substring(mpLow, 0, 8)}"/>
+								<!-- The first day of the period reported. -->
+								<high th:value="${#strings.substring(mpHigh, 0, 8)}"/>
+								<!-- The last day of the period reported. -->
+							</effectiveTime>
+						</act>
+					</entry>
+				</section>
+			</component>
+      <!--
+********************************************************
+Measure Section
+********************************************************
+-->
+      <component>
+        <section>
+          <!-- Implied template Measure Section templateId -->
+          <templateId root="2.16.840.1.113883.10.20.24.2.2"/>
+          <!-- In this case the query is using an eMeasure -->
+          <!-- QRDA Category III Measure Section template -->
+          <templateId root="2.16.840.1.113883.10.20.27.2.1"/>
+          <code code="55186-1" codeSystem="2.16.840.1.113883.6.1"/>
+          <title>Measure Section</title>
+          <text>
+
+          </text>
+          <entry th:each="measure : ${hqmfDocs}">
+            <organizer classCode="CLUSTER" moodCode="EVN">
+              <!-- Implied template Measure Reference templateId -->
+              <templateId root="2.16.840.1.113883.10.20.24.3.98"/>
+              <!-- SHALL 1..* (one for each referenced measure) Measure Reference and Results template -->
+              <templateId root="2.16.840.1.113883.10.20.27.3.1"/>
+               <id nullFlavor="NI" />
+              <statusCode code="completed"/>
+              <reference typeCode="REFR">
+                <externalDocument classCode="DOC" moodCode="EVN">
+                  <th:block th:utext="'&lt;!--  CMS ID: ' + ${measure.cmsId} + ' -->'" />
+                  <id root="2.16.840.1.113883.4.738" th:attr="extension=${measure.hqmfId}" />
+                  <text th:text="${measure.title}"/>
+                  <setId th:attr="root=${measure.hqmfSetId}"/>
+                  <versionNumber value="1"/>
+                </externalDocument>
+              </reference>
+
+              <component th:remove="all">
+              	&lt;%== render :partial => 'performance_rate', :locals => {:population_group => pg} %&gt;
+              </component>
+	          <component th:include="qrda_cat3/_measure_data.cat3.xml" th:each="result : ${results[measure.id]}" th:with="resultEntry=${result.value},population=${measure.hqmfPopulations.^[hqmfPopulationId == #root.result.value.result.hqmfPopulationSet.value]}" />
+            </organizer>
+          </entry>
+
+        </section>
+      </component>
+    </structuredBody>
+  </component>
+</ClinicalDocument>

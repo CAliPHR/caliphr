@@ -1,0 +1,271 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="ehcache.xsd"
+         updateCheck="false" monitoring="autodetect" name="persistenceEhcacheModel"
+         dynamicConfig="true">
+
+    <!--
+      Sets the path to the directory where cache files are created.
+
+      If the path is a Java System Property it is replaced by its value in the
+      running VM.
+
+      The following properties are translated:
+      * user.home - User's home directory
+      * user.dir - User's current working directory
+      * java.io.tmpdir - Default temp file path
+
+      Subdirectories can be specified below the property e.g. java.io.tmpdir/one
+      -->
+    <diskStore path="java.io.tmpdir"/>
+
+    <!--
+       Mandatory Default Cache configuration. These settings will be applied to caches
+       created programmtically using CacheManager.add(String cacheName)
+       -->
+    <defaultCache
+            maxElementsInMemory="1000"
+            eternal="false"
+            timeToIdleSeconds="600"
+            timeToLiveSeconds="600"
+            overflowToDisk="false"
+            diskPersistent="false"
+            diskExpiryThreadIntervalSeconds="600"
+    />
+
+
+    <!-- The unnamed query cache -->
+    <cache
+            name="org.hibernate.cache.internal.StandardQueryCache"
+            maxElementsInMemory="300000"
+            eternal="false"
+            timeToLiveSeconds="600"
+            overflowToDisk="false"
+    />
+
+    <cache name="org.hibernate.cache.spi.UpdateTimestampsCache"
+           maxElementsInMemory="5000" eternal="true"
+           overflowToDisk="false" diskPersistent="false"
+           memoryStoreEvictionPolicy="LRU"/>
+
+
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.ApplicationUser"
+            maxElementsInMemory="5000"
+            eternal="false"
+            timeToIdleSeconds="600"
+            timeToLiveSeconds="600"
+            overflowToDisk="false"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.ApplicationUserSecurity"
+            maxElementsInMemory="5000"
+            eternal="false"
+            timeToIdleSeconds="600"
+            timeToLiveSeconds="600"
+            overflowToDisk="false"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.AppointmentType"
+            maxElementsInMemory="5000"
+    		eternal="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.AuditType"
+            maxElementsInMemory="5000"
+    		eternal="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.Bundle"
+            maxElementsInMemory="5000"
+    		eternal="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.Code"
+            maxElementsInMemory="15000"
+    		eternal="true"
+    		memoryStoreEvictionPolicy="LFU"
+    		overflowToDisk="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.Code.customCache"
+            maxElementsInMemory="15000"
+    		eternal="true"
+    		memoryStoreEvictionPolicy="LFU"
+    		overflowToDisk="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.CodeMapping"
+            maxElementsInMemory="5000"
+    		eternal="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.CodeMapping.queryCache"
+            maxElementsInMemory="5000"
+            eternal="false"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.CodeMappingToCode"
+            maxElementsInMemory="5000"
+            eternal="false"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.CodeMappingType"
+            maxElementsInMemory="5000"
+    		eternal="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.CodeSystem"
+            maxElementsInMemory="5000"
+    		eternal="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.CodeSystem.queryCache"
+            maxElementsInMemory="5000"
+    		eternal="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.DocumentType"
+            maxElementsInMemory="5000"
+    		eternal="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.DocumentType.queryCache"
+            maxElementsInMemory="5000"
+    		eternal="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.Domain"
+            maxElementsInMemory="5000"
+    		eternal="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.EhrVendor"
+            maxElementsInMemory="5000"
+    		eternal="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.Organization"
+    		maxElementsInMemory="1000"
+    		eternal="true"
+    		memoryStoreEvictionPolicy="LFU"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.OrganizationType"
+            maxElementsInMemory="5000"
+    		eternal="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.ParseStatusType"
+            maxElementsInMemory="5000"
+    		eternal="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.ParseStatusType.queryCache"
+            maxElementsInMemory="5000"
+    		eternal="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.PracticeAvailableMeasure"
+            maxElementsInMemory="5000"
+    		eternal="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.PracticeGroup"
+    		maxElementsInMemory="20000"
+    		eternal="true"
+    		memoryStoreEvictionPolicy="LFU"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.PracticeGroup.queryCache"
+            maxElementsInMemory="5000"
+    		eternal="true"
+    		memoryStoreEvictionPolicy="LFU"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.PracticeGroupType"
+            maxElementsInMemory="5000"
+    		eternal="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.Provider"
+    		maxElementsInMemory="50000"
+    		eternal="true"
+    		memoryStoreEvictionPolicy="LFU"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.Provider.queryCache"
+    		maxElementsInMemory="50000"
+    		eternal="true"
+    		memoryStoreEvictionPolicy="LFU"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.Provider.customCache"
+            maxElementsInMemory="500"
+    		eternal="true"
+    		memoryStoreEvictionPolicy="LFU"
+    		overflowToDisk="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.ProviderPhoneNumber"
+            maxElementsInMemory="5000"
+    		eternal="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.ProviderPhoneNumber.queryCache"
+            maxElementsInMemory="5000"
+    		eternal="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.ProviderType"
+            maxElementsInMemory="5000"
+    		eternal="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.SecurityRole"
+            maxElementsInMemory="5000"
+    		eternal="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.State"
+            maxElementsInMemory="5000"
+    		eternal="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.State.queryCache"
+            maxElementsInMemory="5000"
+    		eternal="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.StatusCode"
+            maxElementsInMemory="5000"
+    		eternal="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.StatusCode.queryCache"
+            maxElementsInMemory="5000"
+    		eternal="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.TemplateRoot"
+            maxElementsInMemory="5000"
+    		eternal="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.TemplateRoot.queryCache"
+            maxElementsInMemory="5000"
+    		eternal="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.ValueSet"
+            maxElementsInMemory="5000"
+    		eternal="true"
+    />
+    <cache
+            name="com.ainq.caliphr.persistence.model.obj.caliphrDb.ValueSetCode"
+    		maxElementsInMemory="1000"
+    		maxElementsOnDisk="500000"
+    		eternal="true"
+    		overflowToDisk="true"
+    />
+
+</ehcache>

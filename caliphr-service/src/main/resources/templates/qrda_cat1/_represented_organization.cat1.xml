@@ -1,0 +1,9 @@
+<representedOrganization>
+    <!-- Represents unique registry organization TIN -->
+    <th:block th:include="qrda_cat1/_id.cat1.xml" th:each="id : ${provider.id}" th:with="id=${id}" th:if="${id != null}" />
+
+    <!-- Contains name - specific registry not required-->
+    <name th:text="${provider.providerName}" />
+    <th:block th:include="qrda_cat1/_address.cat1.xml" th:with="address=${provider.address}" th:if="${provider.address != null}" />
+    <th:block th:include="qrda_cat1/_telecom.cat1.xml" th:each="telecom : ${provider.phoneNumbers}" th:with="telecom=${telecom}" th:if="${telecom != null}" />
+</representedOrganization>

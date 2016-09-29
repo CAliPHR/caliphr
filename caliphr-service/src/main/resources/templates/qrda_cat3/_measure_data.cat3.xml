@@ -1,0 +1,123 @@
+
+<th:block th:utext="'&lt;!--   MEASURE DATA REPORTING FOR  ' + ${measure.cmsId} + '  ' + ${resultEntry.result.hqmfPopulationSet.value} + ' ' + ${population.hqmfId} + ' -->'" />
+<observation classCode="OBS" moodCode="EVN">
+  <!-- Measure Data template -->
+  <templateId root="2.16.840.1.113883.10.20.27.3.5"/>
+  <code code="ASSERTION" 
+        codeSystem="2.16.840.1.113883.5.4" 
+        displayName="Assertion" 
+        codeSystemName="ActCode"/>
+  <statusCode code="completed"/>
+  <value xsi:type="CD" th:attr="code=${population.populationType}" 
+         codeSystem="2.16.840.1.113883.5.1063"  
+         codeSystemName="ObservationValue"/>
+  <!-- Aggregate Count -->
+  <entryRelationship typeCode="SUBJ" inversionInd="true">
+    <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.27.3.3"/>
+      <code code="MSRAGG" 
+        displayName="rate aggregation" 
+        codeSystem="2.16.840.1.113883.5.4" 
+        codeSystemName="ActCode"/>
+      <value xsi:type="INT" th:value="${resultEntry.result.resultValue}"/>
+      <methodCode code="COUNT" 
+        displayName="Count" 
+        codeSystem="2.16.840.1.113883.5.84" 
+        codeSystemName="ObservationMethod"/>
+    </observation>
+  </entryRelationship>
+
+
+  <entryRelationship th:each="strat: ${resultEntry.stratifications}" typeCode="COMP">
+  	
+  	<th:block th:utext="'&lt;!--   Startification Reporting Template for ' + ${measure.cmsId} + '  ' + ${resultEntry.result.hqmfPopulationSet.value} + '  ' + ${strat.stratTitle} + ' ' + ${strat.stratId} + ' -->'" />
+    <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.27.3.4"/>
+      <code code="ASSERTION" 
+            codeSystem="2.16.840.1.113883.5.4" 
+            displayName="Assertion" 
+            codeSystemName="ActCode"/>
+      <statusCode code="completed"/>
+      <value xsi:type="CD" nullFlavor="OTH">
+       	<originalText th:text="${strat.stratTitle}" />
+      </value>
+      <entryRelationship typeCode="SUBJ" inversionInd="true">
+        <observation classCode="OBS" moodCode="EVN">
+          <templateId root="2.16.840.1.113883.10.20.27.3.3"/>
+          <code code="MSRAGG" 
+                displayName="rate aggregation" 
+                codeSystem="2.16.840.1.113883.5.4" 
+                codeSystemName="ActCode"/>
+          <value xsi:type="INT" th:value="${strat.result.resultValue}"/>
+          <methodCode code="COUNT" 
+                      displayName="Count" 
+                      codeSystem="2.16.840.1.113883.5.84" 
+                      codeSystemName="ObservationMethod"/>
+        </observation>
+      </entryRelationship>
+      <reference typeCode="REFR">
+        <externalObservation classCode="OBS" moodCode="EVN">
+          <id th:attr="root=${strat.stratId}"/>
+        </externalObservation>
+      </reference>
+    </observation>
+  </entryRelationship>
+
+	<!--/* Sex */-->
+  	<th:block th:include="qrda_cat3/_supplemental_data.cat3.xml" 
+          th:each="suppl : ${helper.getSexSupplementalData(resultEntry.result.resultSupplementals)}"
+          th:with="templateName = 'Sex Supplemental Data', 
+                   templateIds = '2.16.840.1.113883.10.20.27.3.6',
+                   supplementalDataCode = '184100006',
+                   supplementalDataCodeSystem = '2.16.840.1.113883.6.96',
+                   supplementalDataValueCode = ${suppl.code.codeName},
+                   supplementalDataValueCodeSystem = '2.16.840.1.113883.5.1', 
+                   count = ${suppl.resultValue}" />
+
+	<!--/* Ethnicity */-->
+	<th:block th:include="qrda_cat3/_supplemental_data.cat3.xml" 
+	          th:each="suppl : ${helper.getEthnicitySupplementalData(resultEntry.result.resultSupplementals)}"
+	          th:with="templateName = 'Ethnicity Supplemental Data', 
+	                   templateIds = '2.16.840.1.113883.10.20.27.3.7',
+	                   supplementalDataCode = '364699009',
+	                   supplementalDataCodeSystem = '2.16.840.1.113883.6.96',
+	                   supplementalDataValueCode = ${suppl.code.codeName},
+	                   supplementalDataValueCodeSystem = '2.16.840.1.113883.6.238', 
+	                   count = ${suppl.resultValue}" />
+	
+	<!--/* Race */-->                 
+	<th:block th:include="qrda_cat3/_supplemental_data.cat3.xml" 
+	          th:each="suppl : ${helper.getRaceSupplementalData(resultEntry.result.resultSupplementals)}"
+	          th:with="templateName = 'Race Supplemental Data', 
+	                   templateIds = '2.16.840.1.113883.10.20.27.3.8',
+	                   supplementalDataCode = '103579009',
+	                   supplementalDataCodeSystem = '2.16.840.1.113883.6.96',
+	                   supplementalDataValueCode = ${suppl.code.codeName},
+	                   supplementalDataValueCodeSystem = '2.16.840.1.113883.6.238', 
+	                   count = ${suppl.resultValue}" />
+	
+	<!--/* Payer */-->
+	<th:block th:include="qrda_cat3/_supplemental_data.cat3.xml" 
+	          th:each="suppl : ${helper.getPayerSupplementalData(resultEntry.result.resultSupplementals)}"
+	          th:with="templateName = 'Payer Supplemental Data', 
+	                   templateIds = ${'2.16.840.1.113883.10.20.27.3.9,2.16.840.1.113883.10.20.24.3.55'.split(',')},
+	                   supplementalDataCode = '48768-6',
+	                   supplementalDataCodeSystem = '2.16.840.1.113883.6.1',
+	                   supplementalDataValueCode = ${suppl.code.codeName},
+	                   supplementalDataValueCodeSystem = '2.16.840.1.113883.3.221.5', 
+	                   count = ${suppl.resultValue}" />
+                   
+<th:block th:remove="all">
+  &lt;% if population.type == 'MSRPOPL' -%&gt;
+  &lt;%  observ = aggregate_count.populations.find{|p| p.type == "OBSERV"} %&gt;
+  &lt;%== render :partial => 'continuous_variable_value', :locals => {:id => observ.id, :value=>observ.value}%&gt;
+  &lt;% end -%&gt;
+</th:block>
+
+  <reference typeCode="REFR">
+     <externalObservation classCode="OBS" moodCode="EVN">
+        <id th:attr="root=${population.hqmfId}"/>
+     </externalObservation>
+  </reference>
+
+</observation>

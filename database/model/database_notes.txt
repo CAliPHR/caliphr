@@ -1,0 +1,64 @@
+# --------------------- #
+# @Cacheable            #
+# --------------------- #
+
+Code.java
+CodeMapping.java
+CodeMappingToCode.java
+CodeMappingType.java
+CodeSystem.java
+DocumentType.java
+EhrVendor.java
+ParseStatusType.java
+PracticeGroup.java
+Provider.java
+ProviderPhoneNumber.java
+State.java
+StatusCode.java
+TemplateRoot.java
+
+
+# ------------------------- #
+# Bigint/Increment Size 10: #
+# ------------------------- #
+
+code
+
+# ------------------------- #
+# Bigint/Increment Size 50: #
+# ------------------------- #
+
+application_user_audit
+patient_advanced_directive
+patient_allergy
+patient_encounter
+patient_encounter_diagnosis
+patient_family_history
+patient_func_cog_status
+patient_immunization
+patient_instruction
+patient_medical_equipment
+patient_medication
+patient_payer
+patient_plan_of_care
+patient_problem
+patient_procedure
+patient_reason_for_referral
+patient_reason_for_visit
+patient_result
+patient_social_history
+patient_vital_sign
+clinical_document
+patient_hl7_appointment_type
+hqmf*
+result*
+
+# --------------------- #
+# All entities:         #
+# --------------------- #
+
+    @PreUpdate
+	public void preUpdate() {
+		this.dateUpdated = new Date();
+	}
+

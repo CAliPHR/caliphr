@@ -1,0 +1,187 @@
+configurations { [jaxb, generate] }
+
+task wsimport {
+    System.setProperty('javax.xml.accessExternalSchema', 'file')
+    System.setProperty("com.sun.xml.bind.v2.runtime.JAXBContextImpl.fastBoot", "true")
+}
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenLocal()
+        mavenCentral()
+        maven { url "http://repo.spring.io/libs-release" }
+    }
+    dependencies {
+	classpath("io.spring.gradle:dependency-management-plugin:0.6.0.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.7.RELEASE")
+        classpath 'com.bmuschko:gradle-cargo-plugin:2.2.2'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+apply plugin: 'groovy'
+apply plugin: 'com.bmuschko.cargo-base'
+
+// Custom JAXB bindings
+apply from: 'xjc.gradle'
+
+// Build runnable jar if necessary
+jar {
+    archiveName = 'CAliPHR-API.jar'
+    from genServiceJaxb.classesDir
+}
+
+// Run application using appStartWar
+apply plugin: 'war'
+apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
+war {
+    archiveName = 'CAliPHR-API.war'
+    from genServiceJaxb.classesDir
+}
+
+gretty {
+    port = 8081
+    contextPath = '/'
+    httpsEnabled = true
+    httpsPort = 8444
+
+    // Fix to -> java.lang.Exception: Timeout scanning annotations
+    jvmArgs = ['-Djava.net.preferIPv4Stack=true', '-Dorg.eclipse.jetty.annotations.maxWait=180']
+
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "http://repo.spring.io/libs-release" }
+}
+
+ext {
+	generatedSourcesDir = file("${buildDir}/generated-sources/service/jaxb")
+}
+
+sourceSets {
+	main {
+		java {
+			srcDir "src/main/java"
+			srcDir generatedSourcesDir
+		}
+	}
+}
+
+dependencies {
+
+    // TEST
+    testCompile 'junit:junit:4.12'
+
+    // Apache Commons
+    compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+
+    // Hibernate
+    compile 'org.hibernate:hibernate-core:4.3.11.Final'
+
+    // AspectJ
+    compile 'org.aspectj:aspectjweaver:1.8.6'
+
+    // SPRING
+    compile "org.springframework.boot:spring-boot-starter"
+    compile "org.springframework.boot:spring-boot-starter-ws"
+    compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.boot:spring-boot-starter-actuator"
+    compile 'org.springframework.boot:spring-boot-starter-logging'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'org.springframework.boot:spring-boot-starter-test'
+    compile 'org.springframework.data:spring-data-rest-webmvc'
+    compile "org.springframework.ws:spring-ws-core"
+    compile 'org.springframework:spring-oxm'
+    compile "org.springframework:spring-context"
+    compile 'org.springframework:spring-context-support'
+
+    // JAXB/WSDL TO JAVA
+    generate 'com.sun.xml.ws:jaxws-rt:2.2.10'
+    generate 'com.sun.xml.ws:jaxws-tools:2.2.10'
+    compile 'wsdl4j:wsdl4j:1.6.3'
+
+    // APACHE COMMONS
+    compile 'commons-io:commons-io:2.4'
+    compile('org.apache.commons:commons-lang3:3.4')
+    compile('org.apache.ws.xmlschema:xmlschema-core:2.2.1')
+    compile('org.apache.httpcomponents:httpclient:4.4')
+
+    // XSTREAM
+    compile('com.thoughtworks.xstream:xstream:1.4.7')
+
+    // GUAVA
+    compile 'com.google.guava:guava:18.0'
+
+    // AXIOM
+    compile 'org.apache.ws.commons.axiom:axiom-api:1.2.15'
+    compile 'org.apache.ws.commons.axiom:axiom-impl:1.2.15'
+
+    // GSON
+    compile 'com.google.code.gson:gson:2.3.1'
+
+    // H2
+    compile 'com.h2database:h2:1.4.192'
+
+    // Postgres
+    compile 'org.postgresql:postgresql:9.3-1102-jdbc41'
+
+    // JAXB classes
+    compile(files(genServiceJaxb.classesDir).builtBy(genServiceJaxb))
+}
+
+test {
+    systemProperties 'property': 'value'
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+}
+
+uploadArchives {
+    repositories {
+        flatDir {
+            dirs 'repos'
+        }
+    }
+}
+
+task afterEclipseImport {
+    dependsOn genServiceJaxb
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}
+
+/*
+    Deployment
+ */
+//import com.bmuschko.gradle.cargo.convention.Deployable
+//import com.bmuschko.gradle.cargo.tasks.remote.CargoRedeployRemote
+
+//  Connection information in each properties file
+//Properties tomcat = new Properties()
+//File propertiesFile = new File("$projectDir/src/main/resources/tomcat.properties")
+//propertiesFile.withInputStream {
+//    tomcat.load(it)
+//}
+
+//  Might need another task if file missing
+//task deployHqmfToTomcat(type: CargoRedeployRemote) {
+//    dependsOn war
+
+//    containerId = 'tomcat8x'
+//    protocol = tomcat.protocol
+//    hostname = tomcat.hostname
+//    port = tomcat.port as Integer
+//    username = tomcat.username
+//    password = tomcat.password
+//    deployables = [new Deployable(
+//            file: file("$buildDir/libs/CAliPHR-API.war")
+//            , context: tomcat.context)]
+//}

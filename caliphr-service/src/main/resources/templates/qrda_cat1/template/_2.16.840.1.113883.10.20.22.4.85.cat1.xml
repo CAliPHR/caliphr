@@ -1,0 +1,19 @@
+<entry>
+    <observation classCode="OBS" moodCode="EVN">
+        <templateId root="2.16.840.1.113883.10.20.22.4.85"/>
+        <id root="1.3.6.1.4.1.115" th:attr="extension=${entry.id}"/>
+        <code code="ASSERTION"
+              displayName="Assertion"
+              codeSystem="2.16.840.1.113883.5.4"
+              codeSystemName="ActCode"/>
+        <statusCode code="completed"/>
+        <effectiveTime>
+            <low th:attr="value=${entry.low}" />
+            <high th:attr="value=${entry.high}" />
+        </effectiveTime>
+        <value th:if="${! #strings.isEmpty(entry.valueCode)}" th:attr="code=${entry.valueCode}, codeSystem=${entry.valueCodeSystem}, 'sdtc:valueSet'=${entry.valueValueSetOid}"
+               xsi:type="CD">
+            <originalText th:text="${entry.valueDescription}"/>
+        </value>
+    </observation>
+</entry>

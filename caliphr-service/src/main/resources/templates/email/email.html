@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:remove="all">Template for HTML email with inline image</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+        a:hover {
+            text-decoration: none !important;
+        }
+
+        .header h1 {
+            color: #fff !important;
+            font: normal 33px Georgia, serif;
+            margin: 0;
+            padding: 0;
+            line-height: 33px;
+        }
+
+        .header p {
+            color: #dfa575;
+            font: normal 11px Georgia, serif;
+            margin: 0;
+            padding: 0;
+            line-height: 11px;
+            letter-spacing: 2px
+        }
+
+        .content h2 {
+            color: #8598a3 !important;
+            font-weight: normal;
+            margin: 0;
+            padding: 0;
+            font-style: italic;
+            line-height: 30px;
+            font-size: 30px;
+            font-family: Georgia, serif;
+        }
+
+        .content p {
+            color: #767676;
+            font-weight: normal;
+            margin: 0;
+            padding: 0;
+            line-height: 20px;
+            font-size: 12px;
+            font-family: Georgia, serif;
+        }
+
+        .content a {
+            color: #d18648;
+            text-decoration: none;
+        }
+
+        .footer p {
+            padding: 0;
+            font-size: 11px;
+            color: #fff;
+            margin: 0;
+            font-family: Georgia, serif;
+        }
+
+        .footer a {
+            color: #f7a766;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; background: #bccdd9;">
+<table cellpadding="0" cellspacing="0" border="0" align="center" width="100%">
+    <tr>
+        <td align="center" style="margin: 0; padding: 0; padding: 35px 0">
+            <table cellpadding="0" cellspacing="0" border="0" align="center" width="650"
+                   style="font-family: Georgia, serif;" class="header">
+                <tr>
+                    <td bgcolor="#062c49" height="115" align="center">
+
+                        <img th:src="'cid:' + ${imageResourceName}" alt="Smiley face"
+                             width="350" style="padding-left:30px;padding-top:20px;"/>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-size: 1px; height: 5px; line-height: 1px;" height="5">&nbsp;</td>
+                </tr>
+            </table>
+            <!-- header-->
+            <table cellpadding="0" cellspacing="0" border="0" align="center" width="650"
+                   style="font-family: Georgia, serif; background: #fff;" bgcolor="#ffffff">
+                <tr>
+                    <td width="14" style="font-size: 0px;" bgcolor="#ffffff">&nbsp;</td>
+                    <td width="620" valign="top" align="left" bgcolor="#ffffff"
+                        style="font-family: Georgia, serif; background: #fff;">
+                        <table cellpadding="0" cellspacing="0" border="0"
+                               style="color: #717171; font: normal 11px Georgia, serif; margin: 0; padding: 0;"
+                               width="620" class="content">
+                            <tr>
+                                <td style="padding: 25px 0 5px; border-bottom: 2px solid #d2b49b;font-family: Georgia, serif; "
+                                    valign="top" align="center">
+                                    <h3 style="color:#767676; font-weight: normal; margin: 0; padding: 0; font-style: italic; line-height: 13px; font-size: 13px;">
+
+                                    </h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 25px 0 0;" align="left">
+                                    <h2 style="color: #8598a3;font-weight: normal;margin: 0;padding: 0;font-style: italic;line-height: 30px;font-size: 30px;font-family: Georgia, serif;"
+                                        th:text="${htmlHeading}">Your Calculation are ready.</h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="content" th:utext="${htmlContent}"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 25px 0 0;" align="left">
+                                    <h2 style="color: #8598a3;font-weight: normal;margin: 0;padding: 0;font-style: italic;line-height: 30px;font-size: 30px;font-family: Georgia, serif;"
+                                    	th:text="${['EMAIL.COMPANY.NAME']}"></h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 15px 0 25px;" valign="top">
+                                    <p style="color: #767676;font-weight: normal;margin: 0;padding: 0;line-height: 20px;font-size: 12px;font-family: Georgia, serif;"
+                                    	th:text="${['EMAIL.COMPANY.DESCRIPTION']}">
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+
+
+                    <td width="16" bgcolor="#ffffff"
+                        style="font-size: 0px;font-family: Georgia, serif; background: #fff;">&nbsp;</td>
+                </tr>
+            </table>
+            <!-- body -->
+            <table cellpadding="0" cellspacing="0" border="0" align="center" width="650"
+                   style="font-family: Georgia, serif; line-height: 10px;" bgcolor="#062c49" class="footer">
+                <tr>
+                    <td bgcolor="#062c49" align="center"
+                        style="padding: 15px 0 10px; font-size: 11px; color:#fff; margin: 0; line-height: 1.2;font-family: Georgia, serif;"
+                        valign="top">
+                        <p style="text-align:center; font-size:10px;color:#ffffff;" th:utext="${['EMAIL_COPYRIGHT_TXT']}">
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <!-- footer-->
+        </td>
+    </tr>
+</table>
+</body>
+</html>

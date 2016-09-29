@@ -1,0 +1,46 @@
+<entry>
+    <act classCode="ACT" moodCode="EVN" th:attr="negationInd=${entry.negationInd}">
+        <!-- Medication, Administered template -->
+        <templateId root="2.16.840.1.113883.10.20.24.3.42"/>
+        <id root="1.3.6.1.4.1.115" th:attr="extension=${entry.id}"/>
+        <code code="416118004" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"
+              displayName="Administration"/>
+        <statusCode code="completed"/>
+        <effectiveTime xsi:type="IVL_TS">
+            <low th:attr="value=${entry.low}" />
+            <high th:attr="value=${entry.high}" />
+        </effectiveTime>
+        <entryRelationship typeCode="COMP">
+            <substanceAdministration classCode="SBADM" moodCode="EVN">
+                <!-- Medication Activity (consolidation) template -->
+                <templateId root="2.16.840.1.113883.10.20.22.4.16"/>
+                <id th:attr="root=${entry.uuid}"/>
+                <text th:text="${entry.description}"/>
+                <statusCode code="completed"/>
+                <effectiveTime xsi:type="IVL_TS">
+                    <low th:attr="value=${entry.low}" />
+                    <high th:attr="value=${entry.high}" />
+                </effectiveTime>
+
+                <!--/* TODO medication details!
+                <%== render(:partial => 'medication_details', :locals => {:entry => entry,
+                :route_oids=>field_oids["ROUTE"]}) %>
+                */-->
+                <consumable>
+                    <manufacturedProduct classCode="MANU">
+                        <!-- Medication Information (consolidation) template -->
+                        <templateId root="2.16.840.1.113883.10.20.22.4.23"/>
+                        <id th:attr="root=${entry.uuid}" />
+                        <manufacturedMaterial>
+                            <code th:if="${! #strings.isEmpty(entry.valueCode)}" th:attr="code=${entry.valueCode}, codeSystem=${entry.valueCodeSystem}, 'sdtc:valueSet'=${entry.valueValueSetOid}">
+                                <originalText th:text="${entry.codeDescription}"/>
+                            </code>
+                        </manufacturedMaterial>
+                    </manufacturedProduct>
+                </consumable>
+            </substanceAdministration>
+        </entryRelationship>
+        <th:block th:include="qrda_cat1/_reason.cat1.xml" th:with="reason=${entry.reason}"
+                  th:if="${entry.reason != null}"/>
+    </act>
+</entry>

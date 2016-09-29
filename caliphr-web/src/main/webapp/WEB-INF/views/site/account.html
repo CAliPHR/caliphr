@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport"
+		  content="width=device-width; initial-scale=1.0; maximum-scale=1.0; minimum-scale=1.0; user-scalable=0;"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="Content-Language" content="en-us"/>
+	<meta name="author" th:content="#{head.meta.author}"/>
+	<title th:text="#{head.title}"></title>
+
+	<link rel="stylesheet" th:href="@{/resources/styles/master.css}"/>
+	<link rel="stylesheet" th:href="@{/resources/styles/login.css}"/>
+	<link rel="stylesheet" th:href="@{/resources/styles/pushMenu.css}"/>
+	<link rel="stylesheet" type="text/css" media="screen"
+		  th:href="@{/resources/bower_components/bootstrap/dist/css/bootstrap.min.css}"/>
+	<link th:href='@{http://fonts.googleapis.com/css?family=Source+Sans+Pro}' rel='stylesheet' type='text/css'/>
+	<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css}"/>
+	<link rel="stylesheet" type="text/css"
+		  th:href="@{/resources/bower_components/bootstrap-daterangepicker/daterangepicker.css}"/>
+
+</head>
+<body>
+<div th:include="master/loggedin :: head"></div>
+<section id="content">
+	<div class="wrap">
+
+		<div id="view_register">
+			<div class="login_pannel">
+				<div class="panel panel-default" style="height:400px;width:450px;">
+					<div class="panel-body">
+						<div class="companyLogo">
+
+							<div class="logInRow">
+								<h3>Account</h3>
+							</div>
+							<div style="padding-top:30px;" class="logInText">
+								<p>Page under construction.</p>
+							</div>
+						</div>
+						<div class="logmod__form">
+							<form accept-charset="utf-8" th:action="@{/web/auth/password/reset}" class="simform" method="post">
+								<div class="copyright">
+									<!--<p style="font-size:10px;color:#888;">Copyright &copy; 2016 CAliPHR</p>-->
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</section>
+<div th:include="master/loggedin :: foot"></div>
+
+<script type="text/javascript"
+		th:src="@{/resources/bower_components/jquery/dist/jquery.js}"></script>
+<script type="text/javascript"
+		th:src="@{/resources/bower_components/jqueryui/jquery-ui.min.js}"></script>
+
+<script type="text/javascript"
+		th:src="@{/resources/bower_components/handlebars/handlebars.min.js}"></script>
+<script type="text/javascript"
+		th:src="@{/resources/bower_components/ember/ember-template-compiler.js}"></script>
+<script type="text/javascript"
+		th:src="@{/resources/bower_components/ember/ember.min.js}"></script>
+<script type="text/javascript"
+		th:src="@{/resources/bower_components/ember-data/ember-data.min.js}"></script>
+
+<script type="text/javascript"
+		th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js}"></script>
+
+
+<script type="text/javascript"
+		th:src="@{/resources/bower_components/classy-loader/jquery.classyLoader/1.2.0/js/jquery.classyloader-1.2.0.js}"></script>
+
+<script type="text/javascript" th:src="@{resources/bower_components/scrollTo.js}"></script>
+<script type="text/javascript" th:src="@{/resources/bower_components/bootstrap-daterangepicker/moment.js}"></script>
+<script type="text/javascript"
+		th:src="@{/resources/bower_components/bootstrap-daterangepicker/daterangepicker.js}"></script>
+<script type="text/javascript"
+		th:src="@{/resources/js/site/dashboard.js}"></script>
+<script type="text/javascript"
+		th:src="@{/resources/js/security/auto-logout.js}"></script>
+</body>
+</html>

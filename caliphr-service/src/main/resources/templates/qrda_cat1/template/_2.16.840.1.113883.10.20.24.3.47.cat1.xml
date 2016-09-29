@@ -1,0 +1,32 @@
+<entry>
+  <!--Medication Order -->
+  <substanceAdministration classCode="SBADM" moodCode="RQO" th:attr="negationInd=${entry.negationInd}">
+    <templateId root="2.16.840.1.113883.10.20.22.4.42"/>
+    <!-- Medication, Order template -->
+    <templateId root="2.16.840.1.113883.10.20.24.3.47"/>
+    <id root="1.3.6.1.4.1.115" th:attr="extension=${entry.id}"/>
+    <text th:text="${entry.description}"/>
+    <statusCode code="new"/>
+    <effectiveTime xsi:type="IVL_TS">
+      <low th:attr="value=${entry.low}" />
+      <high th:attr="value=${entry.high}" />
+    </effectiveTime>
+
+    <!--/* TODO fix me !!
+     <%== render(:partial => 'medication_details', :locals => {:entry => entry, :route_oids=>field_oids["ROUTE"]}) %>
+    */-->
+    <consumable>
+      <manufacturedProduct classCode="MANU">
+        <!-- Medication Information (consolidation) template -->
+        <templateId root="2.16.840.1.113883.10.20.22.4.23"/>
+        <id th:attr="root=${entry.uuid}" />
+        <manufacturedMaterial>
+          <code th:attr="code=${entry.valueCode}, codeSystem=${entry.valueCodeSystem}, 'sdtc:valueSet'=${entry.valueValueSetOid}">
+            <originalText th:text="${entry.codeDescription}" />
+          </code>
+        </manufacturedMaterial>
+      </manufacturedProduct>
+    </consumable>
+    <th:block th:include="qrda_cat1/_reason.cat1.xml" th:with="reason=${entry.reason}" th:if="${entry.reason != null}"/>
+  </substanceAdministration>
+</entry>

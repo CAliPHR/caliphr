@@ -1,0 +1,19 @@
+# Set the error path
+error.path: /error
+
+# Logging
+logging.level.org.springframework.web: DEBUG
+
+# INTERNATIONALIZATION (MessageSourceAutoConfiguration)
+spring:
+  messages:
+    basename: locale/messages
+    cache-seconds: -1
+    encoding: UTF-8
+    fallback-to-system-locale: true
+    
+# File upload max size limit and total request size for a multipart/form-data
+multipart:
+  maxFileSize: 200Mb
+  maxRequestSize: 200Mb
+  fileSizeThreshold: 1Mb

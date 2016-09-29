@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width; initial-scale=1.0; maximum-scale=1.0; minimum-scale=1.0; user-scalable=0;"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Language" content="en-us"/>
+    <meta name="author" th:content="#{head.meta.author}"/>
+	<title th:text="#{head.title}"></title>
+    <link type="text/css" rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700|Crete+Round:400italic"/>
+    <link rel="stylesheet" type="text/css" media="screen"
+          th:href="@{'/resources/styles/master.css?version=' + #{application.version}}"/>
+    <link rel="stylesheet" type="text/css" media="screen"
+          th:href="@{/resources/bower_components/bootstrap/dist/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" media="screen"
+          th:href="@{/resources/bower_components/bootstrap/dist/css/bootstrap-theme.min.css}"/>
+    <link rel="icon" type="image/x-icon"
+          th:href="@{/resources/images/favicon.ico}"/>
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css}"/>
+
+    <script type="text/javascript"
+            th:src="@{/resources/bower_components/jquery/dist/jquery.js}"></script>
+    <script type="text/javascript"
+            th:src="@{/resources/bower_components/jqueryui/jquery-ui.min.js}"></script>
+    <script type="text/javascript"
+            th:src="@{/resources/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+    <script type="text/javascript"
+            th:src="@{/resources/bower_components/handlebars/handlebars.min.js}"></script>
+    <script type="text/javascript"
+            th:src="@{/resources/bower_components/ember/ember-template-compiler.js}"></script>
+    <script type="text/javascript"
+            th:src="@{/resources/bower_components/ember/ember.min.js}"></script>
+    <script type="text/javascript"
+            th:src="@{/resources/bower_components/ember-data/ember-data.min.js}"></script>
+    <script type="text/javascript"
+            th:src="@{'/resources/js/index.js?version=' + #{application.version}}"></script>
+
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body style="background-color:#d8d8d8">
+<!--<div id="header" th:include="layout :: head"></div>-->
+<section id="content">
+ <!--Commented by Omkar-->
+   <!-- <h1>Default Spring Boot Error Page</h1>-->
+
+    <!--  As we are using Thymeleaf, you might consider using
+          ${#httpServletRequest.requestURL}. But that returns the path
+          to this error page.  Hence we explicitly add the url to the
+          Model in some of the example code. -->
+   <!-- <p th:if="${url}">
+        <b>Page:</b> <span th:text="${url}">Page URL</span>
+    </p>-->
+
+   <!-- <p th:if="${timestamp}" id='created'>
+        <b>Occurred:</b> <span th:text="${timestamp}">Timestamp</span>
+    </p>-->
+    <!-- end of comment-->
+    <div class="panel panel-default" style="width:40%;margin:auto;margin-top:100px;">
+        <div class="panel-body">
+            <p th:if="${status}" style="font-size:45px;padding-top:40px;color:#0071c1;text-align:center;">
+                <!-- <b>Response Status:</b>--> <span th:text="${status}">status-code</span>
+                <!--<span th:if="${error}" th:text="'('+${error}+')'">error ...</span>-->
+            </p>
+            <p style="font-size:40px;color:#0071c1;text-align:center;">Unexpected Error <i class="fa fa-frown-o fa-1x" style="color:#0071c1 !important;"></i></p>
+            <p style="font-size:20px; color:#808080;text-align:center;"> An error occurred and your request couldn't be completed. </p>
+            <p style="font-size:20px; color:#808080 ;text-align:center;"
+                    th:if="${ex} or ${exception} or (${message} and ${message.length() != 0})">
+                <b>Cause:</b> <span th:if="${ex}" th:text="${ex}">exception ...</span>
+                <span th:if="${exception}" th:text="${exception}">exception ...</span>
+		        <span th:if="${message} and ${message.length() != 0}"
+              th:text="${message}">message ...</span>
+               <!-- <blockquote>
+                    <i>Note: You would never generate a page that displays a Java
+                        exception to an end-user in a real application</i>
+                </blockquote>-->
+            </p>
+            <p style="text-align:center;"><a class="btn btn-default" th:href="@{/}" role="button">Home</a></p>
+        </div>
+    </div>
+
+
+
+
+    <!--/* ${ex} is set by ourSimpleMappingExceptionResolver,
+           ${exception} or ${message} are set internally by Spring Boot. */-->
+
+    <!-- Commented out By Omkar -->
+    <!--<div
+            th:if="${ex} or ${exception} or (${message} and ${message.length() != 0})">
+        <b>Cause:</b> <span th:if="${ex}" th:text="${ex}">exception ...</span>
+        <span th:if="${exception}" th:text="${exception}">exception ...</span>
+		<span th:if="${message} and ${message.length() != 0}"
+              th:text="${message}">message ...</span>
+        <blockquote>
+            <i>Note: You would never generate a page that displays a Java
+                exception to an end-user in a real application</i>
+        </blockquote>
+    </div>
+
+    <p
+            th:unless="${ex} or ${exception} or (${message} and ${message.length() != 0})">
+        Cause unknown (no exception details available)</p>
+
+    <p>
+        You are seeing this error page due to Spring Boot (which returns a
+        view called "error" in response to uncaught exceptions. Since we are
+        using Thymeleaf this corresponds to the template
+        <code>error.html</code>
+        )
+    </p>-->
+    <!-- end of commented code -->
+</section>
+
+
+</body>
+</html>

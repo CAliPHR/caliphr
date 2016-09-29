@@ -1,0 +1,28 @@
+<entry>
+    <observation classCode="OBS" moodCode="EVN" th:attr="negationInd=${entry.negationInd}">
+        <!-- Consolidated Result Observation templateId (Implied Template) -->
+        <templateId root="2.16.840.1.113883.10.20.22.4.2"/>
+        <!-- Diagnostic Study, Result template -->
+        <templateId root="2.16.840.1.113883.10.20.24.3.20"/>
+        <id root="1.3.6.1.4.1.115" th:attr="extension=${entry.id}"/>
+        <code th:attr="code=${entry.codeCode}, codeSystem=${entry.codeSystem}, 'sdtc:valueSet'=${entry.codeValueSetOid}">
+            <originalText th:text="${entry.codeDescription}"/>
+        </code>
+        <text th:text="${entry.description}"/>
+        <statusCode code="completed"/>
+
+        <effectiveTime>
+            <low th:attr="value=${entry.low}" />
+            <high th:attr="value=${entry.high}" />
+        </effectiveTime>
+        <value th:if="${! #strings.isEmpty(entry.valueCode)}" th:attr="code=${entry.valueCode}, codeSystem=${entry.valueCodeSystem}, 'sdtc:valueSet'=${entry.valueValueSetOid}"
+               xsi:type="CD">
+            <originalText th:text="${entry.valueDescription}"/>
+        </value>
+        <value th:if="${#strings.isEmpty(entry.valueCode) &amp;&amp; (! #strings.isEmpty(entry.resultValueUnit))}" th:attr="value=${entry.resultValue},unit=${entry.resultValueUnit}" xsi:type="PQ" />
+        <value th:if="${#strings.isEmpty(entry.valueCode) &amp;&amp; (! #strings.isEmpty(entry.resultValue)) &amp;&amp; (#strings.isEmpty(entry.resultValueUnit))}" th:text="${entry.resultValue}" xsi:type="ST" />
+        <value th:if="${#strings.isEmpty(entry.valueCode) &amp;&amp; #strings.isEmpty(entry.resultValue)}" xsi:type="CD" nullFlavor="UNK"/>
+        <th:block th:include="qrda_cat1/_reason.cat1.xml" th:with="reason=${entry.reason}"
+                  th:if="${entry.reason != null}"/>
+    </observation>
+</entry>

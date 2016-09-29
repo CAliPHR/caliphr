@@ -1,0 +1,44 @@
+configurations {
+    jaxb
+}
+
+task wsimport {
+    System.setProperty('javax.xml.accessExternalSchema', 'file')
+}
+
+task genJaxb {
+    ext.sourcesDir = "${buildDir}/generated-sources/"
+    ext.classesDir = "${buildDir}/classes/"
+    ext.schema = "src/main/resources/schema/ccda/r2/infrastructure/cda/CDA.xsd"
+    ext.binding = "src/main/resources/schema/ccda/r2/jaxb-bindings.xjb"
+
+    outputs.dir classesDir
+
+    doLast() {
+        project.ant {
+            taskdef name: "xjc", classname: "com.sun.tools.xjc.XJCTask",
+                    classpath: configurations.jaxb.asPath
+            mkdir(dir: sourcesDir)
+            mkdir(dir: classesDir)
+
+            xjc(destdir: sourcesDir, schema: schema, binding: binding) {
+                arg(value: "-extension")
+                produces(dir: sourcesDir, includes: "**/*.java")
+            }
+
+            javac(destdir: classesDir, source: 1.8, target: 1.8, debug: true,
+                    debugLevel: "lines,vars,source",
+                    classpath: configurations.jaxb.asPath) {
+                src(path: sourcesDir)
+                include(name: "**/*.java")
+                include(name: "*.java")
+            }
+
+            copy(todir: classesDir) {
+                fileset(dir: sourcesDir, erroronmissingdir: false) {
+                    exclude(name: "**/*.java")
+                }
+            }
+        }
+    }
+}

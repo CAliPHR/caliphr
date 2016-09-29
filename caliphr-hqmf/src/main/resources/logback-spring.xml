@@ -1,0 +1,86 @@
+<configuration>
+
+    <appender name="FILEA" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <!-- Never use relative paths with logback! -->
+        <file>${catalina.base}/logs/caliphr-hqmf.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <!-- Never use relative paths with logback! -->
+            <fileNamePattern>${catalina.base}/logs/caliphr-hqmf.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+        </encoder>
+
+    </appender>
+
+    <appender name="FILEB" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <!-- Never use relative paths with logback! -->
+        <file>${catalina.base}/logs/caliphr-service.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <!-- Never use relative paths with logback! -->
+            <fileNamePattern>${catalina.base}/logs/caliphr-service.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+        </encoder>
+
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
+            </Pattern>
+        </layout>
+    </appender>
+
+	<!-- if the profile in not production, log certain categories in debug, otherwise log in info -->
+	<springProfile name="!production">
+	    <logger name="com.ainq.caliphr.hqmf" level="debug"
+	            additivity="false">
+	        <appender-ref ref="STDOUT"/>
+	        <appender-ref ref="FILEA"/>
+	    </logger>
+	
+	    <logger name="com.ainq.caliphr.persistence" level="debug"
+	            additivity="false">
+	        <appender-ref ref="STDOUT"/>
+	        <appender-ref ref="FILEB"/>
+	    </logger>
+	</springProfile>
+	
+	<springProfile name="production">
+	    <logger name="com.ainq.caliphr.hqmf" level="info"
+	            additivity="false">
+	        <appender-ref ref="STDOUT"/>
+	        <appender-ref ref="FILEA"/>
+	    </logger>
+	
+	    <logger name="com.ainq.caliphr.persistence" level="info"
+	            additivity="false">
+	        <appender-ref ref="STDOUT"/>
+	        <appender-ref ref="FILEB"/>
+	    </logger>
+	</springProfile>
+
+    <root level="error">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILEA"/>
+        <appender-ref ref="FILEB"/>
+    </root>
+
+</configuration>
