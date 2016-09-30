@@ -27,8 +27,13 @@ for any damages arising out of consumption, possession, or inability to use of t
 consequential, or resultant damages arising from the same.
 
 Audacious Inquiry
+
 5523 Research Park Dr, Suite 370
+
 Catonsville, MD 21228
+
 Phone - (301) 560-6999
+
 Fax - (301) 560-4154
+
 www.ainq.com
