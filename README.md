@@ -41,5 +41,5 @@ For information on the CAliPHR license, please click [here](LICENSE.md)
 
 # General Inquiries
 
-For questions or general inquiries, please email Audacious Inquiry at [caliphr@ainq.com](caliphr@ainq.com)
+For questions or general inquiries, please email Audacious Inquiry at [caliphr@ainq.com](mailto:caliphr@ainq.com)
 
