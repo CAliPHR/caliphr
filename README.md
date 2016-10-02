@@ -13,7 +13,7 @@ more accurate and reliable eCQM results.
 Please note:  Additional technology is necessary to de-duplicate and link patient data across multiple healthcare settings.
 
 # Certification
-CAliPHR achieved oNC 2014 Edition Certification for:
+CAliPHR achieved ONC 2014 Edition Certification for:
 *	(c)(1) – Capture Export
 *	(c)(2) – Import and Calculate
 *	(c)(3) – Electronic Submission
@@ -28,7 +28,7 @@ this Modular EHR’s capabilities, whether to meet meaningful use objectives and
 scope of the health IT’s certification, include:
 *	If a user elects to transmit their clinical data to CAliPHR using the C-CDA instead of the QRDA Category 1 data format, 
 the number of CQMs possible, and the accuracy of their results may be impacted.
-*	Altering the CAliPHR code may result in the invalidation of oNC Certification.
+*	Altering the CAliPHR code may result in the invalidation of ONC Certification.
 
 More information to follow soon!
 
@@ -38,3 +38,8 @@ Please see the [wiki page](../../wiki) for more information and installation ins
 
 # License
 For information on the CAliPHR license, please click [here](LICENSE.md)
+
+# General Inquiries
+
+For questions or general inquiries, please email Audacious Inquiry at [caliphr@ainq.com](caliphr@ainq.com)
+
